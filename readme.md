@@ -7,6 +7,7 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/johnkommas/BarcodeReader)](COMMIT)
 [![GitHub language count](https://img.shields.io/github/languages/count/johnkommas/BarcodeReader)](LANGUAGES)
 [![GitHub top language](https://img.shields.io/github/languages/top/johnkommas/BarcodeReader)](lang)
+---
 
 # Barcode Form Print Generator 
 
