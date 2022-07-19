@@ -51,7 +51,7 @@ def delete_all_files_inside_folder(folder=f'{path}/svg'):
 - Ioannis E. Kommas
 
 
-#### Thank you to everyone who has contributed to the Pipedream codebase. We appreciate you!
+#### Thank you to everyone who has contributed. We appreciate you!
 
 <a >
   <img src="https://github.com/johnkommas/CodeCademy_Projects/blob/master/img/dart_images/b.png?raw=true" />
