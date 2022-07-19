@@ -5,7 +5,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/johnkommas/BarcodeReader)](ISSUES)
 [![GitHub last commit](https://img.shields.io/github/last-commit/johnkommas/BarcodeReader)](COMMIT)
 [![GitHub language count](https://img.shields.io/github/languages/count/johnkommas/BarcodeReader)](LANGUAGES)
-[![GitHub top language](https://img.shields.io/github/languages/top/johnkommas/BarcodeReader)](lang)
+[![GitHub top language](https://img.shields.io/github/languages/top/johnkommas/BarcodeReader)](lang) [![Join the chat at https://gitter.im/johnkommas/Welcome](https://badges.gitter.im/johnkommas/Welcome.svg)](https://gitter.im/johnkommas/Welcome?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 ---
 
 # Barcode Form Print Generator 
