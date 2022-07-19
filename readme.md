@@ -1,12 +1,12 @@
 [![MIT licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
-[![Gitter](https://badges.gitter.im/Elounda_Market/community.svg)](https://gitter.im/Elounda_Market/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge)
-[![LGTM Grade](https://img.shields.io/lgtm/grade/python/github/johnkommas/Elounda_Market)](SCORE)
-[![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/johnkommas/Elounda_Market)](CODE_SIZE)
-[![GitHub forks](https://img.shields.io/github/forks/johnkommas/Elounda_Market?style=social)](FORKS)
-[![GitHub issues](https://img.shields.io/github/issues/johnkommas/Elounda_Market)](ISSUES)
-[![GitHub last commit](https://img.shields.io/github/last-commit/johnkommas/Elounda_Market)](COMMIT)
-[![GitHub language count](https://img.shields.io/github/languages/count/johnkommas/Elounda_Market)](LANGUAGES)
-[![GitHub top language](https://img.shields.io/github/languages/top/johnkommas/Elounda_Market)](lang)
+[![Gitter](https://badges.gitter.im/BarcodeReader/community.svg)](https://gitter.im/BarcodeReader/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge)
+[![LGTM Grade](https://img.shields.io/lgtm/grade/python/github/johnkommas/BarcodeReader)](SCORE)
+[![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/johnkommas/BarcodeReader)](CODE_SIZE)
+[![GitHub forks](https://img.shields.io/github/forks/johnkommas/BarcodeReader?style=social)](FORKS)
+[![GitHub issues](https://img.shields.io/github/issues/johnkommas/BarcodeReader)](ISSUES)
+[![GitHub last commit](https://img.shields.io/github/last-commit/johnkommas/BarcodeReader)](COMMIT)
+[![GitHub language count](https://img.shields.io/github/languages/count/johnkommas/BarcodeReader)](LANGUAGES)
+[![GitHub top language](https://img.shields.io/github/languages/top/johnkommas/BarcodeReader)](lang)
 
 # Barcode Form Print Generator 
 
