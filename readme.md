@@ -1,7 +1,6 @@
 [![MIT licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
 [![Gitter](https://badges.gitter.im/BarcodeReader/community.svg)](https://gitter.im/BarcodeReader/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge)
-[![LGTM Grade](https://img.shields.io/lgtm/grade/python/github/johnkommas/BarcodeReader)](SCORE)
-[![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/johnkommas/BarcodeReader)](CODE_SIZE)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/johnkommas/BarcodeReader.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/johnkommas/BarcodeReader/context:python)[![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/johnkommas/BarcodeReader)](CODE_SIZE)
 [![GitHub forks](https://img.shields.io/github/forks/johnkommas/BarcodeReader?style=social)](FORKS)
 [![GitHub issues](https://img.shields.io/github/issues/johnkommas/BarcodeReader)](ISSUES)
 [![GitHub last commit](https://img.shields.io/github/last-commit/johnkommas/BarcodeReader)](COMMIT)
