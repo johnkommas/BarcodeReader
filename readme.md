@@ -29,7 +29,9 @@
     
 ```python
 def get_info_from_database(mobile_document_header_code, order_type):
-    pass
+    # mobile_document_header_code => the number
+    # order_type => the type
+    ...
 ```    
 
 ---
