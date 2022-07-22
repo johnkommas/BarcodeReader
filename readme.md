@@ -1,3 +1,4 @@
+
 [![MIT licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/johnkommas/BarcodeReader.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/johnkommas/BarcodeReader/context:python)[![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/johnkommas/BarcodeReader)](CODE_SIZE)
 [![GitHub forks](https://img.shields.io/github/forks/johnkommas/BarcodeReader?style=social)](FORKS)
@@ -26,7 +27,12 @@
 - IMP_MobileDocumentHeaders 
 - ESFIItem 
     
-    
+```python
+def get_info_from_database(mobile_document_header_code, order_type):
+    pass
+```    
+
+---
 
 ### Δημιουργία Αρχείων `{barcode}.svg` στον Φάκελο `svg` <br>
 - Τα αρχεία αποθηκεύονται στην μορφή `<κωδικός>.svg`
@@ -38,6 +44,8 @@ def app(codes, folder='svg'):
     ...
 ```
 
+---
+
 ### Διαγραφή Αρχείων μέσα στον Φάκελο `svg`
 - Όλα τα αρχεία που βρίσκονται μέσα στο φάκελο 'svg' διαγράφονται.
 ```python
@@ -45,6 +53,8 @@ def delete_all_files_inside_folder(folder=f'{path}/svg'):
     # folder is predifined
     ...
 ```
+
+---
 
 ### Contributors
 

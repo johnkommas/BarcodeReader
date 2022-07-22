@@ -1,13 +1,13 @@
-
+import pandas as pd
 import logging
 import os
 import pathlib
 import shutil
 import barcode
 from barcode.writer import SVGWriter
+import sql
 
 path = pathlib.Path(__file__).parent.resolve()
-codes = ['5214000237334', '5213002921425', '52059894']
 
 
 def app(db_codes, folder='svg'):
@@ -50,7 +50,15 @@ def delete_all_files_inside_folder(folder=f'{path}/svg'):
             print(f'Failed to delete {file_path}. Reason: {e}')
 
 
+def get_info_from_database(mobile_document_header_code, order_type):
+    df = pd.read_sql_query(sql.data_query(mobile_document_header_code, order_type), con='connection string')
+    return df
+
+
 if __name__ == '__main__':
+    mobile_document_header_code = '1200'
+    order_type = 'ΠΠΡ'
+    codes = get_info_from_database(mobile_document_header_code, order_type)
     app(codes)
     # delete_all_files_inside_folder()
 
