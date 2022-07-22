@@ -58,7 +58,8 @@ def get_info_from_database(mobile_document_header_code, order_type):
 if __name__ == '__main__':
     mobile_document_header_code = '1200'
     order_type = 'ΠΠΡ'
-    codes = get_info_from_database(mobile_document_header_code, order_type)
+    # codes = get_info_from_database(mobile_document_header_code, order_type)
+    codes = ['5214000237334', '5213002921425', '52059894']
     app(codes)
     # delete_all_files_inside_folder()
 
