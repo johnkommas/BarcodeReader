@@ -54,6 +54,11 @@ def get_info_from_database(mobile_document_header_code, order_type):
     df = pd.read_sql_query(sql.data_query(mobile_document_header_code, order_type), con='connection string')
     return df
 
+# TODO add slack modal (popup asks for number and type)
+# TODO add slack button
+# TODO create and image and import svg file in it
+# TODO create the DB connection string
+
 
 if __name__ == '__main__':
     mobile_document_header_code = '1200'
