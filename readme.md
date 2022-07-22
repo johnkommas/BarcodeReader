@@ -11,7 +11,7 @@
 
 # Barcode Form Print Generator 
 
----
+
 ### SQL Ανάγνωση Κωδικών ειδών.
 ###### Eφαρμογή D-Net Mobile 
 - Απογραφή ΑΠ-ΜΟΒ <b>ΧΧΧΧ</b>
