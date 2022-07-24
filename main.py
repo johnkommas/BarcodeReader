@@ -1,70 +1,82 @@
-import pandas as pd
-import logging
-import os
-import pathlib
-import shutil
-import barcode
-from barcode.writer import SVGWriter
-import sql
+import time
+import uvicorn
+from slack_bolt import App
+from slack_bolt.adapter.fastapi import SlackRequestHandler
+from private import credentials, sql_connect
+from app import slack_home_page, barcode_generator
+from fastapi import FastAPI, Request
+from private import credentials
 
-path = pathlib.Path(__file__).parent.resolve()
+app = App(signing_secret=credentials.c['slack_credentials'].get('slack_secret'),
+          token=credentials.c['slack_credentials'].get('slack_token'), )
+app_handler = SlackRequestHandler(app)
 
 
-def app(db_codes, folder='svg'):
-    options = {
-        # 'module_width': 0.2,
-        # 'module_height': 120.0,
-        # 'quiet_zone': 3.0,
-        # 'font_path': 'DejaVuSansMono',
-        # 'font_size': 7,
-        # 'text_distance': 2.0,
-        # 'background': 'white',
-        # 'foreground': 'black',
-        # 'center_text': True
-    }
-    for code in db_codes:
+@app.event("app_home_opened")
+def publish_home_view(client, event, logger):
+    """
+    The Home tab is a persistent, yet dynamic interface for apps.
+    The user can reach the App Home from the conversation list
+    within Slack or by clicking on the app's name in messages.
+    Note: you *must* enable Home Tab (App Home > Show Tabs Section)
+    to receive this event.
+    Please see the 'Event Subscriptions' and 'OAuth & Permissions'
+    sections of your app's configuration to add the following:
+    Event subscription(s):  app_home_opened
+    Required scope(s):      none
+    Further Information & Resources
+    https://slack.dev/bolt-python/concepts#app-home
+    https://api.slack.com/surfaces/tabs
+    """
+    # admin_users = [ΚΟΜΜΑΣ , ΛΟΓΙΣΤΗΡΙΟ]
+    admin_users = credentials.slack_admin_users
+    if event["user"] in admin_users:
+        print(f'Admin User {event["user"]}')
         try:
-            if len(code) == 13:
-                x = barcode.EAN13_GUARD(str(code), writer=SVGWriter())
-            elif len(code) == 8:
-                x = barcode.EAN8_GUARD(str(code), writer=SVGWriter())
-            elif len(code) == 14:
-                x = barcode.EAN14(str(code), writer=SVGWriter())
-            else:
-                raise Exception
-            with open(f"{path}/{folder}/{code}.svg", "wb") as f:
-                x.write(f, options=options)
+            client.views_publish(
+                user_id=event["user"],
+                view=slack_home_page.admin_event(event))
         except Exception as e:
-            logging.warning(f'BARCODE ERROR: {code} || length is: {len(code)}', e)
-
-
-def delete_all_files_inside_folder(folder=f'{path}/svg'):
-    for filename in os.listdir(folder):
-        file_path = os.path.join(folder, filename)
+            logger.error(f"Error publishing view to Home Tab: {e}")
+    else:
+        print(f'Single User {event["user"]}')
         try:
-            if os.path.isfile(file_path) or os.path.islink(file_path):
-                os.unlink(file_path)
-            elif os.path.isdir(file_path):
-                shutil.rmtree(file_path)
+            client.views_publish(
+                user_id=event["user"],
+                view=slack_home_page.no_auth(event))
         except Exception as e:
-            print(f'Failed to delete {file_path}. Reason: {e}')
+            logger.error(f"Error publishing view to Home Tab: {e}")
 
 
-def get_info_from_database(mobile_document_header_code, order_type):
-    df = pd.read_sql_query(sql.data_query(mobile_document_header_code, order_type), con='connection string')
-    return df
+@app.event("message")
+def handle_message_events(body, logger, say):
+    logger.info(body)
 
-# TODO add slack modal (popup asks for number and type)
-# TODO add slack button
-# TODO create and image and import svg file in it
-# TODO create the DB connection string
+@app.action("action_id_barcode_generator")
+def handle_some_action(ack, body, logger):
+    ack()
+    logger.info(body)
+    try:
+        barcode_generator.delete_all_files_inside_folder()
+        barcode_generator.app(['2234567891234', '22345678'])
+    except Exception as e:
+        logger.error(f"Error on Barcode Generator: {e}")
+
+api = FastAPI()
 
 
-if __name__ == '__main__':
-    mobile_document_header_code = '1200'
-    order_type = 'ΠΠΡ'
-    # codes = get_info_from_database(mobile_document_header_code, order_type)
-    codes = ['5214000237334', '5213002921425', '52059894']
-    app(codes)
-    # delete_all_files_inside_folder()
+@api.post("/slack/events")
+async def endpoint(req: Request):
+    return await app_handler.handle(req)
+
+
+@api.get("/")
+async def root():
+    x = {'print': 'Hello World'}
+    return x
+
+
+if __name__ == "__main__":
+    my_ip = sql_connect.get_ip_address()
+    uvicorn.run("main:api", host=my_ip, port=3000, log_level="info", reload=True)
 

@@ -58,6 +58,7 @@ def delete_all_files_inside_folder(folder=f'{path}/svg'):
 
 ---
 
+
 ### Contributors
 
 - Ioannis E. Kommas

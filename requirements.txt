@@ -6,3 +6,6 @@ pyxattr==0.7.2
 setuptools==63.2.0
 wheel==0.37.1
 pandas~=1.4.3
+uvicorn~=0.18.2
+fastapi~=0.79.0
+pyodbc~=4.0.34
