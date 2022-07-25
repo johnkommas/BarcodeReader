@@ -28,6 +28,12 @@ def modal_view():
                         "text": "ΕΠΙΛΕΞΕ ΤΟΝ ΤΥΠΟ ΠΑΡΑΣΤΑΤΙΚΟΥ",
                         "emoji": True
                     },
+                    "initial_option": {"text": {"type": "plain_text",
+                                          "text": f"ΑΠ_ΜΟΒ: \t\t (ΔΕΛΤΙΟ ΑΠΟΓΡΑΦΗΣ)",
+                                          "emoji": True
+                                          },
+                                 "value": f"ΑΠ_ΜΟΒ"},
+
                     "options": [{"text": {"type": "plain_text",
                                           "text": f"ΔΕΑ: \t\t\t\t (ΔΕΛΤΙΟ ΕΠΙΣΤΡΟΦΗΣ ΑΓΟΡΩΝ)",
                                           "emoji": True
@@ -121,6 +127,13 @@ def modal_view():
                         "text": "ΕΠΙΛΕΞΕ ΥΠΟΚΑΤΑΣΤΗΜΑ",
                         "emoji": True
                     },
+                    "initial_option": {
+                        "text": {"type": "plain_text",
+                                          "text": "ELOUNDA MARKET",
+                                          "emoji": True
+                                          },
+                                 "value": "EM"
+                    },
                     "options": [{"text": {"type": "plain_text",
                                           "text": "ELOUNDA MARKET",
                                           "emoji": True
@@ -142,10 +155,11 @@ def modal_view():
                                 ],
 
                     "action_id": "pick_type_static_select_store"
+
                 },
                 "label": {
                     "type": "plain_text",
-                    "text": "ΕΠΙΛΕΞΕ ΤΟΝ ΤΥΠΟ ΤΟΥ ΠΑΡΑΣΤΑΤΙΚΟΥ:",
+                    "text": "ΕΠΙΛΕΞΕ ΥΠΟΚΑΤΑΣΤΗΜΑ:",
                     "emoji": True
                 }
             },
@@ -157,6 +171,14 @@ def modal_view():
                         "type": "plain_text",
                         "text": "ΕΠΙΛΕΞΕ ΤΥΠΟ ΧΑΡΤΙΟΥ",
                         "emoji": True
+                    },
+                    "initial_option": {
+                        "text": {"type": "plain_text",
+                                  "text": "ΛΕΥΚΟ",
+                                  "emoji": True
+                                  },
+                         "value": "WHITE"
+
                     },
                     "options": [{"text": {"type": "plain_text",
                                           "text": "ΛΕΥΚΟ",

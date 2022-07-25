@@ -18,20 +18,20 @@ def run(df, file_name, price):
     title_font = ImageFont.truetype('Times.ttc', 80)
     euro_font = ImageFont.truetype('Times.ttc', 700)
     copper_font = ImageFont.truetype('Times.ttc', 300)
-    euro_sign_font = ImageFont.truetype('Times.ttc', 500)
+    euro_sign_font = ImageFont.truetype('Times.ttc', 400)
     fMUCode_font = ImageFont.truetype('Times.ttc', 100)
     image_editable = ImageDraw.Draw(my_image)
     image_editable.text((100, 80), title, (0, 0, 0), font=title_font)
     if len(str(euro_price)) == 1:
-        image_editable.text((1478, 278),  str(euro_price) + ".", (244, 36, 7), font=euro_font)
+        image_editable.text((1478, 249),  str(euro_price) + ",", (244, 36, 7), font=euro_font)
     elif len(str(euro_price)) == 2:
-        image_editable.text((1128, 278),  str(euro_price) + ".", (244, 36, 7), font=euro_font)
+        image_editable.text((1128, 249),  str(euro_price) + ",", (244, 36, 7), font=euro_font)
     elif len(str(euro_price)) == 3:
-        image_editable.text((1478, 278),  str(euro_price) + ".", (244, 36, 7), font=euro_font)
+        image_editable.text((1478, 249),  str(euro_price) + ",", (244, 36, 7), font=euro_font)
 
-    image_editable.text((1796, 322), str(copper_price), (244, 36, 7), font=copper_font)
-    image_editable.text((2038, 439), "€", (244, 36, 7), font=euro_sign_font)
-    image_editable.text((2123, 332), fMUCode, (0, 0, 0), font=fMUCode_font)
+    image_editable.text((1796, 293), str(copper_price), (244, 36, 7), font=copper_font)
+    image_editable.text((2086, 440), "€", (244, 36, 7), font=euro_sign_font)
+    image_editable.text((2123, 303), fMUCode, (0, 0, 0), font=fMUCode_font)
     overlay = Image.open(f"{path}/svg/{barcode}.png").convert("RGBA")
     size = (overlay.size[0] // 3, overlay.size[1] // 3)
     overlay = overlay.resize(size, Image.ANTIALIAS)
