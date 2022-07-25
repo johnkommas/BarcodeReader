@@ -1,6 +1,3 @@
-from private import credentials
-
-
 def get_user_details(event, client):
     user_id = event["user"]
     try:
@@ -15,6 +12,7 @@ def get_user_details(event, client):
         # profile.get('status_emoji')
     except Exception as e:
         print(e)
+
 
 def get_modal_user_details(body, client):
     user_id = body['user'].get('id')
