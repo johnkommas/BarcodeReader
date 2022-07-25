@@ -1,15 +1,13 @@
-import time
 from datetime import datetime
-
-import pandas as pd
 import uvicorn
 from slack_bolt import App
 from slack_bolt.adapter.fastapi import SlackRequestHandler
-from private import credentials, sql_connect
+from private import sql_connect
 from app import slack_home_page, barcode_generator, slack_getters, slack_modal, create_final_image
 from fastapi import FastAPI, Request
 from private import credentials
 import warnings
+
 warnings.simplefilter("ignore", UserWarning)
 
 app = App(signing_secret=credentials.c['slack_credentials'].get('slack_secret'),
