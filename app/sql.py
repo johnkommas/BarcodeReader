@@ -1,24 +1,29 @@
-
 def data_query(input_param, type_of_forma):
     return f"""
-SELECT  distinct IMP_MobileDocumentLines.BarCode,
-        IMP_MobileDocumentLines.ItemDescription as 'Περιγραφή',
-        sum(quant) as 'Ποσότητα',
-        ESFIZItemCategory.Description AS 'Κατηγορία'
+SELECT  DISTINCT IMP_MobileDocumentLines.BarCode        AS 'BarCode',
+        IMP_MobileDocumentLines.ItemDescription         AS 'Περιγραφή',
+        sum(quant)                                      AS 'Ποσότητα',
+        ESFIZItemCategory.Description                   AS 'Κατηγορία',
+        ESMMItemMU.fMUCode                              AS 'MM'
+        
         FROM IMP_MobileDocumentLines
-        left join IMP_MobileDocumentHeaders
-        on IMP_MobileDocumentHeaders.GID = IMP_MobileDocumentLines.fDocGID
-        left join ESFITradeAccount
-        on ESFITradeAccount.gid = IMP_MobileDocumentHeaders.Supplier
-        left JOIN ESFIItem
-            ON ESFIItem.GID = IMP_MobileDocumentLines.fItemGID
-        LEFT JOIN ESFIZItemCategory
-        ON ESFIItem.fItemCategoryCode = ESFIZItemCategory.Code
-        where DATEPART(yyyy,RealImportTime) = DATEPART(yyyy,getdate())
-        --and DATEPART(mm,RealImportTime) = DATEPART(mm,getdate())
-        and IMP_MobileDocumentHeaders.Code = {input_param}
-        and OrderType = '{type_of_forma}'
-        group by IMP_MobileDocumentLines.ItemDescription, IMP_MobileDocumentLines.BarCode
+            LEFT JOIN IMP_MobileDocumentHeaders
+                ON IMP_MobileDocumentHeaders.GID = IMP_MobileDocumentLines.fDocGID
+            LEFT JOIN ESFITradeAccount
+                ON ESFITradeAccount.gid = IMP_MobileDocumentHeaders.Supplier
+            LEFT JOIN ESFIItem
+                ON ESFIItem.GID = IMP_MobileDocumentLines.fItemGID
+            LEFT JOIN ESFIZItemCategory
+                ON ESFIItem.fItemCategoryCode = ESFIZItemCategory.Code
+            LEFT JOIN ESMMItemMU
+                ON ESFIItem.fMainMUGID = ESMMItemMU.GID
+        WHERE DATEPART(yyyy,RealImportTime) = DATEPART(yyyy,getdate())
+            AND IMP_MobileDocumentHeaders.Code = {input_param}
+            AND OrderType = '{type_of_forma}'
+        GROUP BY IMP_MobileDocumentLines.ItemDescription
+                 ,IMP_MobileDocumentLines.BarCode
                  ,ESFIZItemCategory.Description
-        order by 4, 2
+                 ,ESMMItemMU.fMUCode 
+        ORDER BY 4, 2
 """
+

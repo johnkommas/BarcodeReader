@@ -6,7 +6,7 @@ import shutil
 import barcode
 from barcode.writer import SVGWriter
 from app import sql
-
+from private import sql_connect
 parent_path = pathlib.Path(__file__).parent.resolve()
 
 
@@ -15,11 +15,11 @@ def app(db_codes, folder='svg'):
         # 'module_width': 0.2,
         # 'module_height': 120.0,
         # 'quiet_zone': 3.0,
-        # 'font_path': 'DejaVuSansMono',
+        # 'font_path': 'Times.ttc',
         # 'font_size': 7,
         # 'text_distance': 2.0,
-        # 'background': 'white',
-        # 'foreground': 'black',
+        'background': '#6FBCF0',
+        'foreground': 'black',
         # 'center_text': True
     }
     for code in db_codes:
@@ -51,5 +51,17 @@ def delete_all_files_inside_folder(folder=f'{parent_path}/svg'):
 
 
 def get_info_from_database(mobile_document_header_code, order_type):
-    df = pd.read_sql_query(sql.data_query(mobile_document_header_code, order_type), con='connection string')
+    df = pd.read_sql_query(sql.data_query(mobile_document_header_code, order_type), con=sql_connect.connect())
     return df
+
+
+def run(mobile_document_header_code, order_type):
+    # ----------------MAKE DF Reports Viewable----------------------------
+    pd.set_option('display.max_columns', 500)
+    pd.set_option('display.width', 1000)
+
+    delete_all_files_inside_folder()
+    df = get_info_from_database(mobile_document_header_code, order_type)
+    print(df)
+    barcodes = df['BarCode'].tolist()
+    app(barcodes)
