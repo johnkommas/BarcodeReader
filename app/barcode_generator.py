@@ -7,10 +7,12 @@ import barcode
 from barcode.writer import SVGWriter
 from app import sql
 from private import sql_connect
+
+
 parent_path = pathlib.Path(__file__).parent.resolve()
 
 
-def app(db_codes, folder='svg'):
+def app(db_codes, color, folder='svg'):
     options = {
         # 'module_width': 0.2,
         # 'module_height': 120.0,
@@ -18,7 +20,7 @@ def app(db_codes, folder='svg'):
         # 'font_path': 'Times.ttc',
         # 'font_size': 7,
         # 'text_distance': 2.0,
-        'background': '#6FBCF0',
+        'background': color,
         'foreground': 'black',
         # 'center_text': True
     }
@@ -55,13 +57,15 @@ def get_info_from_database(mobile_document_header_code, order_type):
     return df
 
 
-def run(mobile_document_header_code, order_type):
+def run(mobile_document_header_code, order_type, color):
     # ----------------MAKE DF Reports Viewable----------------------------
     pd.set_option('display.max_columns', 500)
     pd.set_option('display.width', 1000)
 
     delete_all_files_inside_folder()
+    delete_all_files_inside_folder(folder=f'{parent_path}/merged_images')
     df = get_info_from_database(mobile_document_header_code, order_type)
     print(df)
     barcodes = df['BarCode'].tolist()
-    app(barcodes)
+    app(barcodes, color)
+    return df

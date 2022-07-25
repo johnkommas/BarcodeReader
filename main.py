@@ -6,7 +6,7 @@ import uvicorn
 from slack_bolt import App
 from slack_bolt.adapter.fastapi import SlackRequestHandler
 from private import credentials, sql_connect
-from app import slack_home_page, barcode_generator, slack_getters, slack_modal
+from app import slack_home_page, barcode_generator, slack_getters, slack_modal, create_final_image
 from fastapi import FastAPI, Request
 from private import credentials
 import warnings
@@ -63,9 +63,45 @@ def handle_submission(ack, body, client, view, logger,):
         # get values from inputs
         type = view['state']['values'][key[0]]['pick_type_static_select_action']['selected_option'].get('value')
         number = int(view['state']['values'][key[1]]['pda_number_plain_text_input_action'].get('value'))
+        store = str(view['state']['values'][key[2]]['pick_type_static_select_store']['selected_option'].get('value'))
+        special_color = str(view['state']['values'][key[3]]['pick_type_static_select_paper_type']['selected_option'].get('value'))
+
+        stores = ['EM', 'L1', 'L2']
+        special_colors = ['WHITE', 'YELLOW']
+        bg_colors = ['#61D839', '#6FBCF0']
+        prices = ['RetailPrice', 'LATO 01', 'LATO 02']
+        file_names = ['Elounda Market White.png', 'Elounda Market Yellow.png', 'Lato White.png', 'Lato Yellow.png']
+
+        bg_color = bg_colors[0]
+        file_name = file_names[0]
+        price = prices[0]
+
+        if store == stores[0]:
+            price = prices[0]
+            bg_color = bg_colors[0]
+            if special_color == special_colors[0]:
+                file_name = file_names[0]
+            elif special_color == special_colors[1]:
+                file_name = file_names[1]
+        elif store == stores[1]:
+            price = prices[1]
+            bg_color = bg_colors[1]
+            if special_color == special_colors[0]:
+                file_name = file_names[2]
+            elif special_color == special_colors[1]:
+                file_name = file_names[3]
+        elif store == stores[2]:
+            price = prices[2]
+            bg_color = bg_colors[1]
+            if special_color == special_colors[0]:
+                file_name = file_names[2]
+            elif special_color == special_colors[1]:
+                file_name = file_names[3]
 
         # run app
-        barcode_generator.run(number, type)
+        df = barcode_generator.run(number, type, bg_color)
+        for i in df.BarCode.unique():
+            create_final_image.run(df[df['BarCode'] == i], file_name, price)
 
     except Exception as e:
         logger.error(f"Error responding to 'first_button' button click: {e}")

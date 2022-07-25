@@ -112,7 +112,75 @@ def modal_view():
                     "emoji": True
                 }
             },
+            {
+                "type": "input",
+                "element": {
+                    "type": "static_select",
+                    "placeholder": {
+                        "type": "plain_text",
+                        "text": "ΕΠΙΛΕΞΕ ΥΠΟΚΑΤΑΣΤΗΜΑ",
+                        "emoji": True
+                    },
+                    "options": [{"text": {"type": "plain_text",
+                                          "text": "ELOUNDA MARKET",
+                                          "emoji": True
+                                          },
+                                 "value": "EM"
+                                 },
+                                {"text": {"type": "plain_text",
+                                          "text": "LATO 01",
+                                          "emoji": True
+                                          },
+                                 "value": "L1"
+                                 },
+                                {"text": {"type": "plain_text",
+                                          "text": "LATO 02",
+                                          "emoji": True
+                                          },
+                                 "value": "L2"
+                                 },
+                                ],
 
+                    "action_id": "pick_type_static_select_store"
+                },
+                "label": {
+                    "type": "plain_text",
+                    "text": "ΕΠΙΛΕΞΕ ΤΟΝ ΤΥΠΟ ΤΟΥ ΠΑΡΑΣΤΑΤΙΚΟΥ:",
+                    "emoji": True
+                }
+            },
+            {
+                "type": "input",
+                "element": {
+                    "type": "static_select",
+                    "placeholder": {
+                        "type": "plain_text",
+                        "text": "ΕΠΙΛΕΞΕ ΤΥΠΟ ΧΑΡΤΙΟΥ",
+                        "emoji": True
+                    },
+                    "options": [{"text": {"type": "plain_text",
+                                          "text": "ΛΕΥΚΟ",
+                                          "emoji": True
+                                          },
+                                 "value": "WHITE"
+                                 },
+                                {"text": {"type": "plain_text",
+                                          "text": "ΚΙΤΡΙΝΟ",
+                                          "emoji": True
+                                          },
+                                 "value": "YELLOW"
+                                 },
+
+                                ],
+
+                    "action_id": "pick_type_static_select_paper_type"
+                },
+                "label": {
+                    "type": "plain_text",
+                    "text": "ΕΠΙΛΕΞΕ ΤΥΠΟ ΧΑΡΤΙΟΥ:",
+                    "emoji": True
+                }
+            },
 
 
         ]
