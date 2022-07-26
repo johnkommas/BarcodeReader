@@ -7,7 +7,7 @@ import barcode
 from barcode.writer import SVGWriter
 from app import sql
 from private import sql_connect
-
+from tqdm import tqdm
 
 parent_path = pathlib.Path(__file__).parent.resolve()
 
@@ -24,7 +24,7 @@ def app(db_codes, color, folder='svg'):
         'foreground': 'black',
         # 'center_text': True
     }
-    for code in db_codes:
+    for code in tqdm(db_codes, desc="Barcode Generator: Creating SVG Files"):
         try:
             if len(code) == 13:
                 x = barcode.EAN13_GUARD(str(code), writer=SVGWriter())
@@ -41,7 +41,7 @@ def app(db_codes, color, folder='svg'):
 
 
 def delete_all_files_inside_folder(folder=f'{parent_path}/svg'):
-    for filename in os.listdir(folder):
+    for filename in tqdm(os.listdir(folder), desc=f'Barcode Generator: Deleting Files on {folder}'):
         file_path = os.path.join(folder, filename)
         try:
             if os.path.isfile(file_path) or os.path.islink(file_path):
@@ -65,7 +65,6 @@ def run(mobile_document_header_code, order_type, color):
     delete_all_files_inside_folder()
     delete_all_files_inside_folder(folder=f'{parent_path}/merged_images')
     df = get_info_from_database(mobile_document_header_code, order_type)
-    print(df)
     barcodes = df['BarCode'].tolist()
     app(barcodes, color)
     return df

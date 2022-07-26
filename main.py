@@ -7,6 +7,8 @@ from app import slack_home_page, barcode_generator, slack_getters, slack_modal, 
 from fastapi import FastAPI, Request
 from private import credentials
 import warnings
+import time
+from tqdm import tqdm
 
 warnings.simplefilter("ignore", UserWarning)
 
@@ -51,8 +53,9 @@ def handle_submission(ack, body, client, view, logger,):
     try:
         # get user name
         user_info = slack_getters.get_modal_user_details(body, client)
+        start_process_time_modal_button_triggered_barcode_generator = time.process_time()
+        start_performance_time_modal_button_triggered_barcode_generator = time.perf_counter()
         print(f"🟢 Button Triggered on Home Page: Barcode Generator 💭 || By: {user_info['user']['profile'].get('display_name')} || TimeStamp: {datetime.now().strftime('%d/%m/%y %H:%M:%S')}")
-
         logger.info(body)
         #get keys from modal
         key = view['state'].get('values').keys()
@@ -98,13 +101,19 @@ def handle_submission(ack, body, client, view, logger,):
 
         # run app
         df = barcode_generator.run(number, type, bg_color)
-        for i in df.BarCode.unique():
+        for i in tqdm(df.BarCode.unique(), desc='Barcode Generator: Creating Final Images:'):
             create_final_image.run(df[df['BarCode'] == i], file_name, price)
 
     except Exception as e:
         logger.error(f"Error responding to 'first_button' button click: {e}")
         print(f"⭕️ Error on Home Page: Barcode Generator Button 💭")
-
+    finally:
+        stop_process_time_modal_button_triggered_barcode_generator = time.process_time()
+        stop_performance_time_modal_button_triggered_barcode_generator = time.perf_counter()
+        final_process_time_modal_button_triggered_barcode_generator = stop_process_time_modal_button_triggered_barcode_generator - start_process_time_modal_button_triggered_barcode_generator
+        final_performance_time_modal_button_triggered_barcode_generator = stop_performance_time_modal_button_triggered_barcode_generator - start_performance_time_modal_button_triggered_barcode_generator
+        print(f"🎉 END OF: Barcode Generator 💭 || By: {user_info['user']['profile'].get('display_name')} || TimeStamp: {datetime.now().strftime('%d/%m/%y %H:%M:%S')}")
+        print(f"⌛️ Performance Time: {round(final_performance_time_modal_button_triggered_barcode_generator, 2)} sec || Process Time: {round(final_process_time_modal_button_triggered_barcode_generator, 2)}")
 
 api = FastAPI()
 

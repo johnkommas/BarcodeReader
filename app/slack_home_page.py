@@ -38,7 +38,8 @@ def event(user_info):
                                     "type": "section",
                                     "text": {
                                         "type": "mrkdwn",
-                                        "text": "*Barcode Generator*"
+                                        "text": "*Barcode Generator*\n"
+                                                "_Koutoulakis M. Atsalis A. O.E._"
                                     },
 
                                 }
@@ -67,6 +68,7 @@ def event(user_info):
                 "blocks": [basic_user_info, divider, barcode_generator_section, barcode_generator_action, divider]
            }
     else:
+        print("User is app user", user_info['user'])
         return {
             "type": "home",
             "blocks": [basic_user_info, divider, access_denied]
