@@ -10,7 +10,8 @@ def run(df, file_name, price):
     price = df[price].values[0]
     fMUCode = df['MM'].values[0]
     euro_price = int(price)
-    copper_price = int(round(price % euro_price, 2) * 100)
+    # Διαίρεση με το 0 όταν η τιμή είναι 0.50 μας βγάζει σφάλμα έτσι το μετατρέπουμε σε 1
+    copper_price = int(round(price % (euro_price if euro_price>0 else 1), 2) * 100)
 
     svg2png(url=f"{path}/svg/{barcode}.svg", write_to=f"{path}/svg/{barcode}.png",
             dpi=1200)
@@ -28,8 +29,8 @@ def run(df, file_name, price):
         image_editable.text((1128, 249),  str(euro_price) + ",", (244, 36, 7), font=euro_font)
     elif len(str(euro_price)) == 3:
         image_editable.text((1478, 249),  str(euro_price) + ",", (244, 36, 7), font=euro_font)
-
-    image_editable.text((1796, 293), str(copper_price), (244, 36, 7), font=copper_font)
+    # Εμφανίζει ένα δεκαδικό όταν η τιμή είναι π.χ. 1.0 έτσι προσθέτουμε ακόμα ένα 0
+    image_editable.text((1796, 293), (str(copper_price) if len(str(copper_price)) == 2 else str(copper_price) + "0"), (244, 36, 7), font=copper_font)
     image_editable.text((2086, 440), "€", (244, 36, 7), font=euro_sign_font)
     image_editable.text((2123, 303), fMUCode, (0, 0, 0), font=fMUCode_font)
     overlay = Image.open(f"{path}/svg/{barcode}.png").convert("RGBA")
