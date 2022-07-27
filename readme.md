@@ -163,10 +163,10 @@ if user_info['user'].get('is_admin')
 ...
   
 "initial_option": {"text": {"type": "plain_text",
-                                          "text": f"",
+                                          "text": f"...",
                                           "emoji": True
                                           },
-                                 "value": f"ΑΠ_ΜΟΒ"},
+                                 "value": f"..."},
 ...
 
   "options": [ 
