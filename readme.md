@@ -191,7 +191,7 @@ def modal_view():
 
 ---
 
-### SLACK BUTTON TRIGGERED
+### SLACK BUTTON TRIGGERED (Αποστολή)
 ```python
 @app.view("modal_button_triggered_barcode_generator")
 def handle_submission(ack, body, client, view, logger,):
