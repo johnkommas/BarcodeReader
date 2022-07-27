@@ -1,3 +1,5 @@
+#  Copyright (c) Ioannis E. Kommas 2022. All Rights Reserved
+
 def get_user_details(event, client):
     user_id = event["user"]
     try:

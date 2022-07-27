@@ -1,3 +1,5 @@
+#  Copyright (c) Ioannis E. Kommas 2022. All Rights Reserved
+
 def data_query(input_param, type_of_forma):
     return f"""
 SELECT  DISTINCT IMP_MobileDocumentLines.BarCode        AS 'BarCode',

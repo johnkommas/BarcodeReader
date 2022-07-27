@@ -1,3 +1,5 @@
+#  Copyright (c) Ioannis E. Kommas 2022. All Rights Reserved
+
 from datetime import datetime
 import uvicorn
 from slack_bolt import App

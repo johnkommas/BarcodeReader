@@ -1,3 +1,5 @@
+#  Copyright (c) Ioannis E. Kommas 2022. All Rights Reserved
+
 from PIL import Image, ImageFont, ImageDraw
 import pathlib
 from cairosvg import svg2png

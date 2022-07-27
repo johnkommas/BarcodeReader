@@ -1,4 +1,4 @@
-
+#  Copyright (c) Ioannis E. Kommas 2022. All Rights Reserved
 
 def event(user_info):
     profile = user_info['user']['profile']
