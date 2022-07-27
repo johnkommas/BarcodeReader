@@ -148,6 +148,11 @@ if user_info['user'].get('is_admin')
 def action_button_click(body, ack, say, logger, client):
     ...
 ```
+
+<a >
+  <img src="https://github.com/johnkommas/BarcodeReader/blob/master/app/images/modal.png?raw=true" />
+</a>
+
 - Επιστρέφει το modal view που ενεργοποιείτε όταν πατηθεί το κουμπί.
 ```python
 def modal_view():
