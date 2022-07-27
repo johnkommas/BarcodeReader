@@ -57,6 +57,20 @@ def get_info_from_database(mobile_document_header_code, order_type):
 ```    
 
 ---
+### SLACK LISTENER
+```python
+@api.post("/slack/events")
+async def endpoint(req: Request):
+    return await app_handler.handle(req)
+```
+
+---
+### UVICORN API
+```python
+uvicorn.run("main:api", host=my_ip, port=3000, log_level="info", reload=True)
+```
+
+---
 
 ### Δημιουργία Αρχείων `{barcode}.svg` στον Φάκελο `svg` <br>
 - Τα αρχεία αποθηκεύονται στην μορφή `<κωδικός>.svg`
@@ -98,6 +112,11 @@ def get_modal_user_details(body, client):
 ---
 
 ### SLACK HOME PAGE
+```python
+@app.event("app_home_opened")
+def publish_home_view(client, event, logger):
+    ...
+```
 - Δέχεται Βασικές Πληροφορίες του Χρήστη
   - Link
   - Title
@@ -107,16 +126,43 @@ def get_modal_user_details(body, client):
 ```python
 if user_info['user'].get('is_admin')
 ```
-- Επιστρέφει αποτελέσματα βάσει τύπο χρήστη
+- Επιστρέφει διαφορετικά αποτελέσματα 
+
+- ADMIN OUTPUT
+
+<a >
+  <img src="https://github.com/johnkommas/BarcodeReader/blob/master/app/images/admin.png?raw=true" />
+</a>
+
+- USER OUTPUT
+
+<a >
+  <img src="https://github.com/johnkommas/BarcodeReader/blob/master/app/images/user.png?raw=true" />
+</a>
 
 ---
 
 ### SLACK MODAL
-- Επιστρέφει το modal view που ενεργοποιείτε όταν πατηθέι το κουμπί.
+```python
+@app.action("action_id_barcode_generator")
+def action_button_click(body, ack, say, logger, client):
+    ...
+```
+- Επιστρέφει το modal view που ενεργοποιείτε όταν πατηθεί το κουμπί.
 ```python
 def modal_view():
     return ...
 ```
+
+---
+
+### SLACK BUTTON TRIGGERED
+```python
+@app.view("modal_button_triggered_barcode_generator")
+def handle_submission(ack, body, client, view, logger,):
+    ack()
+```
+
 ### Contributors
 
 - Ioannis E. Kommas
