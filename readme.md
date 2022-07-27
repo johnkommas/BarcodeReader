@@ -155,7 +155,7 @@ if user_info['user'].get('is_admin')
   - Τύπος Παραστατικού
   - Υποκατάστημα
   - Τύπος Χαρτιού
-  - 
+  
 ```python
 {
                 "type": "input",
