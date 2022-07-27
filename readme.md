@@ -91,10 +91,19 @@ async def endpoint(req: Request):
 ```
 
 ---
-###  WEB API FastApi with Unicorn and Hot Reload
+###  WEB API FastApi with Uvicorn and Hot Reload
+<a>
+<img src="https://repository-images.githubusercontent.com/160919119/29516980-f308-11e9-9096-0836920fdae3" />
+</a>
+
 ```python
 api = FastAPI()
 ```
+
+<a>
+<img src="https://raw.githubusercontent.com/tomchristie/uvicorn/master/docs/uvicorn.png" />
+</a>
+
 ```python
 uvicorn.run("main:api", host=my_ip, port=3000, log_level="info", reload=True)
 ```
