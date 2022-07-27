@@ -225,6 +225,12 @@ def handle_submission(ack, body, client, view, logger,):
 
 ---
 
+### Python Version
+ - Version: 3.9
+
+---
+
+
 ### Contributors
 
 - Ioannis E. Kommas
