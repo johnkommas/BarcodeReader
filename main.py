@@ -51,7 +51,6 @@ def action_button_click(body, ack, say, logger, client):
 @app.view("modal_button_triggered_barcode_generator")
 def handle_submission(ack, body, client, view, logger,):
     ack()
-    number = 'ΕΣΦΑΛΜΕΝΗ ΤΙΜΗ'
     try:
         # get user name
         user_info = slack_getters.get_modal_user_details(body, client)
