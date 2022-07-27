@@ -168,6 +168,13 @@ def handle_submission(ack, body, client, view, logger,):
     ack()
 ```
 
+- Δημιουργεί στον φάκελο `merged images` τα τελικά αρχεία προς εκτύπωση.
+- Το αποτέλεσμα αλλάζει ανάλογα το Υποκατάστημα και τον Τύπο του Χαρτιού (Χρώμα)
+
+<a >
+  <img src="https://github.com/johnkommas/BarcodeReader/blob/master/app/images/final.png?raw=true" />
+</a>
+
 ### Contributors
 
 - Ioannis E. Kommas
