@@ -57,23 +57,6 @@ def get_info_from_database(mobile_document_header_code, order_type):
 ```    
 
 ---
-### SLACK LISTENER
-```python
-@api.post("/slack/events")
-async def endpoint(req: Request):
-    return await app_handler.handle(req)
-```
-
----
-###  API
-```python
-api = FastAPI()
-```
-```python
-uvicorn.run("main:api", host=my_ip, port=3000, log_level="info", reload=True)
-```
-
----
 
 ### Δημιουργία Αρχείων `{barcode}.svg` στον Φάκελο `svg` <br>
 - Τα αρχεία αποθηκεύονται στην μορφή `<κωδικός>.svg`
@@ -93,6 +76,24 @@ def app(codes, folder='svg'):
 def delete_all_files_inside_folder(folder):
     # folder is predifined
     ...
+```
+
+---
+
+### SLACK LISTENER
+```python
+@api.post("/slack/events")
+async def endpoint(req: Request):
+    return await app_handler.handle(req)
+```
+
+---
+###  WEB API FastApi with Unicorn and Hot Reload
+```python
+api = FastAPI()
+```
+```python
+uvicorn.run("main:api", host=my_ip, port=3000, log_level="info", reload=True)
 ```
 
 ---
@@ -170,13 +171,53 @@ def modal_view():
 def handle_submission(ack, body, client, view, logger,):
     ack()
 ```
+- Προεπιλεγμένες τιμές στα πεδία
+  - Τύπος Παραστατικού
+  - Υποκατάστημα
+  - Τύπος Χαρτιού
+```python
+{
+                "type": "input",
+                "element": {" 
+...
+  
+"initial_option": {"text": {"type": "plain_text",
+                                          "text": f"",
+                                          "emoji": True
+                                          },
+                                 "value": f"ΑΠ_ΜΟΒ"},
+...
 
+  "options": [ 
+...
+
+```
 - Δημιουργεί στον φάκελο `merged images` τα τελικά αρχεία προς εκτύπωση.
 - Το αποτέλεσμα αλλάζει ανάλογα το Υποκατάστημα και τον Τύπο του Χαρτιού (Χρώμα)
 
 <a >
   <img src="https://github.com/johnkommas/BarcodeReader/blob/master/app/images/final.png?raw=true" />
 </a>
+
+---
+
+### Requirements
+- crefi==2.0.9
+- pip==22.2
+- python-barcode==0.14.0
+- python-Levenshtein==0.12.2
+- pyxattr==0.7.2
+- setuptools==63.2.0
+- wheel==0.37.1
+- pandas~=1.4.3
+- uvicorn~=0.18.2
+- fastapi~=0.79.0
+- pyodbc~=4.0.34
+- Pillow~=9.2.0
+- CairoSVG~=2.5.2
+- tqdm~=4.64.0
+
+---
 
 ### Contributors
 
