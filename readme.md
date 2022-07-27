@@ -65,7 +65,10 @@ async def endpoint(req: Request):
 ```
 
 ---
-### UVICORN API
+###  API
+```python
+api = FastAPI()
+```
 ```python
 uvicorn.run("main:api", host=my_ip, port=3000, log_level="info", reload=True)
 ```
