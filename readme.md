@@ -150,6 +150,29 @@ if user_info['user'].get('is_admin')
 ---
 
 ### SLACK MODAL
+
+- Προεπιλεγμένες τιμές στα πεδία
+  - Τύπος Παραστατικού
+  - Υποκατάστημα
+  - Τύπος Χαρτιού
+  - 
+```python
+{
+                "type": "input",
+                "element": {" 
+...
+  
+"initial_option": {"text": {"type": "plain_text",
+                                          "text": f"",
+                                          "emoji": True
+                                          },
+                                 "value": f"ΑΠ_ΜΟΒ"},
+...
+
+  "options": [ 
+...
+```
+
 ```python
 @app.action("action_id_barcode_generator")
 def action_button_click(body, ack, say, logger, client):
@@ -174,27 +197,7 @@ def modal_view():
 def handle_submission(ack, body, client, view, logger,):
     ack()
 ```
-- Προεπιλεγμένες τιμές στα πεδία
-  - Τύπος Παραστατικού
-  - Υποκατάστημα
-  - Τύπος Χαρτιού
-```python
-{
-                "type": "input",
-                "element": {" 
-...
-  
-"initial_option": {"text": {"type": "plain_text",
-                                          "text": f"",
-                                          "emoji": True
-                                          },
-                                 "value": f"ΑΠ_ΜΟΒ"},
-...
 
-  "options": [ 
-...
-
-```
 - Δημιουργεί στον φάκελο `merged images` τα τελικά αρχεία προς εκτύπωση.
 - Το αποτέλεσμα αλλάζει ανάλογα το Υποκατάστημα και τον Τύπο του Χαρτιού (Χρώμα)
 
