@@ -12,3 +12,4 @@ pyodbc~=4.0.34
 Pillow~=9.2.0
 CairoSVG~=2.5.2
 tqdm~=4.64.0
+cryptography~=37.0.4

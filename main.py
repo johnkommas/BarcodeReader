@@ -11,6 +11,7 @@ from private import credentials
 import warnings
 import time
 from tqdm import tqdm
+from private import sql3_conn
 
 warnings.simplefilter("ignore", UserWarning)
 
@@ -21,12 +22,13 @@ app_handler = SlackRequestHandler(app)
 
 @app.event("app_home_opened")
 def publish_home_view(client, event, logger):
+    entersoft_id = sql3_conn.main()
     user_info = slack_getters.get_user_details(event, client)
     # logger.error(f"User {user_info['user']['profile'].get('display_name')} clicked:  [Home Page]")
     try:
         client.views_publish(
             user_id=event["user"],
-            view=slack_home_page.event(user_info))
+            view=slack_home_page.event(user_info, entersoft_id))
     except Exception as e:
         logger.error(f"Error publishing view to Home Tab: {e}")
 
@@ -45,6 +47,17 @@ def action_button_click(body, ack, say, logger, client):
     client.views_open(
         trigger_id=body["trigger_id"],
         view=slack_modal.modal_view()
+    )
+
+@app.action("action_id_entersoft_sql")
+def action_button_click(body, ack, say, logger, client):
+    # print(body)
+    # Acknowledge the shortcut request
+    ack()
+    # Call the views_open method using the built-in WebClient
+    client.views_open(
+        trigger_id=body["trigger_id"],
+        view=slack_modal.sql_modal_view()
     )
 
 

@@ -209,3 +209,140 @@ def modal_view():
 
         ]
     }
+
+def sql_modal_view():
+    return {
+        "type": "modal",
+        "callback_id": "modal_button_triggered_barcode_generator",
+        "title": {
+            "type": "plain_text",
+            "text": "INITIALIZE CREDENTIALS",
+            "emoji": True
+        },
+        "submit": {
+            "type": "plain_text",
+            "text": "Αποστολή",
+            "emoji": True
+        },
+        "close": {
+            "type": "plain_text",
+            "text": "Άκυρο",
+            "emoji": True
+        },
+        "blocks": [
+            {
+                "type": "input",
+                "element": {
+                    "type": "plain_text_input",
+                    "action_id": "sql_server_ip"
+                },
+                "label": {
+                    "type": "plain_text",
+                    "text": " SQL SERVER IP:",
+                    "emoji": True
+                }
+            },
+            {
+                "type": "input",
+                "element": {
+                    "type": "plain_text_input",
+                    "initial_value": "sa",
+                    "action_id": "sql_server_uid"
+                },
+                "label": {
+                    "type": "plain_text",
+                    "text": " SQL SERVER UID:",
+                    "emoji": True
+                }
+            },
+            {
+                "type": "input",
+                "element": {
+                    "type": "plain_text_input",
+                    "action_id": "sql_server_password"
+                },
+                "label": {
+                    "type": "plain_text",
+                    "text": " SQL SERVER PASS:",
+                    "emoji": True
+                }
+            },
+            {
+                "type": "input",
+                "element": {
+                    "type": "plain_text_input",
+                    "action_id": "sql_server_Database"
+                },
+                "label": {
+                    "type": "plain_text",
+                    "text": " SQL SERVER DATABASE:",
+                    "emoji": True
+                }
+            },
+            {
+                "type": "input",
+                "element": {
+                    "type": "static_select",
+                    "placeholder": {
+                        "type": "plain_text",
+                        "text": "sql_server_TrustServerCertificate",
+                        "emoji": True
+                    },
+                    "initial_option": {
+                        "text": {"type": "plain_text",
+                                 "text": "NO",
+                                 "emoji": True
+                                 },
+                        "value": "NO"
+
+                    },
+                    "options": [{"text": {"type": "plain_text",
+                                          "text": "YES",
+                                          "emoji": True
+                                          },
+                                 "value": "YES"
+                                 },
+                                {"text": {"type": "plain_text",
+                                          "text": "NO",
+                                          "emoji": True
+                                          },
+                                 "value": "NO"
+                                 },
+
+                                ],
+
+                    "action_id": "pick_type_static_select_paper_type"
+                },
+                "label": {
+                    "type": "plain_text",
+                    "text": "SQL SERVER TrustServerCertificate",
+                    "emoji": True
+                }
+            },
+            {
+                "type": "input",
+                "element": {
+                    "type": "plain_text_input",
+                    "action_id": "vpn_name"
+                },
+                "label": {
+                    "type": "plain_text",
+                    "text": " VPN NAME:",
+                    "emoji": True
+                }
+            },
+            {
+                "type": "input",
+                "element": {
+                    "type": "plain_text_input",
+                    "action_id": "vpn_secret"
+                },
+                "label": {
+                    "type": "plain_text",
+                    "text": " VPN SECRET:",
+                    "emoji": True
+                }
+            },
+
+        ]
+    }

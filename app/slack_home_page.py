@@ -1,6 +1,6 @@
 #  Copyright (c) Ioannis E. Kommas 2022. All Rights Reserved
 
-def event(user_info):
+def event(user_info, sql_status):
     profile = user_info['user']['profile']
 
     divider = {
@@ -62,10 +62,43 @@ def event(user_info):
                                     ]
                                 }
 
+
+    entersoft_sql_section = {
+        "type": "section",
+        "text": {
+            "type": "mrkdwn",
+            "text": "*Setup Entersoft SQL Server and VPN*\n"
+                    "_work in progress_"
+        },
+
+    }
+
+    entersoft_sql_action = {
+        "type": "actions",
+        "elements": [
+            {
+                "type": "button",
+                "text": {
+                    "type": "plain_text",
+                    "text": "SQL & VPN SETUP",
+                    "emoji": True
+                },
+                "style": "primary",
+                "value": "value_entersoft_sql",
+                "action_id": "action_id_entersoft_sql"
+            },
+
+        ]
+    }
+
     if user_info['user'].get('is_admin'):
+        if sql_status:
+            blocks = [basic_user_info, divider, entersoft_sql_section, entersoft_sql_action, divider]
+        else:
+            blocks = [basic_user_info, divider, barcode_generator_section, barcode_generator_action, divider]
         return {
                 "type": "home",
-                "blocks": [basic_user_info, divider, barcode_generator_section, barcode_generator_action, divider]
+                "blocks": blocks
            }
     else:
         print("User is app user", user_info['user'])
