@@ -67,6 +67,9 @@ def app(codes, folder='svg'):
     # folder is predifined
     ...
 ```
+<a >
+  <img src="https://raw.githubusercontent.com/johnkommas/BarcodeReader/c72c662eedf800ba3b9731d203a8afabda002323/app/images/3228020232028.svg" />
+</a>
 
 ---
 
