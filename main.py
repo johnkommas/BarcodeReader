@@ -45,20 +45,21 @@ def action_button_click(body, ack, say, logger, client):
     client.views_open(
         trigger_id=body["trigger_id"],
         view=slack_modal.modal_view()
-        )
+    )
 
 
 @app.view("modal_button_triggered_barcode_generator")
-def handle_submission(ack, body, client, view, logger,):
+def handle_submission(ack, body, client, view, logger, ):
     ack()
     try:
         # get user name
         user_info = slack_getters.get_modal_user_details(body, client)
         start_process_time_modal_button_triggered_barcode_generator = time.process_time()
         start_performance_time_modal_button_triggered_barcode_generator = time.perf_counter()
-        print(f"🟢 Button Triggered on Home Page: Barcode Generator 💭 || By: {user_info['user']['profile'].get('display_name')} || TimeStamp: {datetime.now().strftime('%d/%m/%y %H:%M:%S')}")
+        print(
+            f"🟢 Button Triggered on Home Page: Barcode Generator 💭 || By: {user_info['user']['profile'].get('display_name')} || TimeStamp: {datetime.now().strftime('%d/%m/%y %H:%M:%S')}")
         logger.info(body)
-        #get keys from modal
+        # get keys from modal
         key = view['state'].get('values').keys()
         key = list(key)
 
@@ -66,7 +67,8 @@ def handle_submission(ack, body, client, view, logger,):
         type = view['state']['values'][key[0]]['pick_type_static_select_action']['selected_option'].get('value')
         number = int(view['state']['values'][key[1]]['pda_number_plain_text_input_action'].get('value'))
         store = str(view['state']['values'][key[2]]['pick_type_static_select_store']['selected_option'].get('value'))
-        special_color = str(view['state']['values'][key[3]]['pick_type_static_select_paper_type']['selected_option'].get('value'))
+        special_color = str(
+            view['state']['values'][key[3]]['pick_type_static_select_paper_type']['selected_option'].get('value'))
 
         stores = ['EM', 'L1', 'L2']
         special_colors = ['WHITE', 'YELLOW']
@@ -113,8 +115,11 @@ def handle_submission(ack, body, client, view, logger,):
         stop_performance_time_modal_button_triggered_barcode_generator = time.perf_counter()
         final_process_time_modal_button_triggered_barcode_generator = stop_process_time_modal_button_triggered_barcode_generator - start_process_time_modal_button_triggered_barcode_generator
         final_performance_time_modal_button_triggered_barcode_generator = stop_performance_time_modal_button_triggered_barcode_generator - start_performance_time_modal_button_triggered_barcode_generator
-        print(f"🎉 END OF: Barcode Generator 💭 || By: {user_info['user']['profile'].get('display_name')} || TimeStamp: {datetime.now().strftime('%d/%m/%y %H:%M:%S')}")
-        print(f"⌛️ Performance Time: {round(final_performance_time_modal_button_triggered_barcode_generator, 2)} sec || Process Time: {round(final_process_time_modal_button_triggered_barcode_generator, 2)}")
+        print(
+            f"🎉 END OF: Barcode Generator 💭 || By: {user_info['user']['profile'].get('display_name')} || TimeStamp: {datetime.now().strftime('%d/%m/%y %H:%M:%S')}")
+        print(
+            f"⌛️ Performance Time: {round(final_performance_time_modal_button_triggered_barcode_generator, 2)} sec || Process Time: {round(final_process_time_modal_button_triggered_barcode_generator, 2)}")
+
 
 api = FastAPI()
 
@@ -133,4 +138,3 @@ async def root():
 if __name__ == "__main__":
     my_ip = sql_connect.get_ip_address()
     uvicorn.run("main:api", host=my_ip, port=3000, log_level="info", reload=True)
-
