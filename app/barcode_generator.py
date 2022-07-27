@@ -40,7 +40,7 @@ def app(db_codes, color, folder='svg'):
             logging.warning(f'BARCODE ERROR: {code} || length is: {len(code)}', e)
 
 
-def delete_all_files_inside_folder(folder=f'{parent_path}/svg'):
+def delete_all_files_inside_folder(folder):
     for filename in tqdm(os.listdir(folder), desc=f'Barcode Generator: Deleting Files on {folder}'):
         file_path = os.path.join(folder, filename)
         try:
@@ -62,7 +62,7 @@ def run(mobile_document_header_code, order_type, color):
     pd.set_option('display.max_columns', 500)
     pd.set_option('display.width', 1000)
 
-    delete_all_files_inside_folder()
+    delete_all_files_inside_folder(folder=f'{parent_path}/svg')
     delete_all_files_inside_folder(folder=f'{parent_path}/merged_images')
     df = get_info_from_database(mobile_document_header_code, order_type)
     barcodes = df['BarCode'].tolist()

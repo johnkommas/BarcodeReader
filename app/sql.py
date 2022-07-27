@@ -11,8 +11,8 @@ SELECT  DISTINCT IMP_MobileDocumentLines.BarCode        AS 'BarCode',
         FROM IMP_MobileDocumentLines
             LEFT JOIN IMP_MobileDocumentHeaders
                 ON IMP_MobileDocumentHeaders.GID = IMP_MobileDocumentLines.fDocGID
-            LEFT JOIN ESFITradeAccount
-                ON ESFITradeAccount.gid = IMP_MobileDocumentHeaders.Supplier
+--             LEFT JOIN ESFITradeAccount
+--                 ON ESFITradeAccount.gid = IMP_MobileDocumentHeaders.Supplier
             LEFT JOIN ESFIItem
                 ON ESFIItem.GID = IMP_MobileDocumentLines.fItemGID
             LEFT JOIN ESFIZItemCategory

@@ -39,7 +39,7 @@ def event(user_info):
                                     "text": {
                                         "type": "mrkdwn",
                                         "text": "*Barcode Generator*\n"
-                                                "_Koutoulakis M. Atsalis A. O.E._"
+                                                "_work in progress_"
                                     },
 
                                 }

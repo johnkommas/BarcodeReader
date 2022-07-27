@@ -17,16 +17,38 @@
 - Απογραφή ΑΠ-ΜΟΒ <b>ΧΧΧΧ</b>
 
 ###### Το ερώτημα στη βάση δεδομένων επιστρέφει:
-- Barcode
+- Barcode (DISTINCT)
 - Περιγραφή
+- Ποσότητα (SUM)
+- Κατηγορία
 - Μονάδα Μέτρησης
 - Τιμή Πώλησης Καταστήματος
+- Τιμή 1
+- Τιμή 2
 
 ###### Πίνακες Entersoft Database
 - <b>IMP_MobileDocumentLines </b>
 - IMP_MobileDocumentHeaders 
 - ESFIItem 
-    
+- ESFIZItemCategory
+- ESMMItemMU
+
+###### Φίλτρα
+- Έτος == Τρέχον Έτος (const)
+- Αριθμός Παραστατικού: (modal view on Slack)
+- Τύπος Παραστατικού: (modal view Slack)
+
+###### Ταξινόμηση
+- Κατηγορία (1st)
+- Περιγραφή (2d)
+
+```python
+def data_query(input_param, type_of_forma):
+    return f"""
+    SELECT ...
+    """
+```
+
 ```python
 def get_info_from_database(mobile_document_header_code, order_type):
     # mobile_document_header_code => the number
@@ -49,16 +71,52 @@ def app(codes, folder='svg'):
 ---
 
 ### Διαγραφή Αρχείων μέσα στον Φάκελο `svg`
-- Όλα τα αρχεία που βρίσκονται μέσα στο φάκελο 'svg' διαγράφονται.
+- Όλα τα αρχεία που βρίσκονται μέσα στο φάκελο 'svg' και 'merged_images' διαγράφονται.
 ```python
-def delete_all_files_inside_folder(folder=f'{path}/svg'):
+def delete_all_files_inside_folder(folder):
     # folder is predifined
     ...
 ```
 
 ---
 
+### SLACK GETTER
+- Επιστρέφει πληροφορίες χρήστη κατά τη διεπαφή.
+- με χρήση `event` (κυρίως σε View Channel)
+```python
+def get_user_details(event, client):
+    user_id = event["user"]
+    ...
+```
+- με χρήση `body` (κυρίως σε Button Triggers)
+```python
+def get_modal_user_details(body, client):
+    user_id = body['user'].get('id')
+    ...
+```
 
+---
+
+### SLACK HOME PAGE
+- Δέχεται Βασικές Πληροφορίες του Χρήστη
+  - Link
+  - Title
+  - Status
+  - Image
+- Ελέγχει τα δικαιώματα 
+```python
+if user_info['user'].get('is_admin')
+```
+- Επιστρέφει αποτελέσματα βάσει τύπο χρήστη
+
+---
+
+### SLACK MODAL
+- Επιστρέφει το modal view που ενεργοποιείτε όταν πατηθέι το κουμπί.
+```python
+def modal_view():
+    return ...
+```
 ### Contributors
 
 - Ioannis E. Kommas
