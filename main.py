@@ -12,6 +12,7 @@ import warnings
 import time
 from tqdm import tqdm
 from private import sql3_conn
+from private import pass_manager
 
 warnings.simplefilter("ignore", UserWarning)
 
@@ -132,6 +133,48 @@ def handle_submission(ack, body, client, view, logger, ):
             f"🎉 END OF: Barcode Generator 💭 || By: {user_info['user']['profile'].get('display_name')} || TimeStamp: {datetime.now().strftime('%d/%m/%y %H:%M:%S')}")
         print(
             f"⌛️ Performance Time: {round(final_performance_time_modal_button_triggered_barcode_generator, 2)} sec || Process Time: {round(final_process_time_modal_button_triggered_barcode_generator, 2)}")
+
+
+@app.view("modal_button_triggered_initialize_sql_settings")
+def handle_submission(ack, body, client, view, logger, ):
+    ack()
+    try:
+        # get user name
+        user_info_initialize_sql = slack_getters.get_modal_user_details(body, client)
+        start_process_time_modal_button_triggered_initialize_sql = time.process_time()
+        start_performance_time_modal_button_triggered_initialize_sql = time.perf_counter()
+        print(
+            f"🟢 Button Triggered on Home Page: Barcode Generator 💭 || By: {user_info_initialize_sql['user']['profile'].get('display_name')} || TimeStamp: {datetime.now().strftime('%d/%m/%y %H:%M:%S')}")
+        logger.info(body)
+
+        # get keys from modal
+        key = view['state'].get('values').keys()
+        key = list(key)
+
+        sql_server_ip = str(view['state']['values'][key[0]]['sql_server_ip'].get('value'))
+        sql_server_uid = str(view['state']['values'][key[1]]['sql_server_uid'].get('value'))
+        f_sql_key, sql_server_password = pass_manager.encrypt(str(view['state']['values'][key[2]]['sql_server_password'].get('value')))
+        sql_server_Database =str(view['state']['values'][key[3]]['sql_server_Database'].get('value'))
+        sql_server_TrustServerCertificate =str(view['state']['values'][key[4]]['sql_server_TrustServerCertificate']['selected_option'].get('value'))
+
+        vpn_name =str(view['state']['values'][key[5]]['vpn_name'].get('value'))
+        f_vpn_key, vpn_secret = pass_manager.encrypt(str(view['state']['values'][key[6]]['vpn_secret'].get('value')))
+
+        #Store Data To database
+        #TODO
+
+    except Exception as e:
+        logger.error(f"Error responding to 'first_button' button click: {e}")
+        print(f"⭕️ Error on Home Page: Barcode Generator Button 💭")
+    finally:
+        stop_process_time_modal_button_triggered_initialize_sql = time.process_time()
+        stop_performance_time_modal_button_triggered_initialize_sql = time.perf_counter()
+        final_process_time_modal_button_triggered_initialize_sql = stop_process_time_modal_button_triggered_initialize_sql - start_process_time_modal_button_triggered_initialize_sql
+        final_performance_time_modal_button_triggered_initialize_sql = stop_performance_time_modal_button_triggered_initialize_sql - start_performance_time_modal_button_triggered_initialize_sql
+        print(
+            f"🎉 END OF: Barcode Generator 💭 || By: {user_info_initialize_sql['user']['profile'].get('display_name')} || TimeStamp: {datetime.now().strftime('%d/%m/%y %H:%M:%S')}")
+        print(
+            f"⌛️ Performance Time: {round(final_performance_time_modal_button_triggered_initialize_sql, 2)} sec || Process Time: {round(final_process_time_modal_button_triggered_initialize_sql, 2)}")
 
 
 api = FastAPI()

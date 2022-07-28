@@ -2,7 +2,7 @@ import pathlib
 import sqlite3
 from sqlite3 import Error
 import pandas as pd
-from cryptography.fernet import Fernet
+from private import pass_manager
 
 
 def create_connection(db_file):
@@ -43,12 +43,8 @@ def insertVaribleIntoSlackTable():
         print("Connected to SQLite")
 
         # GET DATA
-        key = Fernet.generate_key()
-        cipher_suite = Fernet(key)
         token_input = input("SLACK TOKEN: ")
-        token_input = cipher_suite.encrypt(bytes(token_input, 'utf-8'))
-        secrete_input = input("SLACK SECRET: ")
-        secrete_input = cipher_suite.encrypt(bytes(secrete_input, 'utf-8'))
+        key, secrete_input = pass_manager.encrypt(input("SLACK SECRET: "))
 
         sqlite_insert_with_param = """INSERT INTO slack
                           (id, token, secrete, fernet) 
@@ -78,13 +74,15 @@ def main():
                                         ServerIp nvarchar(255)                       not null,
                                         PasswdKey nvarchar(255)                       not null,
                                         DataBaseName nvarchar(255)                       not null,
-                                        TrustServerCertificate nvarchar(255)                       not null   
+                                        TrustServerCertificate nvarchar(255)                       not null,
+                                        fernet  nvarchar(255)                       not null   
                                     ); """
 
     sql_create_vpn_table = """ CREATE TABLE IF NOT EXISTS Vpn (
                                             id integer PRIMARY KEY,
                                             Name nvarchar(255)                       not null,
-                                            PasswdKey nvarchar(255)                       not null
+                                            PasswdKey nvarchar(255)                       not null,
+                                            fernet  nvarchar(255)                       not null
                                         ); """
     sql_create_slack_table = """ CREATE TABLE IF NOT EXISTS slack (
                                             id integer PRIMARY KEY,

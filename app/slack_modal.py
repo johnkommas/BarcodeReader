@@ -210,10 +210,11 @@ def modal_view():
         ]
     }
 
+
 def sql_modal_view():
     return {
         "type": "modal",
-        "callback_id": "modal_button_triggered_barcode_generator",
+        "callback_id": "modal_button_triggered_initialize_sql_settings",
         "title": {
             "type": "plain_text",
             "text": "INITIALIZE CREDENTIALS",
@@ -293,14 +294,14 @@ def sql_modal_view():
                                  "text": "NO",
                                  "emoji": True
                                  },
-                        "value": "NO"
+                        "value": "no"
 
                     },
                     "options": [{"text": {"type": "plain_text",
                                           "text": "YES",
                                           "emoji": True
                                           },
-                                 "value": "YES"
+                                 "value": "yes"
                                  },
                                 {"text": {"type": "plain_text",
                                           "text": "NO",
@@ -311,7 +312,7 @@ def sql_modal_view():
 
                                 ],
 
-                    "action_id": "pick_type_static_select_paper_type"
+                    "action_id": "sql_server_TrustServerCertificate"
                 },
                 "label": {
                     "type": "plain_text",
