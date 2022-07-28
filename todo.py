@@ -11,17 +11,6 @@ Slack Modal Filed --> Ημερομηνία Έναρξης                       
  - ΗΜΕΡΟΜΗΝΙΑ ΛΗΞΗΗΣ           (PENDING)
 """
 
-# TODO Initialize SQL and VPN Data
-"""
-Slack HOME PAGE BUTTON (OK)
-Slack MODAL POP UP     (OK)
-SLack Action           (OK)
-"""
-
-# TODO CHANGE CREDENTAILS INPUT
-"""
-SQL CONNECT --> Να τραβάει τις πληροφορίες σύνδεσης από την Βάση Δεδομένων αντί το αρχείο  (OK)
-"""
 
 # TODO SQL and VPN UPDATE
 """
