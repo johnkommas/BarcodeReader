@@ -1,7 +1,10 @@
 #  Copyright (c) Ioannis E. Kommas 2022. All Rights Reserved
 
-def modal_view():
 
+from datetime import datetime
+
+
+def modal_view():
     return {
         "type": "modal",
         "callback_id": "modal_button_triggered_barcode_generator",
@@ -31,10 +34,10 @@ def modal_view():
                         "emoji": True
                     },
                     "initial_option": {"text": {"type": "plain_text",
-                                          "text": f"ΑΠ_ΜΟΒ: \t\t (ΔΕΛΤΙΟ ΑΠΟΓΡΑΦΗΣ)",
-                                          "emoji": True
-                                          },
-                                 "value": f"ΑΠ_ΜΟΒ"},
+                                                "text": f"ΑΠ_ΜΟΒ: \t\t (ΔΕΛΤΙΟ ΑΠΟΓΡΑΦΗΣ)",
+                                                "emoji": True
+                                                },
+                                       "value": f"ΑΠ_ΜΟΒ"},
 
                     "options": [{"text": {"type": "plain_text",
                                           "text": f"ΔΕΑ: \t\t\t\t (ΔΕΛΤΙΟ ΕΠΙΣΤΡΟΦΗΣ ΑΓΟΡΩΝ)",
@@ -131,10 +134,10 @@ def modal_view():
                     },
                     "initial_option": {
                         "text": {"type": "plain_text",
-                                          "text": "ELOUNDA MARKET",
-                                          "emoji": True
-                                          },
-                                 "value": "EM"
+                                 "text": "ELOUNDA MARKET",
+                                 "emoji": True
+                                 },
+                        "value": "EM"
                     },
                     "options": [{"text": {"type": "plain_text",
                                           "text": "ELOUNDA MARKET",
@@ -176,10 +179,10 @@ def modal_view():
                     },
                     "initial_option": {
                         "text": {"type": "plain_text",
-                                  "text": "ΛΕΥΚΟ",
-                                  "emoji": True
-                                  },
-                         "value": "WHITE"
+                                 "text": "ΛΕΥΚΟ",
+                                 "emoji": True
+                                 },
+                        "value": "WHITE"
 
                     },
                     "options": [{"text": {"type": "plain_text",
@@ -205,7 +208,6 @@ def modal_view():
                     "emoji": True
                 }
             },
-
 
         ]
     }
@@ -345,5 +347,48 @@ def sql_modal_view():
                 }
             },
 
+        ]
+    }
+
+
+def special_offer_modal():
+    set_today = datetime.now().strftime('%Y-%m-%d')
+    return {
+        "type": "modal",
+        "callback_id": "modal_button_triggered_special_offer",
+        "submit": {
+            "type": "plain_text",
+            "text": "GO!",
+            "emoji": True
+        },
+        "close": {
+            "type": "plain_text",
+            "text": "ΆΚΥΡΟ",
+            "emoji": True
+        },
+        "title": {
+            "type": "plain_text",
+            "text": "ΕΙΔΙΚΕΣ ΠΡΟΣΦΟΡΕΣ",
+            "emoji": True
+        },
+        "blocks": [
+            {
+                "type": "input",
+                "element": {
+                    "type": "datepicker",
+                    "initial_date": f"{set_today}",
+                    "placeholder": {
+                        "type": "plain_text",
+                        "text": "Select a date",
+                        "emoji": True
+                    },
+                    "action_id": "special_offer_datepicker_action_from"
+                },
+                "label": {
+                    "type": "plain_text",
+                    "text": "Από Ημερομηνία:",
+                    "emoji": True
+                }
+            },
         ]
     }

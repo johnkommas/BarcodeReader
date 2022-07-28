@@ -19,11 +19,10 @@ from private import pass_manager
 warnings.simplefilter("ignore", UserWarning)
 
 sql3_conn.main()
-df =sql3_conn.read_token_for_slack()
+df = sql3_conn.read_token_for_slack()
 app = App(signing_secret=pass_manager.decrypt(df['fernet'].values[0], df['secrete'].values[0]),
           token=df['token'].values[0])
 app_handler = SlackRequestHandler(app)
-
 
 
 @app.event("app_home_opened")
@@ -55,6 +54,7 @@ def action_button_click(body, ack, say, logger, client):
         view=slack_modal.modal_view()
     )
 
+
 @app.action("action_id_entersoft_sql")
 def action_button_click(body, ack, say, logger, client):
     # print(body)
@@ -64,6 +64,18 @@ def action_button_click(body, ack, say, logger, client):
     client.views_open(
         trigger_id=body["trigger_id"],
         view=slack_modal.sql_modal_view()
+    )
+
+
+@app.action("action_id_special_price_list")
+def action_button_click(body, ack, say, logger, client):
+    # print(body)
+    # Acknowledge the shortcut request
+    ack()
+    # Call the views_open method using the built-in WebClient
+    client.views_open(
+        trigger_id=body["trigger_id"],
+        view=slack_modal.special_offer_modal()
     )
 
 
@@ -158,25 +170,29 @@ def handle_submission(ack, body, client, view, logger, ):
 
         sql_server_ip = str(view['state']['values'][key[0]]['sql_server_ip'].get('value'))
         sql_server_uid = str(view['state']['values'][key[1]]['sql_server_uid'].get('value'))
-        f_sql_key, sql_server_password = pass_manager.encrypt(str(view['state']['values'][key[2]]['sql_server_password'].get('value')))
-        sql_server_Database =str(view['state']['values'][key[3]]['sql_server_Database'].get('value'))
-        sql_server_TrustServerCertificate =str(view['state']['values'][key[4]]['sql_server_TrustServerCertificate']['selected_option'].get('value'))
+        f_sql_key, sql_server_password = pass_manager.encrypt(
+            str(view['state']['values'][key[2]]['sql_server_password'].get('value')))
+        sql_server_Database = str(view['state']['values'][key[3]]['sql_server_Database'].get('value'))
+        sql_server_TrustServerCertificate = str(
+            view['state']['values'][key[4]]['sql_server_TrustServerCertificate']['selected_option'].get('value'))
 
-        vpn_name =str(view['state']['values'][key[5]]['vpn_name'].get('value'))
+        vpn_name = str(view['state']['values'][key[5]]['vpn_name'].get('value'))
         f_vpn_key, vpn_secret = pass_manager.encrypt(str(view['state']['values'][key[6]]['vpn_secret'].get('value')))
 
-        sql_data = (1, sql_server_ip,  sql_server_uid, sql_server_password, sql_server_Database, sql_server_TrustServerCertificate, f_sql_key)
-        vpn_data = (1, vpn_name, vpn_secret, f_vpn_key )
+        sql_data = (
+        1, sql_server_ip, sql_server_uid, sql_server_password, sql_server_Database, sql_server_TrustServerCertificate,
+        f_sql_key)
+        vpn_data = (1, vpn_name, vpn_secret, f_vpn_key)
 
         sql3_conn.insertVaribleIntoSqlTable(sql_data)
         sql3_conn.insertVaribleIntoVpnTable(vpn_data)
 
-        #Store Data To database
-        #TODO
+        # Store Data To database
+        # TODO
 
     except Exception as e:
         logger.error(f"Error responding to 'first_button' button click: {e}")
-        print(f"⭕️ Error on Home Page: Barcode Generator Button 💭")
+        print(f"⭕️ Error on Home Page: Initialize SQL Settings 💭")
     finally:
         stop_process_time_modal_button_triggered_initialize_sql = time.process_time()
         stop_performance_time_modal_button_triggered_initialize_sql = time.perf_counter()
@@ -186,6 +202,37 @@ def handle_submission(ack, body, client, view, logger, ):
             f"🎉 END OF: Initialize SQL Settings 💭 || By: {user_info_initialize_sql['user']['profile'].get('display_name')} || TimeStamp: {datetime.now().strftime('%d/%m/%y %H:%M:%S')}")
         print(
             f"⌛️ Performance Time: {round(final_performance_time_modal_button_triggered_initialize_sql, 2)} sec || Process Time: {round(final_process_time_modal_button_triggered_initialize_sql, 2)}")
+
+@app.view("modal_button_triggered_special_offer")
+def handle_submission(ack, body, client, view, logger, ):
+    ack()
+    try:
+        # get user name
+        user_info_special_offer = slack_getters.get_modal_user_details(body, client)
+        start_process_time_modal_button_triggered_special_offer = time.process_time()
+        start_performance_time_modal_button_triggered_special_offer = time.perf_counter()
+        print(
+            f"🟢 Button Triggered on Home Page: Special Offer 💭 || By: {user_info_special_offer['user']['profile'].get('display_name')} || TimeStamp: {datetime.now().strftime('%d/%m/%y %H:%M:%S')}")
+        logger.info(body)
+
+        # get keys from modal
+        key = view['state'].get('values').keys()
+        key = list(key)
+        from_date = (view['state']['values'][key[0]]['special_offer_datepicker_action_from'].get('selected_date'))
+        df = barcode_generator.special_offer_get_data(from_date)
+
+    except Exception as e:
+        logger.error(f"Error responding to 'first_button' button click: {e}")
+        print(f"⭕️ Error on Home Page: Special Offer 💭")
+    finally:
+        stop_process_time_modal_button_triggered_special_offer = time.process_time()
+        stop_performance_time_modal_button_triggered_special_offer = time.perf_counter()
+        final_process_time_modal_button_triggered_special_offer = stop_process_time_modal_button_triggered_special_offer - start_process_time_modal_button_triggered_special_offer
+        final_performance_time_modal_button_triggered_special_offer = stop_performance_time_modal_button_triggered_special_offer - start_performance_time_modal_button_triggered_special_offer
+        print(
+            f"🎉 END OF: Special Offer 💭 || By: {user_info_special_offer['user']['profile'].get('display_name')} || TimeStamp: {datetime.now().strftime('%d/%m/%y %H:%M:%S')}")
+        print(
+            f"⌛️ Performance Time: {round(final_performance_time_modal_button_triggered_special_offer, 2)} sec || Process Time: {round(final_process_time_modal_button_triggered_special_offer, 2)}")
 
 
 api = FastAPI()

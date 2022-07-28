@@ -13,6 +13,14 @@
 ![image](https://github.com/johnkommas/BarcodeReader/blob/master/app/images/Mixture.png?raw=true)
 
 ---
+# ΑΠΑΙΤΗΣΕΙΣ ΛΟΓΙΣΜΙΚΟΥ
+- Entersoft Expert / Business Suite (installed)
+- Microsoft SQL Server Administrator (credentials requirement)
+- Company Network Administrator (credentials required)
+- D-Net Mobile (installed)
+- Slack App (installed, credential requirements)
+
+---
 
 # Αρχικοποίηση:
 - Βάσης Δεδομένων (Entersoft SQL SERVER DB) 
