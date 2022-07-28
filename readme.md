@@ -8,7 +8,8 @@
 [![GitHub top language](https://img.shields.io/github/languages/top/johnkommas/BarcodeReader)](lang)
 [![Join the chat at https://gitter.im/johnkommas/Welcome](https://badges.gitter.im/johnkommas/Welcome.svg)](https://gitter.im/johnkommas/Welcome?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 ---
-[![asciicast](https://asciinema.org/a/113463.png)](https://asciinema.org/a/113463)
+
+[![asciicast](https://github.com/johnkommas/BarcodeReader/blob/master/app/images/step_a.png?raw=true)](https://github.com/johnkommas/BarcodeReader/blob/master/app/images/normal_demo.mov?raw=true)
 
 # FIRST STEP
 - On First Run, SQL Lite Database will be Created to store credentials
