@@ -14,7 +14,3 @@ Slack Modal Filed --> Ημερομηνία Έναρξης                       
 """
 
 
-# TODO SQL and VPN UPDATE
-"""
-Να δημιουργήσω στο SLACK ΗΟΜΕ, BUTTON που να κάνει UPDATE τα CREDENTILAS   (PENDING)
-"""

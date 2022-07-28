@@ -174,7 +174,7 @@ def modal_view():
                     "type": "static_select",
                     "placeholder": {
                         "type": "plain_text",
-                        "text": "ΕΠΙΛΕΞΕ ΤΥΠΟ ΧΑΡΤΙΟΥ",
+                        "text": "ΕΠΙΛΕΞΕ ΧΡΩΜΑ",
                         "emoji": True
                     },
                     "initial_option": {
@@ -204,7 +204,7 @@ def modal_view():
                 },
                 "label": {
                     "type": "plain_text",
-                    "text": "ΕΠΙΛΕΞΕ ΤΥΠΟ ΧΑΡΤΙΟΥ:",
+                    "text": "ΕΠΙΛΕΞΕ ΧΡΩΜΑ:",
                     "emoji": True
                 }
             },
