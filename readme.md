@@ -24,18 +24,19 @@ https://user-images.githubusercontent.com/54149422/181605383-0f466b64-9308-436e-
 
 ---
 
-# Δημιουργία Normal Price Tag
-
-
-https://user-images.githubusercontent.com/54149422/181603822-a90400e4-ffbb-4839-8844-c842a2f73550.mov
-
----
-
 # SVG BARCODE GENERATOR PREVIEW
 
 <a >
   <img src="https://raw.githubusercontent.com/johnkommas/BarcodeReader/c72c662eedf800ba3b9731d203a8afabda002323/app/images/3228020232028.svg" />
 </a>
+
+
+---
+
+# Δημιουργία Normal Price Tag
+
+
+https://user-images.githubusercontent.com/54149422/181603822-a90400e4-ffbb-4839-8844-c842a2f73550.mov
 
 ---
 
