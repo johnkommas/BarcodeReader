@@ -22,6 +22,7 @@
 <a >
   <img src="https://github.com/johnkommas/BarcodeReader/blob/master/app/images/step_a.png?raw=true" />
 </a>
+
 ---
 
 # SECOND STEP
