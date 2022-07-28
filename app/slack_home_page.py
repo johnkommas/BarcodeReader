@@ -4,24 +4,24 @@ def event(user_info, sql_status):
     profile = user_info['user']['profile']
 
     divider = {
-                "type": "divider"
-            }
+        "type": "divider"
+    }
 
     basic_user_info = {
-                            "type": "section",
-                            "text": {
-                                "type": "mrkdwn",
-                                "text": f"<@{user_info['user'].get('id')}> \n"
-                                        f"{profile.get('title')}  \n"
-                                        f"{profile.get('status_emoji')} _{profile.get('status_text')}_ \n"
+        "type": "section",
+        "text": {
+            "type": "mrkdwn",
+            "text": f"<@{user_info['user'].get('id')}> \n"
+                    f"{profile.get('title')}  \n"
+                    f"{profile.get('status_emoji')} _{profile.get('status_text')}_ \n"
 
-                                    },
-                            "accessory": {
-                                "type": "image",
-                                "image_url": f"{profile.get('image_original')}",
-                                "alt_text": "apple"
-                            },
-                        }
+        },
+        "accessory": {
+            "type": "image",
+            "image_url": f"{profile.get('image_original')}",
+            "alt_text": "apple"
+        },
+    }
 
     access_denied = {
         "type": "section",
@@ -35,44 +35,43 @@ def event(user_info, sql_status):
     }
 
     barcode_generator_section = {
-                                    "type": "section",
-                                    "text": {
-                                        "type": "mrkdwn",
-                                        "text": "*Barcode Generator*\n"
-                                                "_work in progress_"
-                                    },
+        "type": "section",
+        "text": {
+            "type": "mrkdwn",
+            "text": "*Barcode Generator*\n"
+                    "_work in progress_"
+        },
 
-                                }
+    }
 
     barcode_generator_action = {
-                                    "type": "actions",
-                                    "elements": [
-                                        {
-                                            "type": "button",
-                                            "text": {
-                                                "type": "plain_text",
-                                                "text": "ΚΑΝΟΝΙΚΕΣ ΤΙΜΕΣ",
-                                                "emoji": True
-                                            },
-                                            "style": "primary",
-                                            "value": "value_barcode_generator",
-                                            "action_id": "action_id_barcode_generator"
-                                        },
-                                        {
-                                            "type": "button",
-                                            "text": {
-                                                "type": "plain_text",
-                                                "text": "ΠΡΟΣΦΟΡΕΣ",
-                                                "emoji": True
-                                            },
-                                            "style": "primary",
-                                            "value": "value_special_price_list",
-                                            "action_id": "action_id_special_price_list"
-                                        },
+        "type": "actions",
+        "elements": [
+            {
+                "type": "button",
+                "text": {
+                    "type": "plain_text",
+                    "text": "ΚΑΝΟΝΙΚΕΣ ΤΙΜΕΣ",
+                    "emoji": True
+                },
+                "style": "primary",
+                "value": "value_barcode_generator",
+                "action_id": "action_id_barcode_generator"
+            },
+            {
+                "type": "button",
+                "text": {
+                    "type": "plain_text",
+                    "text": "ΠΡΟΣΦΟΡΕΣ",
+                    "emoji": True
+                },
+                "style": "primary",
+                "value": "value_special_price_list",
+                "action_id": "action_id_special_price_list"
+            },
 
-                                    ]
-                                }
-
+        ]
+    }
 
     entersoft_sql_section = {
         "type": "section",
@@ -108,14 +107,12 @@ def event(user_info, sql_status):
         else:
             blocks = [basic_user_info, divider, barcode_generator_section, barcode_generator_action, divider]
         return {
-                "type": "home",
-                "blocks": blocks
-           }
+            "type": "home",
+            "blocks": blocks
+        }
     else:
         print("User is app user", user_info['user'])
         return {
             "type": "home",
             "blocks": [basic_user_info, divider, access_denied]
         }
-
-
