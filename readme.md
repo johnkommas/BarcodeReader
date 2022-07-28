@@ -1,11 +1,12 @@
 
-[![MIT licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
-[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/johnkommas/BarcodeReader.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/johnkommas/BarcodeReader/context:python)[![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/johnkommas/BarcodeReader)](CODE_SIZE)
-[![GitHub forks](https://img.shields.io/github/forks/johnkommas/BarcodeReader?style=social)](FORKS)
-[![GitHub issues](https://img.shields.io/github/issues/johnkommas/BarcodeReader)](ISSUES)
-[![GitHub last commit](https://img.shields.io/github/last-commit/johnkommas/BarcodeReader)](COMMIT)
-[![GitHub language count](https://img.shields.io/github/languages/count/johnkommas/BarcodeReader)](LANGUAGES)
-[![GitHub top language](https://img.shields.io/github/languages/top/johnkommas/BarcodeReader)](lang)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=for-the-badge)](LICENSE)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/johnkommas/BarcodeReader.svg?style=for-the-badge)](https://lgtm.com/projects/g/johnkommas/BarcodeReader/context:python)
+[![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/johnkommas/BarcodeReader?style=for-the-badge)](CODE_SIZE)
+[![GitHub forks](https://img.shields.io/github/forks/johnkommas/BarcodeReader?style=for-the-badge)](FORKS)
+[![GitHub issues](https://img.shields.io/github/issues/johnkommas/BarcodeReader?style=for-the-badge)](ISSUES)
+[![GitHub last commit](https://img.shields.io/github/last-commit/johnkommas/BarcodeReader?style=for-the-badge)](COMMIT)
+[![GitHub language count](https://img.shields.io/github/languages/count/johnkommas/BarcodeReader?style=for-the-badge)](LANGUAGES)
+[![GitHub top language](https://img.shields.io/github/languages/top/johnkommas/BarcodeReader?style=for-the-badge)](lang)
 [![Discord](https://img.shields.io/discord/583993547792056321?style=for-the-badge)](https://discord.gg/kQAxc8sP)
 
 ---
