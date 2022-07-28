@@ -1,6 +1,8 @@
 #  Copyright (c) Ioannis E. Kommas 2022. All Rights Reserved
 
 from datetime import datetime
+
+import pandas as pd
 import uvicorn
 from slack_bolt import App
 from slack_bolt.adapter.fastapi import SlackRequestHandler
@@ -16,9 +18,12 @@ from private import pass_manager
 
 warnings.simplefilter("ignore", UserWarning)
 
-app = App(signing_secret=credentials.c['slack_credentials'].get('slack_secret'),
-          token=credentials.c['slack_credentials'].get('slack_token'), )
+sql3_conn.main()
+df =sql3_conn.read_token_for_slack()
+app = App(signing_secret=pass_manager.decrypt(df['fernet'].values[0], df['secrete'].values[0]),
+          token=df['token'].values[0])
 app_handler = SlackRequestHandler(app)
+
 
 
 @app.event("app_home_opened")
@@ -144,7 +149,7 @@ def handle_submission(ack, body, client, view, logger, ):
         start_process_time_modal_button_triggered_initialize_sql = time.process_time()
         start_performance_time_modal_button_triggered_initialize_sql = time.perf_counter()
         print(
-            f"🟢 Button Triggered on Home Page: Barcode Generator 💭 || By: {user_info_initialize_sql['user']['profile'].get('display_name')} || TimeStamp: {datetime.now().strftime('%d/%m/%y %H:%M:%S')}")
+            f"🟢 Button Triggered on Home Page: Initialize SQL Settings 💭 || By: {user_info_initialize_sql['user']['profile'].get('display_name')} || TimeStamp: {datetime.now().strftime('%d/%m/%y %H:%M:%S')}")
         logger.info(body)
 
         # get keys from modal
@@ -160,6 +165,12 @@ def handle_submission(ack, body, client, view, logger, ):
         vpn_name =str(view['state']['values'][key[5]]['vpn_name'].get('value'))
         f_vpn_key, vpn_secret = pass_manager.encrypt(str(view['state']['values'][key[6]]['vpn_secret'].get('value')))
 
+        sql_data = (1, sql_server_ip,  sql_server_uid, sql_server_password, sql_server_Database, sql_server_TrustServerCertificate, f_sql_key)
+        vpn_data = (1, vpn_name, vpn_secret, f_vpn_key )
+
+        sql3_conn.insertVaribleIntoSqlTable(sql_data)
+        sql3_conn.insertVaribleIntoVpnTable(vpn_data)
+
         #Store Data To database
         #TODO
 
@@ -172,7 +183,7 @@ def handle_submission(ack, body, client, view, logger, ):
         final_process_time_modal_button_triggered_initialize_sql = stop_process_time_modal_button_triggered_initialize_sql - start_process_time_modal_button_triggered_initialize_sql
         final_performance_time_modal_button_triggered_initialize_sql = stop_performance_time_modal_button_triggered_initialize_sql - start_performance_time_modal_button_triggered_initialize_sql
         print(
-            f"🎉 END OF: Barcode Generator 💭 || By: {user_info_initialize_sql['user']['profile'].get('display_name')} || TimeStamp: {datetime.now().strftime('%d/%m/%y %H:%M:%S')}")
+            f"🎉 END OF: Initialize SQL Settings 💭 || By: {user_info_initialize_sql['user']['profile'].get('display_name')} || TimeStamp: {datetime.now().strftime('%d/%m/%y %H:%M:%S')}")
         print(
             f"⌛️ Performance Time: {round(final_performance_time_modal_button_triggered_initialize_sql, 2)} sec || Process Time: {round(final_process_time_modal_button_triggered_initialize_sql, 2)}")
 
@@ -193,4 +204,5 @@ async def root():
 
 if __name__ == "__main__":
     my_ip = sql_connect.get_ip_address()
+
     uvicorn.run("main:api", host=my_ip, port=3000, log_level="info", reload=True)

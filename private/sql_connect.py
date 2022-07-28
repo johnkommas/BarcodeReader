@@ -7,20 +7,22 @@ import os
 from subprocess import call, check_output
 import time
 import socket
-from private.credentials import ip, c
+from private.credentials import ip
+from private import sql3_conn, pass_manager
 
 
 def connect():
     sql_counter = 0
     my_ip = get_ip_address()
+    df = sql3_conn.read_credentials_for_entersoft_sql()
     try:
-        credits = c['sql_server_credentials']
+
         cnxn = pyodbc.connect("DRIVER={ODBC Driver 17 for SQL Server};"
-                              f"Server={credits.get('Server')};"  # <-- HERE GOES SQL SERVER IP
-                              f"UID={credits.get('UID')};"  # <-- HERE GOES SQL USER
-                              f"PWD={credits.get('PWD')};"  # <-- HERE GOES SQL CREDENTIALS
-                              f"Database={credits.get('Database')};"  # <-- HERE GOES DATABASE 
-                              f"TrustServerCertificate={credits.get('TrustServerCertificate')}")
+                              f"Server={df['ServerIp'].values[0]};"  # <-- HERE GOES SQL SERVER IP
+                              f"UID={df['User_ID'].values[0]};"  # <-- HERE GOES SQL USER
+                              f"PWD={pass_manager.decrypt(df['fernet'].values[0], df['PasswdKey'].values[0])};"  # <-- HERE GOES SQL CREDENTIALS
+                              f"Database={df['DataBaseName'].values[0]};"  # <-- HERE GOES DATABASE 
+                              f"TrustServerCertificate={df['TrustServerCertificate'].values[0]}")
     except pyodbc.OperationalError:
         print(f"\n🔴: (!SQL!) Working Remotely: My IP ADDRESS is {my_ip}")
         return open_vpn(sql_counter)
@@ -30,9 +32,9 @@ def connect():
 def open_vpn(sql_counter):
     EM_mode = os.system(f"ping -c 1  {ip.get('EM')} >/dev/null")
     if EM_mode == 0:
-        credits = c['vpn_credentials']
+        df = sql3_conn.read_credentials_for_vpn()
         print("\n🟢: (SQL) Elounda Market is UP, Trying to get VPN UP...")
-        call(["scutil", "--nc", "start", credits.get('name'), '--secret', credits.get('secret')])
+        call(["scutil", "--nc", "start", df['ConnectionName'].values[0], '--secret', pass_manager.decrypt(df['fernet'].values[0], df['PasswdKey'].values[0])])
         time.sleep(5)
         Server_mode = os.system(f"ping -c 1  {ip.get('EM ROUTER')} >/dev/null")
         if Server_mode == 0:

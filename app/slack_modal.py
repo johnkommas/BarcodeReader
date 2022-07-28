@@ -298,7 +298,7 @@ def sql_modal_view():
 
                     },
                     "options": [{"text": {"type": "plain_text",
-                                          "text": "YES",
+                                          "text": "YEs",
                                           "emoji": True
                                           },
                                  "value": "yes"
@@ -307,7 +307,7 @@ def sql_modal_view():
                                           "text": "NO",
                                           "emoji": True
                                           },
-                                 "value": "NO"
+                                 "value": "no"
                                  },
 
                                 ],

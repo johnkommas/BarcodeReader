@@ -64,6 +64,83 @@ def insertVaribleIntoSlackTable():
             sqliteConnection.close()
             print("The SQLite connection is closed")
 
+def insertVaribleIntoSqlTable( data_tuple):
+    try:
+        parent_path = pathlib.Path(__file__).parent.resolve()
+        database = f"{parent_path}/pythonsqlite.db"
+        sqliteConnection = sqlite3.connect(database)
+        cursor = sqliteConnection.cursor()
+        print("Connected to SQLite")
+
+
+        sqlite_insert_with_param = """INSERT INTO EntersoftSql
+                          (id, ServerIp, User_ID, PasswdKey, DataBaseName, TrustServerCertificate, fernet) 
+                          VALUES (?, ?, ?, ?, ?, ?, ?);"""
+
+        cursor.execute(sqlite_insert_with_param, data_tuple)
+        sqliteConnection.commit()
+        print("Python Variables inserted successfully into SqliteDb_developers table (with Fernet encryption)")
+
+        cursor.close()
+
+    except sqlite3.Error as error:
+        print("Failed to insert Python variable into sqlite table", error)
+    finally:
+        if sqliteConnection:
+            sqliteConnection.close()
+            print("The SQLite connection is closed")
+
+
+def insertVaribleIntoVpnTable( data_tuple):
+    try:
+        parent_path = pathlib.Path(__file__).parent.resolve()
+        database = f"{parent_path}/pythonsqlite.db"
+        sqliteConnection = sqlite3.connect(database)
+        cursor = sqliteConnection.cursor()
+        print("Connected to SQLite")
+
+
+        sqlite_insert_with_param = """INSERT INTO Vpn
+                          (id, ConnectionName, PasswdKey, fernet) 
+                          VALUES (?, ?, ?, ?);"""
+
+        cursor.execute(sqlite_insert_with_param, data_tuple)
+        sqliteConnection.commit()
+        print("Python Variables inserted successfully into SqliteDb_developers table (with Fernet encryption)")
+
+        cursor.close()
+
+    except sqlite3.Error as error:
+        print("Failed to insert Python variable into sqlite table", error)
+    finally:
+        if sqliteConnection:
+            sqliteConnection.close()
+            print("The SQLite connection is closed")
+
+
+def read_credentials_for_entersoft_sql():
+    parent_path = pathlib.Path(__file__).parent.resolve()
+    database = f"{parent_path}/pythonsqlite.db"
+    entersoft_query = "SELECT * FROM EntersoftSql WHERE id = 1"
+    entersoft = pd.read_sql_query(entersoft_query, create_connection(database))
+    return  entersoft
+
+
+def read_credentials_for_vpn():
+    parent_path = pathlib.Path(__file__).parent.resolve()
+    database = f"{parent_path}/pythonsqlite.db"
+    vpn_query = "SELECT * FROM Vpn WHERE id = 1"
+    vpn = pd.read_sql_query(vpn_query, create_connection(database))
+    return vpn
+
+
+def read_token_for_slack():
+    parent_path = pathlib.Path(__file__).parent.resolve()
+    database = f"{parent_path}/pythonsqlite.db"
+    slack_query = "SELECT * FROM slack WHERE id = 1"
+    slack = pd.read_sql_query(slack_query, create_connection(database))
+    return slack
+
 
 def main():
     parent_path = pathlib.Path(__file__).parent.resolve()
@@ -72,6 +149,7 @@ def main():
     sql_create_entersoft_table = """ CREATE TABLE IF NOT EXISTS EntersoftSql (
                                         id integer PRIMARY KEY,
                                         ServerIp nvarchar(255)                       not null,
+                                        User_ID nvarchar(255)                       not null,
                                         PasswdKey nvarchar(255)                       not null,
                                         DataBaseName nvarchar(255)                       not null,
                                         TrustServerCertificate nvarchar(255)                       not null,
@@ -80,7 +158,7 @@ def main():
 
     sql_create_vpn_table = """ CREATE TABLE IF NOT EXISTS Vpn (
                                             id integer PRIMARY KEY,
-                                            Name nvarchar(255)                       not null,
+                                            ConnectionName nvarchar(255)                       not null,
                                             PasswdKey nvarchar(255)                       not null,
                                             fernet  nvarchar(255)                       not null
                                         ); """
