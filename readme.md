@@ -51,6 +51,11 @@
 - Απογραφή ΑΠ-ΜΟΒ <b>ΧΧΧΧ</b>
 
 ###### Το ερώτημα στη βάση δεδομένων επιστρέφει:
+
+<a >
+  <img src="https://github.com/johnkommas/BarcodeReader/blob/master/app/images/microsoft_sql.png?raw=true" />
+</a>
+
 - Barcode (DISTINCT)
 - Περιγραφή
 - Ποσότητα (SUM)
