@@ -10,7 +10,7 @@
 [![Discord](https://img.shields.io/discord/583993547792056321?style=for-the-badge)](https://discord.gg/kQAxc8sP)
 
 ---
-![image](https://github.com/johnkommas/BarcodeReader/blob/master/app/images/Mixture.png)
+![image](https://github.com/johnkommas/BarcodeReader/blob/master/app/images/Mixture.png?raw=true)
 
 
 https://user-images.githubusercontent.com/54149422/181598816-0a6b1f89-3f6f-46c6-9585-ad3e0927f458.mov
