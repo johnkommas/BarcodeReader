@@ -15,12 +15,12 @@ Slack Modal Filed --> Ημερομηνία Έναρξης                       
 """
 Slack HOME PAGE BUTTON (OK)
 Slack MODAL POP UP     (OK)
-SLack Action           (PENDING)
+SLack Action           (OK)
 """
 
 # TODO CHANGE CREDENTAILS INPUT
 """
-SQL CONNECT --> Να τραβάει τις πληροφορίες σύνδεσης από την Βάση Δεδομένων αντί το αρχείο  (PENDING)
+SQL CONNECT --> Να τραβάει τις πληροφορίες σύνδεσης από την Βάση Δεδομένων αντί το αρχείο  (OK)
 """
 
 # TODO SQL and VPN UPDATE

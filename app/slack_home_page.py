@@ -51,12 +51,23 @@ def event(user_info, sql_status):
                                             "type": "button",
                                             "text": {
                                                 "type": "plain_text",
-                                                "text": "ΑΣ ΞΕΚΙΝΗΣΟΥΜΕ",
+                                                "text": "ΚΑΝΟΝΙΚΕΣ ΤΙΜΕΣ",
                                                 "emoji": True
                                             },
                                             "style": "primary",
                                             "value": "value_barcode_generator",
                                             "action_id": "action_id_barcode_generator"
+                                        },
+                                        {
+                                            "type": "button",
+                                            "text": {
+                                                "type": "plain_text",
+                                                "text": "ΠΡΟΣΦΟΡΕΣ",
+                                                "emoji": True
+                                            },
+                                            "style": "primary",
+                                            "value": "value_special_price_list",
+                                            "action_id": "action_id_special_price_list"
                                         },
 
                                     ]
