@@ -8,8 +8,41 @@
 [![GitHub top language](https://img.shields.io/github/languages/top/johnkommas/BarcodeReader)](lang)
 [![Join the chat at https://gitter.im/johnkommas/Welcome](https://badges.gitter.im/johnkommas/Welcome.svg)](https://gitter.im/johnkommas/Welcome?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 ---
-# FIRST STEPS
+# FIRST STEP
 - On First Run a SQL Lite Database will be Created to store credentials
+
+<a >
+  <img src="https://github.com/johnkommas/BarcodeReader/blob/master/app/images/sql_lite_logo.png?raw=true" />
+</a>
+
+- In your Terminal you will be asked to insert:
+  - SLACK TOKEN
+  - SLACK SECRET (password will be encrypted)
+  
+<a >
+  <img src="https://github.com/johnkommas/BarcodeReader/blob/master/app/images/step_a.png?raw=true" />
+</a>
+---
+
+# SECOND STEP
+- Open Your Slack and navigate into your Bot Home Page.
+
+<a >
+  <img src="https://github.com/johnkommas/BarcodeReader/blob/master/app/images/step_b.png?raw=true" />
+</a>
+
+---
+
+# THIRD STEP
+- Click on SQL & VPN SETUP Button and insert all necessary info
+- All passwords are encrypted before they stored to database
+
+<a >
+  <img src="https://github.com/johnkommas/BarcodeReader/blob/master/app/images/step_c.png?raw=true" />
+</a>
+
+---
+
 # Barcode Form Print Generator 
 
 
