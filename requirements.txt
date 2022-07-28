@@ -1,5 +1,5 @@
 crefi==2.0.9
-pip==22.2
+pip==22.2.1
 python-barcode==0.14.0
 python-Levenshtein==0.12.2
 pyxattr==0.7.2

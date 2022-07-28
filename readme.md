@@ -14,7 +14,9 @@
 
 ---
 
-# Αρχικοποίηση Βάσης Δεδομένων (SQL SERVER DB) και Εικονικού Ιδιωτικού Δικτύου (L2TP - VPN)
+# Αρχικοποίηση:
+- Βάσης Δεδομένων (Entersoft SQL SERVER DB) 
+- Εικονικού Ιδιωτικού Δικτύου (VPN - L2TP with IPSec)
 
 
 https://user-images.githubusercontent.com/54149422/181605383-0f466b64-9308-436e-ac37-308ff8467259.mov
@@ -22,14 +24,14 @@ https://user-images.githubusercontent.com/54149422/181605383-0f466b64-9308-436e-
 
 ---
 
-# Δημιουργία Price Tag
+# Δημιουργία Normal Price Tag
 
 
 https://user-images.githubusercontent.com/54149422/181603822-a90400e4-ffbb-4839-8844-c842a2f73550.mov
 
 ---
 
-# SVG BARCODE GENERATOR
+# SVG BARCODE GENERATOR PREVIEW
 
 <a >
   <img src="https://raw.githubusercontent.com/johnkommas/BarcodeReader/c72c662eedf800ba3b9731d203a8afabda002323/app/images/3228020232028.svg" />
@@ -39,7 +41,7 @@ https://user-images.githubusercontent.com/54149422/181603822-a90400e4-ffbb-4839-
 
 ### Requirements
 - crefi==2.0.9
-- pip==22.2
+- pip==22.2.1
 - python-barcode==0.14.0
 - python-Levenshtein==0.12.2
 - pyxattr==0.7.2
@@ -52,11 +54,12 @@ https://user-images.githubusercontent.com/54149422/181603822-a90400e4-ffbb-4839-
 - Pillow~=9.2.0
 - CairoSVG~=2.5.2
 - tqdm~=4.64.0
+- cryptography~=37.0.4
 
 ---
 
 ### Python Version
- - Version: 3.9
+- Version: 3.9
 
 ---
 
