@@ -1,3 +1,5 @@
+#  Copyright (c) Ioannis E. Kommas 2022. All Rights Reserved
+
 from cryptography.fernet import Fernet
 
 

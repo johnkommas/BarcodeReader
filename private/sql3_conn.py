@@ -1,3 +1,5 @@
+#  Copyright (c) Ioannis E. Kommas 2022. All Rights Reserved
+
 import pathlib
 import sqlite3
 from sqlite3 import Error

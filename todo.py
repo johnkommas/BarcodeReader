@@ -1,3 +1,5 @@
+#  Copyright (c) Ioannis E. Kommas 2022. All Rights Reserved
+
 # TODO Να φτιάξω τελικό αποτέλεσμα με τιμές από τιμοκατάλογο
 """
 Ερώτημα στην DB                                                (OK)
