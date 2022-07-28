@@ -106,7 +106,7 @@ def insertVaribleIntoVpnTable( data_tuple):
 
         cursor.execute(sqlite_insert_with_param, data_tuple)
         sqliteConnection.commit()
-        print("Python Variables inserted successfully into SqliteDb_developers table (with Fernet encryption)")
+        print("Python Variables inserted successfully into pythonsqlite.db table (with Fernet encryption)")
 
         cursor.close()
 
