@@ -16,7 +16,9 @@
 
 # Δημιουργία Price Tag
 
-https://user-images.githubusercontent.com/54149422/181598816-0a6b1f89-3f6f-46c6-9585-ad3e0927f458.mov
+
+https://user-images.githubusercontent.com/54149422/181603822-a90400e4-ffbb-4839-8844-c842a2f73550.mov
+
 
 # SVG BARCODE GENERATOR
 
