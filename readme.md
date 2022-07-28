@@ -1,6 +1,7 @@
 
 [![MIT licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=for-the-badge)](LICENSE)
 [![GitHub code size in bytes](https://img.shields.io/github/repo-size/johnkommas/BarcodeReader?style=for-the-badge)](CODE_SIZE)
+![GitHub repo file count](https://img.shields.io/github/directory-file-count/johnkommas/BarcodeReader?style=for-the-badge)
 [![GitHub forks](https://img.shields.io/github/forks/johnkommas/BarcodeReader?style=for-the-badge)](FORKS)
 [![GitHub issues](https://img.shields.io/github/issues/johnkommas/BarcodeReader?style=for-the-badge)](ISSUES)
 [![GitHub last commit](https://img.shields.io/github/last-commit/johnkommas/BarcodeReader?style=for-the-badge)](COMMIT)
