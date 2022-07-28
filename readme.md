@@ -14,11 +14,20 @@
 
 ---
 
+# Αρχικοποίηση Βάσης Δεδομένων (SQL SERVER DB) και Εικονικού Ιδιωτικού Δικτύου (L2TP - VPN)
+
+
+https://user-images.githubusercontent.com/54149422/181605383-0f466b64-9308-436e-ac37-308ff8467259.mov
+
+
+---
+
 # Δημιουργία Price Tag
 
 
 https://user-images.githubusercontent.com/54149422/181603822-a90400e4-ffbb-4839-8844-c842a2f73550.mov
 
+---
 
 # SVG BARCODE GENERATOR
 
