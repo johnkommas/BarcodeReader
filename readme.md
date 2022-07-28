@@ -6,7 +6,8 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/johnkommas/BarcodeReader)](COMMIT)
 [![GitHub language count](https://img.shields.io/github/languages/count/johnkommas/BarcodeReader)](LANGUAGES)
 [![GitHub top language](https://img.shields.io/github/languages/top/johnkommas/BarcodeReader)](lang)
-[![Join the chat at https://gitter.im/johnkommas/Welcome](https://badges.gitter.im/johnkommas/Welcome.svg)](https://gitter.im/johnkommas/Welcome?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Discord](https://img.shields.io/discord/583993547792056321?style=for-the-badge)](https://discord.gg/kQAxc8sP)
+
 ---
 
 https://user-images.githubusercontent.com/54149422/181598816-0a6b1f89-3f6f-46c6-9585-ad3e0927f458.mov
