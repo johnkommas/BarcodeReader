@@ -59,9 +59,3 @@ where ValidFromDate = '{from_date}'
 order by 3,4,5
 """
 
-# example
-# import pandas as pd
-# from private import sql_connect
-#
-# df= pd.read_sql_query(get_products_in_the_period("2022-07-29"), sql_connect.connect())
-# print(df['ΚΩΔΙΚΟΣ'].values)

@@ -187,8 +187,6 @@ def handle_submission(ack, body, client, view, logger, ):
         sql3_conn.insertVaribleIntoSqlTable(sql_data)
         sql3_conn.insertVaribleIntoVpnTable(vpn_data)
 
-        # Store Data To database
-        # TODO
 
     except Exception as e:
         logger.error(f"Error responding to 'first_button' button click: {e}")
