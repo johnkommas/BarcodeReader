@@ -22,7 +22,7 @@ def app(db_codes, color, folder='svg'):
         # 'font_path': 'Times.ttc',
         # 'font_size': 7,
         # 'text_distance': 2.0,
-        'background': color,
+        'background': None,
         'foreground': 'black',
         # 'center_text': True
     }
