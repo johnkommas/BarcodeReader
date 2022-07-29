@@ -98,9 +98,8 @@ def handle_submission(ack, body, client, view, logger, ):
         type = view['state']['values'][key[0]]['pick_type_static_select_action']['selected_option'].get('value')
         number = int(view['state']['values'][key[1]]['pda_number_plain_text_input_action'].get('value'))
         store = str(view['state']['values'][key[2]]['pick_type_static_select_store']['selected_option'].get('value'))
-        special_color = str(
-            view['state']['values'][key[3]]['pick_type_static_select_paper_type']['selected_option'].get('value'))
-
+        special_color = str(view['state']['values'][key[3]]['pick_type_static_select_color']['selected_option'].get('value'))
+        tags = str((view['state']['values'][key[4]]['pick_type_static_select_tags']['selected_option'].get('value')))
         stores = ['EM', 'L1', 'L2']
         special_colors = ['WHITE', 'YELLOW']
         bg_colors = ['#61D839', '#6FBCF0']
@@ -136,7 +135,7 @@ def handle_submission(ack, body, client, view, logger, ):
         # run app
         df = barcode_generator.run(number, type, bg_color)
         for i in tqdm(df.BarCode.unique(), desc='Barcode Generator: Creating Final Images:'):
-            create_final_image.run(df[df['BarCode'] == i], file_name, price)
+            create_final_image.run(df[df['BarCode'] == i], file_name, price, tags)
 
     except Exception as e:
         logger.error(f"Error responding to 'first_button' button click: {e}")

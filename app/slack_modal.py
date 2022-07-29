@@ -34,68 +34,68 @@ def modal_view():
                         "emoji": True
                     },
                     "initial_option": {"text": {"type": "plain_text",
-                                                "text": f"ΑΠ_ΜΟΒ: \t\t (ΔΕΛΤΙΟ ΑΠΟΓΡΑΦΗΣ)",
+                                                "text": f"3️⃣ ΑΠ_ΜΟΒ: \t\t (ΔΕΛΤΙΟ ΑΠΟΓΡΑΦΗΣ)",
                                                 "emoji": True
                                                 },
                                        "value": f"ΑΠ_ΜΟΒ"},
 
                     "options": [{"text": {"type": "plain_text",
-                                          "text": f"ΔΕΑ: \t\t\t\t (ΔΕΛΤΙΟ ΕΠΙΣΤΡΟΦΗΣ ΑΓΟΡΩΝ)",
+                                          "text": f"1️⃣ ΔΕΑ: \t\t\t\t (ΔΕΛΤΙΟ ΕΠΙΣΤΡΟΦΗΣ ΑΓΟΡΩΝ)",
                                           "emoji": True
                                           },
                                  "value": f"ΔΕΑ"
                                  },
                                 {"text": {"type": "plain_text",
-                                          "text": f"ΠΠΡ: \t\t\t\t (ΠΑΡΑΓΓΕΛΙΑ ΑΓΟΡΑΣ)",
+                                          "text": f"2️⃣ ΠΠΡ: \t\t\t\t (ΠΑΡΑΓΓΕΛΙΑ ΑΓΟΡΑΣ)",
                                           "emoji": True
                                           },
                                  "value": f"ΠΠΡ"
                                  },
                                 {"text": {"type": "plain_text",
-                                          "text": f"ΑΠ_ΜΟΒ: \t\t (ΔΕΛΤΙΟ ΑΠΟΓΡΑΦΗΣ)",
+                                          "text": f"3️⃣ ΑΠ_ΜΟΒ: \t\t (ΔΕΛΤΙΟ ΑΠΟΓΡΑΦΗΣ)",
                                           "emoji": True
                                           },
                                  "value": f"ΑΠ_ΜΟΒ"
                                  },
                                 {"text": {"type": "plain_text",
-                                          "text": f"ΔΕN: \t\t\t\t (ΔΕΛΤΙΟ ΕΝΔΟΔΙΑΚΙΝΗΣΗΣ)",
+                                          "text": f"4️⃣ ΔΕN: \t\t\t\t (ΔΕΛΤΙΟ ΕΝΔΟΔΙΑΚΙΝΗΣΗΣ)",
                                           "emoji": True
                                           },
                                  "value": f"ΔΕΝ"
                                  },
                                 {"text": {"type": "plain_text",
-                                          "text": f"ΠΕΝ: \t\t\t\t (ΠΑΡΑΓΓΕΛΙΑ ΕΝΔΟΔΙΑΚΙΝΗΣΗΣ)",
+                                          "text": f"5️⃣ ΠΕΝ: \t\t\t\t (ΠΑΡΑΓΓΕΛΙΑ ΕΝΔΟΔΙΑΚΙΝΗΣΗΣ)",
                                           "emoji": True
                                           },
                                  "value": f"ΠΕΝ"
                                  },
 
                                 {"text": {"type": "plain_text",
-                                          "text": f"ΑΔΠ: \t\t\t\t (ΔΕΛΤΙΟ ΠΑΡΑΛΑΒΗΣ ΑΓΟΡΩΝ)",
+                                          "text": f"6️⃣ ΑΔΠ: \t\t\t\t (ΔΕΛΤΙΟ ΠΑΡΑΛΑΒΗΣ ΑΓΟΡΩΝ)",
                                           "emoji": True
                                           },
                                  "value": f"ΑΔΠ"
                                  },
                                 {"text": {"type": "plain_text",
-                                          "text": f"ΑΤΔ: \t\t\t\t (ΤΙΜΟΛΟΓΙΟ ΔΕΛΤΙΟ ΠΑΡΑΛΑΒΗΣ)",
+                                          "text": f"7️⃣ ΑΤΔ: \t\t\t\t (ΤΙΜΟΛΟΓΙΟ ΔΕΛΤΙΟ ΠΑΡΑΛΑΒΗΣ)",
                                           "emoji": True
                                           },
                                  "value": f"ΑΤΔ"
                                  },
                                 {"text": {"type": "plain_text",
-                                          "text": f"ΑΠΑΠ: \t\t\t (ΤΙΜΟΛΟΓΙΟ ΑΓΡΟΤΙΚΩΝ ΠΡΟΪΟΝΤΩΝ)",
+                                          "text": f"8️⃣ ΑΠΑΠ: \t\t\t (ΤΙΜΟΛΟΓΙΟ ΑΓΡΟΤΙΚΩΝ ΠΡΟΪΟΝΤΩΝ)",
                                           "emoji": True
                                           },
                                  "value": f"ΑΠΑΠ"
                                  },
                                 {"text": {"type": "plain_text",
-                                          "text": f"ΑΧΔ: \t\t\t\t (ΔΕΛΤΙΟ ΠΑΡΑΛΑΒΗΣ ΧΩΡΙΣ ΧΡΕΩΣΗ)",
+                                          "text": f"9️⃣ ΑΧΔ: \t\t\t\t (ΔΕΛΤΙΟ ΠΑΡΑΛΑΒΗΣ ΧΩΡΙΣ ΧΡΕΩΣΗ)",
                                           "emoji": True
                                           },
                                  "value": f"ΑΧΔ"
                                  },
                                 {"text": {"type": "plain_text",
-                                          "text": f"ΠΔΣ: \t\t\t\t (ΔΕΣΜΕΥΣΗ ΑΠΟΘΕΜΑΤΟΣ ΓΙΑ ΠΕΛΑΤΗ)",
+                                          "text": f"1️⃣0️⃣ ΠΔΣ: \t\t\t\t (ΔΕΣΜΕΥΣΗ ΑΠΟΘΕΜΑΤΟΣ ΓΙΑ ΠΕΛΑΤΗ)",
                                           "emoji": True
                                           },
                                  "value": f"ΠΔΣ"
@@ -134,25 +134,25 @@ def modal_view():
                     },
                     "initial_option": {
                         "text": {"type": "plain_text",
-                                 "text": "ELOUNDA MARKET",
+                                 "text": "⚽️ ELOUNDA MARKET",
                                  "emoji": True
                                  },
                         "value": "EM"
                     },
                     "options": [{"text": {"type": "plain_text",
-                                          "text": "ELOUNDA MARKET",
+                                          "text": "⚽️ ELOUNDA MARKET",
                                           "emoji": True
                                           },
                                  "value": "EM"
                                  },
                                 {"text": {"type": "plain_text",
-                                          "text": "LATO 01",
+                                          "text": "🏀 LATO 01",
                                           "emoji": True
                                           },
                                  "value": "L1"
                                  },
                                 {"text": {"type": "plain_text",
-                                          "text": "LATO 02",
+                                          "text": "🏐 LATO 02",
                                           "emoji": True
                                           },
                                  "value": "L2"
@@ -179,20 +179,20 @@ def modal_view():
                     },
                     "initial_option": {
                         "text": {"type": "plain_text",
-                                 "text": "ΛΕΥΚΟ",
+                                 "text": "⚪ ΛΕΥΚΟ",
                                  "emoji": True
                                  },
                         "value": "WHITE"
 
                     },
                     "options": [{"text": {"type": "plain_text",
-                                          "text": "ΛΕΥΚΟ",
+                                          "text": "⚪ ΛΕΥΚΟ",
                                           "emoji": True
                                           },
                                  "value": "WHITE"
                                  },
                                 {"text": {"type": "plain_text",
-                                          "text": "ΚΙΤΡΙΝΟ",
+                                          "text": "🟡 ΚΙΤΡΙΝΟ",
                                           "emoji": True
                                           },
                                  "value": "YELLOW"
@@ -200,11 +200,84 @@ def modal_view():
 
                                 ],
 
-                    "action_id": "pick_type_static_select_paper_type"
+                    "action_id": "pick_type_static_select_color"
                 },
                 "label": {
                     "type": "plain_text",
                     "text": "ΕΠΙΛΕΞΕ ΧΡΩΜΑ:",
+                    "emoji": True
+                }
+            },
+
+            #tags Start
+            {
+                "type": "input",
+                "element": {
+                    "type": "static_select",
+                    "placeholder": {
+                        "type": "plain_text",
+                        "text": "ΕΠΙΛΕΞΕ TAGS",
+                        "emoji": True
+                    },
+
+
+                    "options": [{"text": {"type": "plain_text",
+                                          "text": "🌚️ ΚΑΝΕΝΑ",
+                                          "emoji": True
+                                          },
+                                 "value": "no_tags"
+                                 },
+                                {"text": {"type": "plain_text",
+                                          "text": "🌕 NEW PRODUCT",
+                                          "emoji": True
+                                          },
+                                 "value": "new_product"
+                                 },
+                                {"text": {"type": "plain_text",
+                                          "text": "🌖 SPECIAL OFFER",
+                                          "emoji": True
+                                          },
+                                 "value": "special_offer"
+                                 },
+                                {"text": {"type": "plain_text",
+                                          "text": "🌗 VEGAN",
+                                          "emoji": True
+                                          },
+                                 "value": "vegan"
+                                 },
+                                {"text": {"type": "plain_text",
+                                          "text": "🌘 BIO",
+                                          "emoji": True
+                                          },
+                                 "value": "Bio"
+                                 },
+                                {"text": {"type": "plain_text",
+                                          "text": "🌔 GLUTEN FREE",
+                                          "emoji": True
+                                          },
+                                 "value": "gluten_free"
+                                 },
+                                {"text": {"type": "plain_text",
+                                          "text": "🌒 BEST CHOICE",
+                                          "emoji": True
+                                          },
+                                 "value": "best_choise"
+                                 },
+                                {"text": {"type": "plain_text",
+                                          "text": "🌙 TRY IT BEFORE YOU BUY IT",
+                                          "emoji": True
+                                          },
+                                 "value": "try_before_buy"
+                                 },
+
+
+                                ],
+
+                    "action_id": "pick_type_static_select_tags"
+                },
+                "label": {
+                    "type": "plain_text",
+                    "text": "ΕΠΙΛΕΞΕ TAGS:",
                     "emoji": True
                 }
             },
