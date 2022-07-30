@@ -126,6 +126,7 @@ def modal_view():
             {
                 "type": "input",
                 "element": {
+
                     "type": "static_select",
                     "placeholder": {
                         "type": "plain_text",
@@ -213,6 +214,7 @@ def modal_view():
             {
                 "type": "input",
                 "element": {
+                    "focus_on_load": True,
                     "type": "static_select",
                     "placeholder": {
                         "type": "plain_text",
