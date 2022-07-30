@@ -5,11 +5,11 @@ import pathlib
 from cairosvg import svg2png
 
 
-def run(df, file_name, price, tags):
+def run(df, file_name, init_price, tags):
     path = pathlib.Path(__file__).parent.resolve()
     barcode = df['BarCode'].values[0]
     title = df['Περιγραφή'].values[0]
-    price = df[price].values[0]
+    price = (df[init_price].values[0] if df['ΕΚΠΤΩΣΗ'].values[0] <= 0 else round(df[init_price].values[0] * (100 - df['ΕΚΠΤΩΣΗ'].values[0]) / 100, 2))
     fMUCode = df['MM'].values[0]
     euro_price = int(price)
     # Διαίρεση με το 0 όταν η τιμή είναι 0.50 μας βγάζει σφάλμα έτσι το μετατρέπουμε σε 1
@@ -17,12 +17,15 @@ def run(df, file_name, price, tags):
 
     svg2png(url=f"{path}/svg/{barcode}.svg", write_to=f"{path}/svg/{barcode}.png", dpi=1200)
     my_image = Image.open(f'{path}/images/{file_name}')
-    title_font = ImageFont.truetype('Times.ttc', 80)
+    title_font = ImageFont.truetype('Avenir Next.ttc', 80)
+    detailed_info_retail_discount = ImageFont.truetype('Avenir Next.ttc', 58)
     euro_font = ImageFont.truetype('Futura.ttc', 700)
     copper_font = ImageFont.truetype('Futura.ttc', 300)
     euro_sign_font = ImageFont.truetype('Futura.ttc', 400)
     fMUCode_font = ImageFont.truetype('Times.ttc', 98)
     image_editable = ImageDraw.Draw(my_image)
+
+    # TITLE
     image_editable.text((100, 80), title, (0, 0, 0), font=title_font)
 
     # BARCODE
@@ -36,6 +39,11 @@ def run(df, file_name, price, tags):
     overlay = Image.open(f"{path}/images/{tags}.png").convert("RGBA")
     size = (overlay.size[0] // 1, overlay.size[1] // 1)
     overlay = overlay.resize(size, Image.ANTIALIAS)
+    data = f"Retail Price: {df[init_price].values[0]}€ || Discount: {df['ΕΚΠΤΩΣΗ'].values[0]}%"
+
+    # Detailed Info about Price and Discount
+    image_editable.text((100, 820), data, (0, 0, 0), font=detailed_info_retail_discount)
+
     if len(str(euro_price)) == 1:
         image_editable.text((1346 - 40, 80),  str(euro_price) + ".", (244, 36, 7), font=euro_font)
         my_image.paste(overlay, (186 - 40, 211), mask=overlay)

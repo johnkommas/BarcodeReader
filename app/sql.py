@@ -9,7 +9,8 @@ SELECT  DISTINCT IMP_MobileDocumentLines.BarCode        AS 'BarCode',
         ESMMItemMU.fMUCode                              AS 'MM',
         ESFIItem.RetailPrice                            AS 'RetailPrice',
         ESFIItem.Price1                                 AS 'LATO 01',
-        ESFIItem.Price2                                 AS 'LATO 02'
+        ESFIItem.Price2                                 AS 'LATO 02',
+        ESFIItem.Discount                               AS 'ΕΚΠΤΩΣΗ'
         FROM IMP_MobileDocumentLines
             LEFT JOIN IMP_MobileDocumentHeaders
                 ON IMP_MobileDocumentHeaders.GID = IMP_MobileDocumentLines.fDocGID
@@ -31,6 +32,7 @@ SELECT  DISTINCT IMP_MobileDocumentLines.BarCode        AS 'BarCode',
                  ,ESFIItem.RetailPrice 
                  ,ESFIItem.Price1
                  ,ESFIItem.Price2
+                 ,ESFIItem.Discount
         ORDER BY 4, 2
 """
 
