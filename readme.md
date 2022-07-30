@@ -48,6 +48,16 @@ https://user-images.githubusercontent.com/54149422/181631589-3754f78a-4adb-435c-
 
 ---
 
+# Τελικό Αποτέλεσμα
+
+
+
+https://user-images.githubusercontent.com/54149422/181936202-aa7af04f-7bd8-4a26-9ea6-188cc61de4ba.mov
+
+
+
+---
+
 ### Requirements
 - crefi==2.0.9
 - pip==22.2.1
