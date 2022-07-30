@@ -45,17 +45,20 @@ SELECT ESFIPricelist.Code                         AS 'ΤΙΜΟΚΑΤΑΛΟΓΟΣ
        ESFIPricelistItem.ValidToDate              AS 'ΛΗΞΗ',
        ESFIItem.Description                       AS 'ΠΕΡΙΓΡΑΦΗ',
        ESFIItem.BarCode                           AS 'ΚΩΔΙΚΟΣ',
-       ESFIItem.RetailPrice                       AS 'ΤΙΜΗ ΛΙΑΝΙΚΗΣ',
+       ESFIItem.RetailPrice                       AS 'RetailPrice',
        ESFIItem.Price1                            AS 'LATO 01',
        ESFIItem.Price2                            AS 'LATO 02',
        ESFIPricelistItem.Price                    AS 'ΝΕΑ ΤΙΜΗ',
-       ESFIPricelistItem.PercentageOnBasePrice    AS 'ΠΟΣΟΣΤΟ',
-       ESFIItem.fItemSubcategoryCode              AS 'BRAND'
+       ESFIPricelistItem.PercentageOnBasePrice    AS 'ΕΚΠΤΩΣΗ',
+       ESFIItem.fItemSubcategoryCode              AS 'BRAND',
+              ESMMItemMU.fMUCode                  AS 'MM'
 from ESFIPricelistItem
          left join ESFIItem
                    on ESFIPricelistItem.fItemGID = ESFIItem.GID
          inner JOIN ESFIPricelist
                     on ESFIPricelistItem.fPricelistGID = ESFIPricelist.GID
+         LEFT JOIN ESMMItemMU
+                    ON ESFIItem.fMainMUGID = ESMMItemMU.GID
 where ValidFromDate = '{from_date}' 
 
 order by 3,4,5

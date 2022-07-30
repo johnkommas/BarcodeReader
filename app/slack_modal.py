@@ -465,5 +465,51 @@ def special_offer_modal():
                     "emoji": True
                 }
             },
+            {
+                "type": "input",
+                "element": {
+
+                    "type": "static_select",
+                    "placeholder": {
+                        "type": "plain_text",
+                        "text": "ΕΠΙΛΕΞΕ ΥΠΟΚΑΤΑΣΤΗΜΑ",
+                        "emoji": True
+                    },
+                    "initial_option": {
+                        "text": {"type": "plain_text",
+                                 "text": "⚽️ ELOUNDA MARKET",
+                                 "emoji": True
+                                 },
+                        "value": "EM"
+                    },
+                    "options": [{"text": {"type": "plain_text",
+                                          "text": "⚽️ ELOUNDA MARKET",
+                                          "emoji": True
+                                          },
+                                 "value": "EM"
+                                 },
+                                {"text": {"type": "plain_text",
+                                          "text": "🏀 LATO 01",
+                                          "emoji": True
+                                          },
+                                 "value": "L1"
+                                 },
+                                {"text": {"type": "plain_text",
+                                          "text": "🏐 LATO 02",
+                                          "emoji": True
+                                          },
+                                 "value": "L2"
+                                 },
+                                ],
+
+                    "action_id": "special_offer_pick_type_static_select_store"
+
+                },
+                "label": {
+                    "type": "plain_text",
+                    "text": "ΕΠΙΛΕΞΕ ΥΠΟΚΑΤΑΣΤΗΜΑ:",
+                    "emoji": True
+                }
+            },
         ]
     }

@@ -200,6 +200,7 @@ def handle_submission(ack, body, client, view, logger, ):
         print(
             f"⌛️ Performance Time: {round(final_performance_time_modal_button_triggered_initialize_sql, 2)} sec || Process Time: {round(final_process_time_modal_button_triggered_initialize_sql, 2)}")
 
+
 @app.view("modal_button_triggered_special_offer")
 def handle_submission(ack, body, client, view, logger, ):
     ack()
@@ -216,7 +217,28 @@ def handle_submission(ack, body, client, view, logger, ):
         key = view['state'].get('values').keys()
         key = list(key)
         from_date = (view['state']['values'][key[0]]['special_offer_datepicker_action_from'].get('selected_date'))
+        store = str(view['state']['values'][key[1]]['special_offer_pick_type_static_select_store']['selected_option'].get('value'))
+
+        stores = ['EM', 'L1', 'L2']
+        prices = ['RetailPrice', 'LATO 01', 'LATO 02']
+        file_names = ['Elounda Market Yellow.png', 'Lato Yellow.png']
+        tags = "special_offer"
+
+        if store == stores[0]:
+            price = prices[0]
+            file_name = file_names[0]
+        elif store == stores[1]:
+            price = prices[1]
+            file_name = file_names[1]
+        else:
+            price = prices[2]
+            file_name = file_names[1]
+
+
         df = barcode_generator.special_offer_get_data(from_date)
+        for i in tqdm(df['ΚΩΔΙΚΟΣ'].unique(), desc='Barcode Generator: Creating Final Images:'):
+            create_final_image.special_price(df[df['ΚΩΔΙΚΟΣ'] == i], file_name, price, tags)
+
 
     except Exception as e:
         logger.error(f"Error responding to 'first_button' button click: {e}")
