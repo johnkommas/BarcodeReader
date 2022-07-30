@@ -66,6 +66,19 @@ https://user-images.githubusercontent.com/54149422/181995686-51b41d61-9832-4ea1-
 
 ---
 
+# Τελικό Αποτέλεσμα
+
+- Έκπτωση Επί Τιμής Υποκαταστήματος:
+
+![5200427400246](https://user-images.githubusercontent.com/54149422/181995790-fc7e57aa-60d2-478a-8d21-78ff8fc9acb0.png)
+- Ανάθεση Τιμής
+
+![5202087000668](https://user-images.githubusercontent.com/54149422/181995891-e23da479-4711-4a62-91ee-00dab99c22a4.png)
+
+
+
+---
+
 ### Requirements
 - crefi==2.0.9
 - pip==22.2.1
