@@ -43,7 +43,8 @@ https://user-images.githubusercontent.com/54149422/181605383-0f466b64-9308-436e-
 # Δημιουργία Normal Price Tag
 
 
-https://user-images.githubusercontent.com/54149422/181631589-3754f78a-4adb-435c-b60a-d8f00f663531.mov
+
+https://user-images.githubusercontent.com/54149422/181936319-cf0cc556-b86f-420f-8d40-eaf394274c17.mov
 
 
 ---
