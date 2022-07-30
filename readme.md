@@ -61,7 +61,7 @@ https://user-images.githubusercontent.com/54149422/181936202-aa7af04f-7bd8-4a26-
 # Προσφορές 
 
 
-https://user-images.githubusercontent.com/54149422/181995630-471b4aa4-bf32-40cb-820b-d7db8a86edd3.mov
+https://user-images.githubusercontent.com/54149422/181995686-51b41d61-9832-4ea1-8023-a885fbdd7cd4.mov
 
 
 ---
