@@ -12,13 +12,3 @@ Slack Modal Filed --> Ημερομηνία Έναρξης                       
  - ΗΜΕΡΟΜΗΝΙΑ ΕΝΑΡΞΗΣ          (PENDING)
  - ΗΜΕΡΟΜΗΝΙΑ ΛΗΞΗΗΣ           (PENDING)
 """
-
-
-"""
-barcode potition = (250.8 x 616)
-TAGS
-- NEW  (1 = 186 x 211) (2 = 73 x 211) (3 = -212 x 211) plus barcode (3 = 55.8 x 616)
-- DISCOUNT
-- BEST PRICE
-- SPECIAL OFFER
-"""
