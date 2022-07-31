@@ -1,17 +1,12 @@
 #  Copyright (c) Ioannis E. Kommas 2022. All Rights Reserved
 
-from datetime import datetime
-
-import pandas as pd
 import uvicorn
 from slack_bolt import App
 from slack_bolt.adapter.fastapi import SlackRequestHandler
 from private import sql_connect
 from app import slack_home_page, barcode_generator, slack_getters, slack_modal, create_final_image
 from fastapi import FastAPI, Request
-from private import credentials
 import warnings
-import time
 from tqdm import tqdm
 from private import sql3_conn
 from private import pass_manager
@@ -39,12 +34,13 @@ def publish_home_view(client, event, logger):
 
 
 @app.event("message")
-def handle_message_events(body, logger, say):
+def handle_message_events(body, logger):
     logger.info(body)
 
 
 @app.action("action_id_barcode_generator")
 def action_button_click(body, ack, say, logger, client):
+    logger.info(body)
     # print(body)
     # Acknowledge the shortcut request
     ack()
@@ -83,7 +79,7 @@ def action_button_click(body, ack, say, logger, client):
 def handle_submission(ack, body, client, view, logger, ):
     ack()
     try:
-        # get user name
+        # get username
         user_info = slack_getters.get_modal_user_details(body, client)
         logger.info(body)
         # get keys from modal

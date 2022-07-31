@@ -105,7 +105,8 @@ def event(user_info, sql_status, activity):
         "type": "section",
         "text": {
             "type": "mrkdwn",
-            "text": f'{activity.pivot("USER", "CHANNEL", "TIMES")}'
+            "text": f'> *USER ACTIVITY ANALYTICS* \n'
+                    f'> ```{activity.pivot("USER", "CHANNEL", "TIMES")}```'
         },
 
     }
@@ -114,7 +115,7 @@ def event(user_info, sql_status, activity):
         if sql_status:
             blocks = [basic_user_info, divider, entersoft_sql_section, entersoft_sql_action, divider]
         else:
-            blocks = [basic_user_info, divider, barcode_generator_section, barcode_generator_action, divider, activity_section]
+            blocks = [basic_user_info, divider, barcode_generator_section, barcode_generator_action, divider, activity_section, divider]
         return {
             "type": "home",
             "blocks": blocks
