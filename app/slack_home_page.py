@@ -101,23 +101,20 @@ def event(user_info, sql_status, activity):
         ]
     }
 
-    image = {
-                "type": "image",
-                "title": {
-                    "type": "plain_text",
-                    "text": "image1",
-                    "emoji": True
-                },
-                "image_url": "https://api.slack.com/img/blocks/bkb_template_images/onboardingComplex.jpg",
-                "alt_text": "image1"
-            },
+    activity_section = {
+        "type": "section",
+        "text": {
+            "type": "mrkdwn",
+            "text": f'{activity.pivot("USER", "CHANNEL", "TIMES")}'
+        },
+
+    }
 
     if user_info['user'].get('is_admin'):
         if sql_status:
             blocks = [basic_user_info, divider, entersoft_sql_section, entersoft_sql_action, divider]
         else:
-            blocks = [basic_user_info, divider, barcode_generator_section, barcode_generator_action, divider,
-                      activity_section]
+            blocks = [basic_user_info, divider, barcode_generator_section, barcode_generator_action, divider, activity_section]
         return {
             "type": "home",
             "blocks": blocks

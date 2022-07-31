@@ -85,10 +85,6 @@ def handle_submission(ack, body, client, view, logger, ):
     try:
         # get user name
         user_info = slack_getters.get_modal_user_details(body, client)
-        start_process_time_modal_button_triggered_barcode_generator = time.process_time()
-        start_performance_time_modal_button_triggered_barcode_generator = time.perf_counter()
-        print(
-            f"🟢 Button Triggered on Home Page: Barcode Generator 💭 || By: {user_info['user']['profile'].get('display_name')} || TimeStamp: {datetime.now().strftime('%d/%m/%y %H:%M:%S')}")
         logger.info(body)
         # get keys from modal
         key = view['state'].get('values').keys()
@@ -142,19 +138,14 @@ def handle_submission(ack, body, client, view, logger, ):
         logger.error(f"Error responding to 'first_button' button click: {e}")
         print(f"⭕️ Error on Home Page: Barcode Generator Button 💭")
     finally:
+        # write data to sql
         user_id = f"<@{user_info['user'].get('id')}>"
         channel_id = "NORMAL PRICES"
         data_tuple = (user_id, channel_id)
         sql3_conn.insert_user_activity(data_tuple)
-        stop_process_time_modal_button_triggered_barcode_generator = time.process_time()
-        stop_performance_time_modal_button_triggered_barcode_generator = time.perf_counter()
-        final_process_time_modal_button_triggered_barcode_generator = stop_process_time_modal_button_triggered_barcode_generator - start_process_time_modal_button_triggered_barcode_generator
-        final_performance_time_modal_button_triggered_barcode_generator = stop_performance_time_modal_button_triggered_barcode_generator - start_performance_time_modal_button_triggered_barcode_generator
-        print(
-            f"🎉 END OF: Barcode Generator 💭 || By: {user_info['user']['profile'].get('display_name')} || TimeStamp: {datetime.now().strftime('%d/%m/%y %H:%M:%S')}")
-        print(
-            f"⌛️ Performance Time: {round(final_performance_time_modal_button_triggered_barcode_generator, 2)} sec || Process Time: {round(final_process_time_modal_button_triggered_barcode_generator, 2)}")
 
+        # refresh home page
+        slack_getters.refresh_home_page(client, user_info)
 
 @app.view("modal_button_triggered_initialize_sql_settings")
 def handle_submission(ack, body, client, view, logger, ):
@@ -162,10 +153,6 @@ def handle_submission(ack, body, client, view, logger, ):
     try:
         # get user_name
         user_info_initialize_sql = slack_getters.get_modal_user_details(body, client)
-        start_process_time_modal_button_triggered_initialize_sql = time.process_time()
-        start_performance_time_modal_button_triggered_initialize_sql = time.perf_counter()
-        print(
-            f"🟢 Button Triggered on Home Page: Initialize SQL Settings 💭 || By: {user_info_initialize_sql['user']['profile'].get('display_name')} || TimeStamp: {datetime.now().strftime('%d/%m/%y %H:%M:%S')}")
         logger.info(body)
 
         # get keys from modal
@@ -196,15 +183,9 @@ def handle_submission(ack, body, client, view, logger, ):
         logger.error(f"Error responding to 'first_button' button click: {e}")
         print(f"⭕️ Error on Home Page: Initialize SQL Settings 💭")
     finally:
-        stop_process_time_modal_button_triggered_initialize_sql = time.process_time()
-        stop_performance_time_modal_button_triggered_initialize_sql = time.perf_counter()
-        final_process_time_modal_button_triggered_initialize_sql = stop_process_time_modal_button_triggered_initialize_sql - start_process_time_modal_button_triggered_initialize_sql
-        final_performance_time_modal_button_triggered_initialize_sql = stop_performance_time_modal_button_triggered_initialize_sql - start_performance_time_modal_button_triggered_initialize_sql
-        print(
-            f"🎉 END OF: Initialize SQL Settings 💭 || By: {user_info_initialize_sql['user']['profile'].get('display_name')} || TimeStamp: {datetime.now().strftime('%d/%m/%y %H:%M:%S')}")
-        print(
-            f"⌛️ Performance Time: {round(final_performance_time_modal_button_triggered_initialize_sql, 2)} sec || Process Time: {round(final_process_time_modal_button_triggered_initialize_sql, 2)}")
 
+        # refresh home page
+        slack_getters.refresh_home_page(client, user_info_initialize_sql)
 
 @app.view("modal_button_triggered_special_offer")
 def handle_submission(ack, body, client, view, logger, ):
@@ -212,10 +193,6 @@ def handle_submission(ack, body, client, view, logger, ):
     try:
         # get user_name
         user_info_special_offer = slack_getters.get_modal_user_details(body, client)
-        start_process_time_modal_button_triggered_special_offer = time.process_time()
-        start_performance_time_modal_button_triggered_special_offer = time.perf_counter()
-        print(
-            f"🟢 Button Triggered on Home Page: Special Offer 💭 || By: {user_info_special_offer['user']['profile'].get('display_name')} || TimeStamp: {datetime.now().strftime('%d/%m/%y %H:%M:%S')}")
         logger.info(body)
 
         # get keys from modal
@@ -249,18 +226,14 @@ def handle_submission(ack, body, client, view, logger, ):
         logger.error(f"Error responding to 'first_button' button click: {e}")
         print(f"⭕️ Error on Home Page: Special Offer 💭")
     finally:
+        # write data to sql
         user_id = f"<@{user_info_special_offer['user'].get('id')}>"
         channel_id = "SPECIAL OFFER"
         data_tuple = (user_id, channel_id)
         sql3_conn.insert_user_activity(data_tuple)
-        stop_process_time_modal_button_triggered_special_offer = time.process_time()
-        stop_performance_time_modal_button_triggered_special_offer = time.perf_counter()
-        final_process_time_modal_button_triggered_special_offer = stop_process_time_modal_button_triggered_special_offer - start_process_time_modal_button_triggered_special_offer
-        final_performance_time_modal_button_triggered_special_offer = stop_performance_time_modal_button_triggered_special_offer - start_performance_time_modal_button_triggered_special_offer
-        print(
-            f"🎉 END OF: Special Offer 💭 || By: {user_info_special_offer['user']['profile'].get('display_name')} || TimeStamp: {datetime.now().strftime('%d/%m/%y %H:%M:%S')}")
-        print(
-            f"⌛️ Performance Time: {round(final_performance_time_modal_button_triggered_special_offer, 2)} sec || Process Time: {round(final_process_time_modal_button_triggered_special_offer, 2)}")
+
+        # refresh home page
+        slack_getters.refresh_home_page(client, user_info_special_offer)
 
 
 api = FastAPI()
