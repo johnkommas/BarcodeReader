@@ -12,3 +12,12 @@ Slack Modal Filed --> Ημερομηνία Έναρξης                       
  - ΗΜΕΡΟΜΗΝΙΑ ΕΝΑΡΞΗΣ          (PENDING)
  - ΗΜΕΡΟΜΗΝΙΑ ΛΗΞΗΗΣ           (PENDING)
 """
+
+# TODO Δημιουργία Πίνακα στον SQLLITE
+"""
+Καταγράφει κινήσεις << button clicks >>   (PENDING)
+GID
+NAME_ID
+CHANNEL_ID
+DATETIME
+"""

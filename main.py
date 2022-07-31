@@ -20,8 +20,8 @@ warnings.simplefilter("ignore", UserWarning)
 
 sql3_conn.main()
 df = sql3_conn.read_token_for_slack()
-app = App(signing_secret=pass_manager.decrypt(df['fernet'].values[0], df['secrete'].values[0]),
-          token=df['token'].values[0])
+app = App(signing_secret=pass_manager.decrypt(df['KeyOnSave'].values[0], df['SlackSecret'].values[0]),
+          token=df['SlackToken'].values[0])
 app_handler = SlackRequestHandler(app)
 
 
@@ -33,7 +33,7 @@ def publish_home_view(client, event, logger):
     try:
         client.views_publish(
             user_id=event["user"],
-            view=slack_home_page.event(user_info, entersoft_id))
+            view=slack_home_page.event(user_info, entersoft_id, sql3_conn.read_activity()))
     except Exception as e:
         logger.error(f"Error publishing view to Home Tab: {e}")
 
@@ -98,7 +98,8 @@ def handle_submission(ack, body, client, view, logger, ):
         type = view['state']['values'][key[0]]['pick_type_static_select_action']['selected_option'].get('value')
         number = int(view['state']['values'][key[1]]['pda_number_plain_text_input_action'].get('value'))
         store = str(view['state']['values'][key[2]]['pick_type_static_select_store']['selected_option'].get('value'))
-        special_color = str(view['state']['values'][key[3]]['pick_type_static_select_color']['selected_option'].get('value'))
+        special_color = str(
+            view['state']['values'][key[3]]['pick_type_static_select_color']['selected_option'].get('value'))
         tags = str((view['state']['values'][key[4]]['pick_type_static_select_tags']['selected_option'].get('value')))
         stores = ['EM', 'L1', 'L2']
         special_colors = ['WHITE', 'YELLOW']
@@ -141,6 +142,10 @@ def handle_submission(ack, body, client, view, logger, ):
         logger.error(f"Error responding to 'first_button' button click: {e}")
         print(f"⭕️ Error on Home Page: Barcode Generator Button 💭")
     finally:
+        user_id = f"<@{user_info['user'].get('id')}>"
+        channel_id = "NORMAL PRICES"
+        data_tuple = (user_id, channel_id)
+        sql3_conn.insert_user_activity(data_tuple)
         stop_process_time_modal_button_triggered_barcode_generator = time.process_time()
         stop_performance_time_modal_button_triggered_barcode_generator = time.perf_counter()
         final_process_time_modal_button_triggered_barcode_generator = stop_process_time_modal_button_triggered_barcode_generator - start_process_time_modal_button_triggered_barcode_generator
@@ -155,7 +160,7 @@ def handle_submission(ack, body, client, view, logger, ):
 def handle_submission(ack, body, client, view, logger, ):
     ack()
     try:
-        # get user name
+        # get user_name
         user_info_initialize_sql = slack_getters.get_modal_user_details(body, client)
         start_process_time_modal_button_triggered_initialize_sql = time.process_time()
         start_performance_time_modal_button_triggered_initialize_sql = time.perf_counter()
@@ -179,13 +184,13 @@ def handle_submission(ack, body, client, view, logger, ):
         f_vpn_key, vpn_secret = pass_manager.encrypt(str(view['state']['values'][key[6]]['vpn_secret'].get('value')))
 
         sql_data = (
-        1, sql_server_ip, sql_server_uid, sql_server_password, sql_server_Database, sql_server_TrustServerCertificate,
-        f_sql_key)
-        vpn_data = (1, vpn_name, vpn_secret, f_vpn_key)
+            sql_server_ip, sql_server_uid, sql_server_password, sql_server_Database,
+            sql_server_TrustServerCertificate,
+            f_sql_key)
+        vpn_data = (vpn_name, vpn_secret, f_vpn_key)
 
-        sql3_conn.insertVaribleIntoSqlTable(sql_data)
-        sql3_conn.insertVaribleIntoVpnTable(vpn_data)
-
+        sql3_conn.insertVariableIntoSqlTable(sql_data)
+        sql3_conn.insertVariableIntoVpnTable(vpn_data)
 
     except Exception as e:
         logger.error(f"Error responding to 'first_button' button click: {e}")
@@ -205,7 +210,7 @@ def handle_submission(ack, body, client, view, logger, ):
 def handle_submission(ack, body, client, view, logger, ):
     ack()
     try:
-        # get user name
+        # get user_name
         user_info_special_offer = slack_getters.get_modal_user_details(body, client)
         start_process_time_modal_button_triggered_special_offer = time.process_time()
         start_performance_time_modal_button_triggered_special_offer = time.perf_counter()
@@ -217,7 +222,9 @@ def handle_submission(ack, body, client, view, logger, ):
         key = view['state'].get('values').keys()
         key = list(key)
         from_date = (view['state']['values'][key[0]]['special_offer_datepicker_action_from'].get('selected_date'))
-        store = str(view['state']['values'][key[1]]['special_offer_pick_type_static_select_store']['selected_option'].get('value'))
+        store = str(
+            view['state']['values'][key[1]]['special_offer_pick_type_static_select_store']['selected_option'].get(
+                'value'))
 
         stores = ['EM', 'L1', 'L2']
         prices = ['RetailPrice', 'LATO 01', 'LATO 02']
@@ -234,16 +241,18 @@ def handle_submission(ack, body, client, view, logger, ):
             price = prices[2]
             file_name = file_names[1]
 
-
         df = barcode_generator.special_offer_get_data(from_date)
         for i in tqdm(df['ΚΩΔΙΚΟΣ'].unique(), desc='Barcode Generator: Creating Final Images:'):
             create_final_image.special_price(df[df['ΚΩΔΙΚΟΣ'] == i], file_name, price, tags)
-
 
     except Exception as e:
         logger.error(f"Error responding to 'first_button' button click: {e}")
         print(f"⭕️ Error on Home Page: Special Offer 💭")
     finally:
+        user_id = f"<@{user_info_special_offer['user'].get('id')}>"
+        channel_id = "SPECIAL OFFER"
+        data_tuple = (user_id, channel_id)
+        sql3_conn.insert_user_activity(data_tuple)
         stop_process_time_modal_button_triggered_special_offer = time.process_time()
         stop_performance_time_modal_button_triggered_special_offer = time.perf_counter()
         final_process_time_modal_button_triggered_special_offer = stop_process_time_modal_button_triggered_special_offer - start_process_time_modal_button_triggered_special_offer

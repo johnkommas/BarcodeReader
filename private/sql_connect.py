@@ -16,11 +16,10 @@ def connect():
     my_ip = get_ip_address()
     df = sql3_conn.read_credentials_for_entersoft_sql()
     try:
-
         cnxn = pyodbc.connect("DRIVER={ODBC Driver 17 for SQL Server};"
                               f"Server={df['ServerIp'].values[0]};"  # <-- HERE GOES SQL SERVER IP
                               f"UID={df['User_ID'].values[0]};"  # <-- HERE GOES SQL USER
-                              f"PWD={pass_manager.decrypt(df['fernet'].values[0], df['PasswdKey'].values[0])};"  # <-- HERE GOES SQL CREDENTIALS
+                              f"PWD={pass_manager.decrypt(df['KeyOnSave'].values[0], df['PasswdKey'].values[0])};"  # <-- HERE GOES SQL CREDENTIALS
                               f"Database={df['DataBaseName'].values[0]};"  # <-- HERE GOES DATABASE 
                               f"TrustServerCertificate={df['TrustServerCertificate'].values[0]}")
     except pyodbc.OperationalError:
@@ -34,7 +33,7 @@ def open_vpn(sql_counter):
     if EM_mode == 0:
         df = sql3_conn.read_credentials_for_vpn()
         print("\n🟢: (SQL) Elounda Market is UP, Trying to get VPN UP...")
-        call(["scutil", "--nc", "start", df['ConnectionName'].values[0], '--secret', pass_manager.decrypt(df['fernet'].values[0], df['PasswdKey'].values[0])])
+        call(["scutil", "--nc", "start", df['ConnectionName'].values[0], '--secret', pass_manager.decrypt(df['KeyOnSave'].values[0], df['PasswdKey'].values[0])])
         time.sleep(5)
         Server_mode = os.system(f"ping -c 1  {ip.get('EM ROUTER')} >/dev/null")
         if Server_mode == 0:
