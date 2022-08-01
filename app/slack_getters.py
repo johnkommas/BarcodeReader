@@ -1,7 +1,7 @@
 #  Copyright (c) Ioannis E. Kommas 2022. All Rights Reserved
 from asyncio.log import logger
 
-from private import sql3_conn
+from private import sql3_conn, slack_channels
 from app import slack_home_page
 
 
@@ -41,8 +41,9 @@ def refresh_home_page(client, user):
     # refresh home page
     entersoft_id = sql3_conn.main()
     try:
+        activity = sql3_conn.read_activity()
         client.views_publish(
             user_id=user["user"].get('id'),
-            view=slack_home_page.event(user, entersoft_id, sql3_conn.read_activity()))
+            view=slack_home_page.event(user, entersoft_id, activity))
     except Exception as e:
         logger.error(f"Error publishing view to Home Tab: {e}")

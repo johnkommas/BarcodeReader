@@ -287,3 +287,9 @@ def update_users_activity(user_info, channel_id):
     # upload image to slack
     remove(0)
     send_files('Image', f'{parent_path}/app/images/user_activity_graph.png', channels_id[0])
+
+    # activity = sql3_conn.read_activity()
+    # activity = activity.pivot("USER", "CHANNEL", "TIMES")
+    # activity = activity.fillna(0)
+    # t = f"> ```{activity}```"
+    # send_text(t, channels_id[0])
