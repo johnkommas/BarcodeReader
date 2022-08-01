@@ -269,6 +269,12 @@ def remove_from_specific_thread(c_id, posted_text):
 def update_users_activity(user_info, channel_id):
     parent_path = pathlib.Path(__file__).parent.parent.resolve()
 
+    # insert data to sql
+    user_id = f"<@{user_info['user'].get('id')}>"
+    UserName = user_info['user'].get('name')
+    data_tuple = (user_id, UserName, channel_id)
+    sql3_conn.insert_user_activity(data_tuple)
+
     # refresh home page
     entersoft_id = sql3_conn.main()
     try:
@@ -277,12 +283,6 @@ def update_users_activity(user_info, channel_id):
             view=slack_home_page.event(user_info, entersoft_id, sql3_conn.read_activity()))
     except Exception as e:
         logger.error(f"Error publishing view to Home Tab: {e}")
-
-    # insert data to sql
-    user_id = f"<@{user_info['user'].get('id')}>"
-    UserName = user_info['user'].get('name')
-    data_tuple = (user_id, UserName, channel_id)
-    sql3_conn.insert_user_activity(data_tuple)
 
     # upload image to slack
     remove(0)
