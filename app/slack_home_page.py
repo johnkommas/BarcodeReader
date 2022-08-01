@@ -1,6 +1,10 @@
 #  Copyright (c) Ioannis E. Kommas 2022. All Rights Reserved
 
+
 def event(user_info, sql_status, activity):
+    activity = activity.pivot("USER", "CHANNEL", "TIMES")
+    activity = activity.fillna(0)
+
     profile = user_info['user']['profile']
 
     divider = {
@@ -106,23 +110,25 @@ def event(user_info, sql_status, activity):
         "text": {
             "type": "mrkdwn",
             "text": f'> *USER ACTIVITY ANALYTICS* \n'
-                    f'> ```{activity.pivot("USER", "CHANNEL", "TIMES")}```'
+                    f'{activity}'
         },
 
     }
 
+    basic_block = [basic_user_info, divider, barcode_generator_section, barcode_generator_action, divider, activity_section, divider]
     if user_info['user'].get('is_admin'):
+        # print("User is app user", user_info['user'])
         if sql_status:
             blocks = [basic_user_info, divider, entersoft_sql_section, entersoft_sql_action, divider]
         else:
-            blocks = [basic_user_info, divider, barcode_generator_section, barcode_generator_action, divider, activity_section, divider]
+            blocks = basic_block
         return {
             "type": "home",
             "blocks": blocks
         }
     else:
-        print("User is app user", user_info['user'])
+        # print("User is app user", user_info['user'])
         return {
             "type": "home",
-            "blocks": [basic_user_info, divider, access_denied]
+            "blocks": basic_block
         }

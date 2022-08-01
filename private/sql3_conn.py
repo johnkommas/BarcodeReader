@@ -130,8 +130,8 @@ def insert_user_activity(data_tuple):
 
 
         sqlite_insert_with_param = """INSERT INTO Activity
-                          (UserID, ChannelID) 
-                          VALUES (?, ?);"""
+                          (UserID, UserName, ChannelID) 
+                          VALUES (?, ?, ?);"""
 
         cursor.execute(sqlite_insert_with_param, data_tuple)
         sqliteConnection.commit()
@@ -171,16 +171,31 @@ def read_token_for_slack():
     return slack
 
 
+def read_slack_channels():
+    parent_path = pathlib.Path(__file__).parent.resolve()
+    database = f"{parent_path}/pythonsqlite.db"
+    slack_query = "SELECT * FROM SlackChannels"
+    df = pd.read_sql_query(slack_query, create_connection(database))
+    return df
+
+def read_slack_bots():
+    parent_path = pathlib.Path(__file__).parent.resolve()
+    database = f"{parent_path}/pythonsqlite.db"
+    slack_query = "SELECT * FROM Bots"
+    df = pd.read_sql_query(slack_query, create_connection(database))
+    return df
+
 def read_activity():
     parent_path = pathlib.Path(__file__).parent.resolve()
     database = f"{parent_path}/pythonsqlite.db"
     slack_query = """
     SELECT UserID as "USER",
+     UserName,
      ChannelID as "CHANNEL",
      count(*) AS "TIMES",
      strftime('%Y', TS) AS "YEAR" 
      FROM Activity
-     GROUP BY UserID, ChannelID, strftime('%Y', TS)
+     GROUP BY UserID, ChannelID, strftime('%Y', TS), UserName
      ORDER BY 2
     """
     activity = pd.read_sql_query(slack_query, create_connection(database))
@@ -218,8 +233,27 @@ def main():
     sql_create_fingerprint_table = """ CREATE TABLE IF NOT EXISTS Activity (
                                             GID integer PRIMARY KEY AUTOINCREMENT      NOT NULL,
                                             UserID nvarchar(255)                       NOT NULL,
+                                            UserName nvarchar(255)                     NOT NULL,
                                             ChannelID nvarchar(255)                    NOT NULL,
                                             TS  DATE DEFAULT (datetime('now','localtime'))          NOT NULL
+                                        ); """
+
+    sql_create_slack_channels = """ CREATE TABLE IF NOT EXISTS SlackChannels (
+                                            GID integer PRIMARY KEY AUTOINCREMENT      NOT NULL,
+                                            ChannelID nvarchar(255)                       NOT NULL,
+                                            ChannelName nvarchar(255)                     NOT NULL
+                                        ); """
+
+    sql_create_bots = """ CREATE TABLE IF NOT EXISTS Bots (
+                                            GID integer PRIMARY KEY AUTOINCREMENT      NOT NULL,
+                                            BotID nvarchar(255)                       NOT NULL,
+                                            BOtName nvarchar(255)                     NOT NULL                               
+                                        ); """
+
+    sql_create_ips = """ CREATE TABLE IF NOT EXISTS IP (
+                                            GID integer PRIMARY KEY AUTOINCREMENT      NOT NULL,
+                                            IPID nvarchar(255)                       NOT NULL,
+                                            IPName nvarchar(255)                     NOT NULL                               
                                         ); """
 
     # create a database connection
@@ -231,6 +265,10 @@ def main():
         create_table(conn, sql_create_vpn_table)
         create_table(conn, sql_create_slack_table)
         create_table(conn, sql_create_fingerprint_table)
+        create_table(conn, sql_create_slack_channels)
+        create_table(conn, sql_create_bots)
+        create_table(conn, sql_create_ips)
+
     else:
         print("Error! cannot create the database connection.")
 

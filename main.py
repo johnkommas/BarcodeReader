@@ -3,7 +3,7 @@
 import uvicorn
 from slack_bolt import App
 from slack_bolt.adapter.fastapi import SlackRequestHandler
-from private import sql_connect
+from private import sql_connect, slack_channels
 from app import slack_home_page, barcode_generator, slack_getters, slack_modal, create_final_image
 from fastapi import FastAPI, Request
 import warnings
@@ -136,12 +136,16 @@ def handle_submission(ack, body, client, view, logger, ):
     finally:
         # write data to sql
         user_id = f"<@{user_info['user'].get('id')}>"
+        UserName = user_info['user'].get('name')
         channel_id = "NORMAL PRICES"
-        data_tuple = (user_id, channel_id)
+        data_tuple = (user_id, UserName, channel_id)
         sql3_conn.insert_user_activity(data_tuple)
 
         # refresh home page
         slack_getters.refresh_home_page(client, user_info)
+
+        #update channel image
+        slack_channels.update_users_activity()
 
 @app.view("modal_button_triggered_initialize_sql_settings")
 def handle_submission(ack, body, client, view, logger, ):
@@ -224,12 +228,16 @@ def handle_submission(ack, body, client, view, logger, ):
     finally:
         # write data to sql
         user_id = f"<@{user_info_special_offer['user'].get('id')}>"
+        UserName = user_info_special_offer['user'].get('name')
         channel_id = "SPECIAL OFFER"
-        data_tuple = (user_id, channel_id)
+        data_tuple = (user_id, UserName, channel_id)
         sql3_conn.insert_user_activity(data_tuple)
 
         # refresh home page
         slack_getters.refresh_home_page(client, user_info_special_offer)
+
+        # update channel image
+        slack_channels.update_users_activity()
 
 
 api = FastAPI()
