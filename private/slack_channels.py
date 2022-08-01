@@ -4,6 +4,7 @@ from slack_sdk import WebClient
 import json
 import pathlib
 from private import sql3_conn
+from app import slack_home_page
 
 df_channels_id = sql3_conn.read_slack_channels()
 channels_id = list(df_channels_id['ChannelID'])
@@ -265,7 +266,24 @@ def remove_from_specific_thread(c_id, posted_text):
         return remove_from_specific_thread(c_id, posted_text)
 
 
-def update_users_activity():
+def update_users_activity(user_info, channel_id):
     parent_path = pathlib.Path(__file__).parent.parent.resolve()
+
+    # refresh home page
+    entersoft_id = sql3_conn.main()
+    try:
+        client.views_publish(
+            user_id=user_info["user"].get('id'),
+            view=slack_home_page.event(user_info, entersoft_id, sql3_conn.read_activity()))
+    except Exception as e:
+        logger.error(f"Error publishing view to Home Tab: {e}")
+
+    # insert data to sql
+    user_id = f"<@{user_info['user'].get('id')}>"
+    UserName = user_info['user'].get('name')
+    data_tuple = (user_id, UserName, channel_id)
+    sql3_conn.insert_user_activity(data_tuple)
+
+    # upload image to slack
     remove(0)
     send_files('Image', f'{parent_path}/app/images/user_activity_graph.png', channels_id[0])

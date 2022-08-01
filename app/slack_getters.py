@@ -34,6 +34,7 @@ def get_modal_user_details(body, client):
     except Exception as e:
         print(e)
 
+
 def refresh_home_page(client, user):
     # refresh home page
     entersoft_id = sql3_conn.main()

@@ -134,18 +134,9 @@ def handle_submission(ack, body, client, view, logger, ):
         logger.error(f"Error responding to 'first_button' button click: {e}")
         print(f"⭕️ Error on Home Page: Barcode Generator Button 💭")
     finally:
-        # write data to sql
-        user_id = f"<@{user_info['user'].get('id')}>"
-        UserName = user_info['user'].get('name')
-        channel_id = "NORMAL PRICES"
-        data_tuple = (user_id, UserName, channel_id)
-        sql3_conn.insert_user_activity(data_tuple)
+        # insert sql data, refresh home page,  update channel image
+        slack_channels.update_users_activity(user_info, 'NORMAL PRICES')
 
-        # refresh home page
-        slack_getters.refresh_home_page(client, user_info)
-
-        #update channel image
-        slack_channels.update_users_activity()
 
 @app.view("modal_button_triggered_initialize_sql_settings")
 def handle_submission(ack, body, client, view, logger, ):
@@ -183,9 +174,9 @@ def handle_submission(ack, body, client, view, logger, ):
         logger.error(f"Error responding to 'first_button' button click: {e}")
         print(f"⭕️ Error on Home Page: Initialize SQL Settings 💭")
     finally:
-
         # refresh home page
         slack_getters.refresh_home_page(client, user_info_initialize_sql)
+
 
 @app.view("modal_button_triggered_special_offer")
 def handle_submission(ack, body, client, view, logger, ):
@@ -226,18 +217,9 @@ def handle_submission(ack, body, client, view, logger, ):
         logger.error(f"Error responding to 'first_button' button click: {e}")
         print(f"⭕️ Error on Home Page: Special Offer 💭")
     finally:
-        # write data to sql
-        user_id = f"<@{user_info_special_offer['user'].get('id')}>"
-        UserName = user_info_special_offer['user'].get('name')
-        channel_id = "SPECIAL OFFER"
-        data_tuple = (user_id, UserName, channel_id)
-        sql3_conn.insert_user_activity(data_tuple)
 
-        # refresh home page
-        slack_getters.refresh_home_page(client, user_info_special_offer)
-
-        # update channel image
-        slack_channels.update_users_activity()
+        # insert sql data, refresh home page,  update channel image
+        slack_channels.update_users_activity(user_info_special_offer, 'SPECIAL OFFER')
 
 
 api = FastAPI()
