@@ -7,7 +7,6 @@ import os
 from subprocess import call, check_output
 import time
 import socket
-from private.credentials import ip
 from private import sql3_conn, pass_manager
 
 
@@ -29,13 +28,14 @@ def connect():
 
 
 def open_vpn(sql_counter):
-    EM_mode = os.system(f"ping -c 1  {ip.get('EM')} >/dev/null")
+    df = sql3_conn.read_ip()
+    EM_mode = os.system(f"ping -c 1  {df['BotID'][['BOtName'] == 'EM'].values[0]} >/dev/null")
     if EM_mode == 0:
         df = sql3_conn.read_credentials_for_vpn()
         print("\n🟢: (SQL) Elounda Market is UP, Trying to get VPN UP...")
         call(["scutil", "--nc", "start", df['ConnectionName'].values[0], '--secret', pass_manager.decrypt(df['KeyOnSave'].values[0], df['PasswdKey'].values[0])])
         time.sleep(5)
-        Server_mode = os.system(f"ping -c 1  {ip.get('EM ROUTER')} >/dev/null")
+        Server_mode = os.system(f"ping -c 1  {df['BotID'][['BOtName'] == 'EM ROUTER'].values[0]} >/dev/null")
         if Server_mode == 0:
             print("🟢: (SQL) VPN IS UP")
             return connect()

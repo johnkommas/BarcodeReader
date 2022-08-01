@@ -178,12 +178,22 @@ def read_slack_channels():
     df = pd.read_sql_query(slack_query, create_connection(database))
     return df
 
+
 def read_slack_bots():
     parent_path = pathlib.Path(__file__).parent.resolve()
     database = f"{parent_path}/pythonsqlite.db"
     slack_query = "SELECT * FROM Bots"
     df = pd.read_sql_query(slack_query, create_connection(database))
     return df
+
+
+def read_ip():
+    parent_path = pathlib.Path(__file__).parent.resolve()
+    database = f"{parent_path}/pythonsqlite.db"
+    slack_query = "SELECT * FROM IP"
+    df = pd.read_sql_query(slack_query, create_connection(database))
+    return df
+
 
 def read_activity():
     parent_path = pathlib.Path(__file__).parent.resolve()
