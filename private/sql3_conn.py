@@ -218,52 +218,52 @@ def main():
     database = f"{parent_path}/pythonsqlite.db"
 
     sql_create_entersoft_table = """ CREATE TABLE IF NOT EXISTS EntersoftSql (
-                                        GID integer PRIMARY KEY AUTOINCREMENT          NOT NULL,
-                                        ServerIp nvarchar(255)                         NOT NULL,
-                                        User_ID nvarchar(255)                          NOT NULL,
-                                        PasswdKey nvarchar(255)                        NOT NULL,
-                                        DataBaseName nvarchar(255)                     NOT NULL,
-                                        TrustServerCertificate nvarchar(255)           NOT NULL,
-                                        KeyOnSave  nvarchar(255)                       NOT NULL  
+                                        GID integer PRIMARY KEY AUTOINCREMENT                   NOT NULL,
+                                        ServerIp nvarchar(255)                                  NOT NULL,
+                                        User_ID nvarchar(255)                                   NOT NULL,
+                                        PasswdKey nvarchar(255)                                 NOT NULL,
+                                        DataBaseName nvarchar(255)                              NOT NULL,
+                                        TrustServerCertificate nvarchar(255)                    NOT NULL,
+                                        KeyOnSave  nvarchar(255)                                NOT NULL  
                                     ); """
 
     sql_create_vpn_table = """ CREATE TABLE IF NOT EXISTS Vpn (
-                                            GID integer PRIMARY KEY AUTOINCREMENT      NOT NULL,
-                                            ConnectionName nvarchar(255)               NOT NULL,
-                                            PasswdKey nvarchar(255)                    NOT NULL,
-                                            KeyOnSave  nvarchar(255)                   NOT NULL 
+                                            GID integer PRIMARY KEY AUTOINCREMENT               NOT NULL,
+                                            ConnectionName nvarchar(255)                        NOT NULL,
+                                            PasswdKey nvarchar(255)                             NOT NULL,
+                                            KeyOnSave  nvarchar(255)                            NOT NULL 
                                         ); """
     sql_create_slack_table = """ CREATE TABLE IF NOT EXISTS Slack (
-                                            GID integer PRIMARY KEY AUTOINCREMENT      NOT NULL,
-                                            SlackToken nvarchar(255)                   NOT NULL,
-                                            SlackSecret nvarchar(255)                  NOT NULL,
-                                            KeyOnSave  nvarchar(255)                   NOT NULL
+                                            GID integer PRIMARY KEY AUTOINCREMENT               NOT NULL,
+                                            SlackToken nvarchar(255)                            NOT NULL,
+                                            SlackSecret nvarchar(255)                           NOT NULL,
+                                            KeyOnSave  nvarchar(255)                            NOT NULL
                                         ); """
 
     sql_create_fingerprint_table = """ CREATE TABLE IF NOT EXISTS Activity (
-                                            GID integer PRIMARY KEY AUTOINCREMENT      NOT NULL,
-                                            UserID nvarchar(255)                       NOT NULL,
-                                            UserName nvarchar(255)                     NOT NULL,
-                                            ChannelID nvarchar(255)                    NOT NULL,
-                                            TS  DATE DEFAULT (datetime('now','localtime'))          NOT NULL
+                                            GID integer PRIMARY KEY AUTOINCREMENT               NOT NULL,
+                                            UserID nvarchar(255)                                NOT NULL,
+                                            UserName nvarchar(255)                              NOT NULL,
+                                            ChannelID nvarchar(255)                             NOT NULL,
+                                            TS  DATE DEFAULT (datetime('now','localtime'))      NOT NULL
                                         ); """
 
     sql_create_slack_channels = """ CREATE TABLE IF NOT EXISTS SlackChannels (
-                                            GID integer PRIMARY KEY AUTOINCREMENT      NOT NULL,
-                                            ChannelID nvarchar(255)                       NOT NULL,
-                                            ChannelName nvarchar(255)                     NOT NULL
+                                            GID integer PRIMARY KEY AUTOINCREMENT               NOT NULL,
+                                            ChannelID nvarchar(255)                             NOT NULL,
+                                            ChannelName nvarchar(255)                           NOT NULL
                                         ); """
 
     sql_create_bots = """ CREATE TABLE IF NOT EXISTS Bots (
-                                            GID integer PRIMARY KEY AUTOINCREMENT      NOT NULL,
-                                            BotID nvarchar(255)                       NOT NULL,
-                                            BOtName nvarchar(255)                     NOT NULL                               
+                                            GID integer PRIMARY KEY AUTOINCREMENT               NOT NULL,
+                                            BotID nvarchar(255)                                 NOT NULL,
+                                            BOtName nvarchar(255)                               NOT NULL                               
                                         ); """
 
     sql_create_ips = """ CREATE TABLE IF NOT EXISTS IP (
-                                            GID integer PRIMARY KEY AUTOINCREMENT      NOT NULL,
-                                            IPID nvarchar(255)                       NOT NULL,
-                                            IPName nvarchar(255)                     NOT NULL                               
+                                            GID integer PRIMARY KEY AUTOINCREMENT               NOT NULL,
+                                            IPID nvarchar(255)                                  NOT NULL,
+                                            IPName nvarchar(255)                                NOT NULL                               
                                         ); """
 
     # create a database connection
