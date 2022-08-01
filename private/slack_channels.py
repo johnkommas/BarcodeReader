@@ -268,4 +268,4 @@ def remove_from_specific_thread(c_id, posted_text):
 def update_users_activity():
     parent_path = pathlib.Path(__file__).parent.parent.resolve()
     remove(0)
-    send_files('Image', f'{parent_path}/app/images/user_activity_graph.png',channels_id[0])
+    send_files('Image', f'{parent_path}/app/images/user_activity_graph.png', channels_id[0])
