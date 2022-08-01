@@ -95,7 +95,7 @@ def modal_view():
                                  "value": f"ΑΧΔ"
                                  },
                                 {"text": {"type": "plain_text",
-                                          "text": f"1️⃣0️⃣ ΠΔΣ: \t\t\t\t (ΔΕΣΜΕΥΣΗ ΑΠΟΘΕΜΑΤΟΣ ΓΙΑ ΠΕΛΑΤΗ)",
+                                          "text": f"0️⃣ ΠΔΣ: \t\t\t\t (ΔΕΣΜΕΥΣΗ ΑΠΟΘΕΜΑΤΟΣ ΓΙΑ ΠΕΛΑΤΗ)",
                                           "emoji": True
                                           },
                                  "value": f"ΠΔΣ"
@@ -103,7 +103,7 @@ def modal_view():
 
                                 ],
 
-                    "action_id": "pick_type_static_select_action"
+                    "action_id": "a_pick_type_static_select_action"
                 },
                 "label": {
                     "type": "plain_text",
@@ -115,7 +115,7 @@ def modal_view():
                 "type": "input",
                 "element": {
                     "type": "plain_text_input",
-                    "action_id": "pda_number_plain_text_input_action"
+                    "action_id": "b_pda_number_plain_text_input_action"
                 },
                 "label": {
                     "type": "plain_text",
@@ -160,7 +160,7 @@ def modal_view():
                                  },
                                 ],
 
-                    "action_id": "pick_type_static_select_store"
+                    "action_id": "c_pick_type_static_select_store"
 
                 },
                 "label": {
@@ -201,7 +201,7 @@ def modal_view():
 
                                 ],
 
-                    "action_id": "pick_type_static_select_color"
+                    "action_id": "d_pick_type_static_select_color"
                 },
                 "label": {
                     "type": "plain_text",
@@ -210,7 +210,7 @@ def modal_view():
                 }
             },
 
-            #tags Start
+            # tags Start
             {
                 "type": "input",
                 "element": {
@@ -221,7 +221,12 @@ def modal_view():
                         "text": "ΕΠΙΛΕΞΕ TAGS",
                         "emoji": True
                     },
-
+                    "initial_option": {"text": {"type": "plain_text",
+                                                "text": "🌚️ ΚΑΝΕΝΑ",
+                                                "emoji": True
+                                                },
+                                       "value": "no_tags"
+                                       },
 
                     "options": [{"text": {"type": "plain_text",
                                           "text": "🌚️ ΚΑΝΕΝΑ",
@@ -272,10 +277,9 @@ def modal_view():
                                  "value": "try_before_buy"
                                  },
 
-
                                 ],
 
-                    "action_id": "pick_type_static_select_tags"
+                    "action_id": "e_pick_type_static_select_tags"
                 },
                 "label": {
                     "type": "plain_text",

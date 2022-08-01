@@ -79,20 +79,25 @@ def action_button_click(body, ack, say, logger, client):
 def handle_submission(ack, body, client, view, logger, ):
     ack()
     try:
-        # get username
+    # get username
         user_info = slack_getters.get_modal_user_details(body, client)
         logger.info(body)
         # get keys from modal
         key = view['state'].get('values').keys()
         key = list(key)
-
         # get values from inputs
-        type = view['state']['values'][key[0]]['pick_type_static_select_action']['selected_option'].get('value')
-        number = int(view['state']['values'][key[1]]['pda_number_plain_text_input_action'].get('value'))
-        store = str(view['state']['values'][key[2]]['pick_type_static_select_store']['selected_option'].get('value'))
-        special_color = str(
-            view['state']['values'][key[3]]['pick_type_static_select_color']['selected_option'].get('value'))
-        tags = str((view['state']['values'][key[4]]['pick_type_static_select_tags']['selected_option'].get('value')))
+        for i in key:
+            x = list(view['state']['values'][i].keys())[0]
+            if x == 'a_pick_type_static_select_action':
+                type = str(view['state']['values'][i]['a_pick_type_static_select_action']['selected_option'].get('value'))
+            elif x == 'b_pda_number_plain_text_input_action':
+                number = int(view['state']['values'][i]['b_pda_number_plain_text_input_action'].get('value'))
+            elif x == 'c_pick_type_static_select_store':
+                store = str(view['state']['values'][i]['c_pick_type_static_select_store']['selected_option'].get('value'))
+            elif x == 'd_pick_type_static_select_color':
+                special_color = str(view['state']['values'][i]['d_pick_type_static_select_color']['selected_option'].get('value'))
+            elif x == 'e_pick_type_static_select_tags':
+                tags = str((view['state']['values'][i]['e_pick_type_static_select_tags']['selected_option'].get('value')))
         stores = ['EM', 'L1', 'L2']
         special_colors = ['WHITE', 'YELLOW']
         bg_colors = ['#61D839', '#6FBCF0']
@@ -189,10 +194,13 @@ def handle_submission(ack, body, client, view, logger, ):
         # get keys from modal
         key = view['state'].get('values').keys()
         key = list(key)
-        from_date = (view['state']['values'][key[0]]['special_offer_datepicker_action_from'].get('selected_date'))
-        store = str(
-            view['state']['values'][key[1]]['special_offer_pick_type_static_select_store']['selected_option'].get(
-                'value'))
+
+        for i in key:
+            x = list(view['state']['values'][i].keys())[0]
+            if x == 'special_offer_datepicker_action_from':
+                from_date = (view['state']['values'][i]['special_offer_datepicker_action_from'].get('selected_date'))
+            elif x == 'special_offer_pick_type_static_select_store':
+                store = str(view['state']['values'][i]['special_offer_pick_type_static_select_store']['selected_option'].get('value'))
 
         stores = ['EM', 'L1', 'L2']
         prices = ['RetailPrice', 'LATO 01', 'LATO 02']

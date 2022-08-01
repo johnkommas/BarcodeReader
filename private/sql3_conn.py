@@ -56,7 +56,7 @@ def insertVariableIntoSlackTable():
         data_tuple = (token_input, secret_input, key)
         cursor.execute(sqlite_insert_with_param, data_tuple)
         sqliteConnection.commit()
-        print("Python Variables inserted successfully into SqliteDb_developers table (with Fernet encryption)")
+        print("Python Variables inserted successfully into SqliteDb_developers table")
 
         cursor.close()
 
@@ -82,7 +82,7 @@ def insertVariableIntoSqlTable(data_tuple):
 
         cursor.execute(sqlite_insert_with_param, data_tuple)
         sqliteConnection.commit()
-        print("Python Variables inserted successfully into SqliteDb_developers table (with Fernet encryption)")
+        print("Python Variables inserted successfully into SqliteDb_developers table")
 
         cursor.close()
 
@@ -135,7 +135,7 @@ def insert_user_activity(data_tuple):
 
         cursor.execute(sqlite_insert_with_param, data_tuple)
         sqliteConnection.commit()
-        print("Python Variables inserted successfully into SqliteDb_developers table (with Fernet encryption)")
+        print("Python Variables inserted successfully into SqliteDb_developers table ")
 
         cursor.close()
 
