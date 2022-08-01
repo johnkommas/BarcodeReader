@@ -260,7 +260,7 @@ def remove_from_specific_thread(c_id, posted_text):
                     timer = message.get('ts')
                     delete(channels_id[c_id], timer)
         except SlackApiError as e:
-            print('error occured')
+            print('error occurred')
     except SlackApiError as e:
         print("Slack Remove from Thread Exception")
         return remove_from_specific_thread(c_id, posted_text)

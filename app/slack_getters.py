@@ -3,6 +3,8 @@ from asyncio.log import logger
 
 from private import sql3_conn
 from app import slack_home_page
+
+
 def get_user_details(event, client):
     user_id = event["user"]
     try:
