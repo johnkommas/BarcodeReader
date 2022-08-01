@@ -2,7 +2,6 @@
 
 # Make the Connection
 import pyodbc
-import sys
 import os
 from subprocess import call, check_output
 import time
