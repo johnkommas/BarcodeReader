@@ -247,4 +247,4 @@ async def root():
 if __name__ == "__main__":
     my_ip = sql_connect.get_ip_address()
 
-    uvicorn.run("main:api", host=my_ip, port=3000, log_level="info", reload=True)
+    uvicorn.run("main:api", host=my_ip, port=3001, log_level="info", reload=True)
