@@ -10,7 +10,7 @@
 [![Discord](https://img.shields.io/discord/583993547792056321?style=for-the-badge)](https://discord.gg/kQAxc8sP)
 
 ---
-![image](https://github.com/johnkommas/BarcodeReader/blob/master/app/images/Mixture.png?raw=true)
+![image](https://github.com/johnkommas/BarcodeReader/blob/master/my_app/SELF_LABEL/images/Mixture.png?raw=true)
 
 ---
 # ΑΠΑΙΤΗΣΕΙΣ ΛΟΓΙΣΜΙΚΟΥ
