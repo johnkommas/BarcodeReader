@@ -1,6 +1,6 @@
 #  Copyright (c) Ioannis E. Kommas 2022. All Rights Reserved
 
-from DEMOS import sql_query
+from my_app.KEK_DEMO import sql_query
 import pandas as pd
 import warnings
 
