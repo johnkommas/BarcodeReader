@@ -6,6 +6,7 @@ from cairosvg import svg2png
 import pandas as pd
 from datetime import datetime
 
+
 def run(df, file_name, init_price, tags):
     path = pathlib.Path(__file__).parent.resolve()
     barcode = df['BarCode'].values[0]
@@ -15,6 +16,8 @@ def run(df, file_name, init_price, tags):
     euro_price = int(price)
     # Διαίρεση με το 0 όταν η τιμή είναι 0.50 μας βγάζει σφάλμα έτσι το μετατρέπουμε σε 1
     copper_price = int(round(price % (euro_price if euro_price>0 else 1), 2) * 100)
+    if len(str(copper_price)) == 1:
+        copper_price = "0"+str(copper_price)
 
     svg2png(url=f"{path}/svg/{barcode}.svg", write_to=f"{path}/svg/{barcode}.png", dpi=1200)
     my_image = Image.open(f'{path}/images/{file_name}')
@@ -67,12 +70,13 @@ def special_price(df, file_name, init_price, tags):
     path = pathlib.Path(__file__).parent.resolve()
     barcode = df['ΚΩΔΙΚΟΣ'].values[0]
     title = df['ΠΕΡΙΓΡΑΦΗ'].values[0]
-    price = (df['ΝΕΑ ΤΙΜΗ'].values[0] if df['ΕΚΠΤΩΣΗ'].values[0] <= 0 else round(
-        df[init_price].values[0] * (100 - df['ΕΚΠΤΩΣΗ'].values[0]) / 100, 2))
+    price = (df['ΝΕΑ ΤΙΜΗ'].values[0] if df['ΕΚΠΤΩΣΗ'].values[0] <= 0 else round(df[init_price].values[0] * (100 - df['ΕΚΠΤΩΣΗ'].values[0]) / 100, 2))
     fMUCode = df['MM'].values[0]
     euro_price = int(price)
     # Διαίρεση με το 0 όταν η τιμή είναι 0.50 μας βγάζει σφάλμα έτσι το μετατρέπουμε σε 1
     copper_price = int(round(price % (euro_price if euro_price > 0 else 1), 2) * 100)
+    if len(str(copper_price)) == 1:
+        copper_price = "0"+str(copper_price)
 
     svg2png(url=f"{path}/svg/{barcode}.svg", write_to=f"{path}/svg/{barcode}.png", dpi=1200)
     my_image = Image.open(f'{path}/images/{file_name}')

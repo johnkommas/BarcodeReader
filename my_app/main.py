@@ -204,8 +204,8 @@ def handle_submission(ack, body, client, view, logger, ):
 
         stores = ['EM', 'L1', 'L2']
         prices = ['RetailPrice', 'LATO 01', 'LATO 02']
-        file_names = ['Elounda Market Yellow.png', 'Lato Yellow.png']
-        tags = "special_offer"
+        file_names = ['Elounda Market RED.png', 'Lato Yellow.png']
+        tags = ["special_offer", 'none']
 
         if store == stores[0]:
             price = prices[0]
@@ -219,7 +219,7 @@ def handle_submission(ack, body, client, view, logger, ):
 
         df = barcode_generator.special_offer_get_data(from_date)
         for i in tqdm(df['ΚΩΔΙΚΟΣ'].unique(), desc='Barcode Generator: Creating Final Images:'):
-            create_final_image.special_price(df[df['ΚΩΔΙΚΟΣ'] == i], file_name, price, tags)
+            create_final_image.special_price(df[df['ΚΩΔΙΚΟΣ'] == i], file_name, price, tags[-1])
 
     except Exception as e:
         logger.error(f"Error responding to 'first_button' button click: {e}")

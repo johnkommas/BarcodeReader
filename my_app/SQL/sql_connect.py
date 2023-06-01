@@ -1,12 +1,15 @@
 #  Copyright (c) Ioannis E. Kommas 2022. All Rights Reserved
 
 # Make the Connection
-import pyodbc
 import os
 from subprocess import call
 import time
 import socket
 from my_app.SQL import sql3_conn, pass_manager
+# from sqlalchemy.engine import URL
+# from sqlalchemy import create_engine
+import pyodbc
+
 
 
 def connect():
@@ -15,12 +18,15 @@ def connect():
     df = sql3_conn.read_credentials_for_entersoft_sql()
     try:
         cnxn = pyodbc.connect("DRIVER={ODBC Driver 17 for SQL Server};"
-                              f"Server={df['ServerIp'].values[0]};"  # <-- HERE GOES SQL SERVER IP
-                              f"UID={df['User_ID'].values[0]};"  # <-- HERE GOES SQL USER
-                              f"PWD={pass_manager.decrypt(df['KeyOnSave'].values[0], df['PasswdKey'].values[0])};"  # <-- HERE GOES SQL CREDENTIALS
-                              f"Database={df['DataBaseName'].values[0]};"  # <-- HERE GOES DATABASE 
+                              f"Server={df['ServerIp'].values[0]};"  
+                              f"UID={df['User_ID'].values[0]};"  
+                              f"PWD={pass_manager.decrypt(df['KeyOnSave'].values[0], df['PasswdKey'].values[0])};"  
+                              f"Database={df['DataBaseName'].values[0]};"  
                               f"TrustServerCertificate={df['TrustServerCertificate'].values[0]}")
-    except pyodbc.OperationalError:
+        # connection_string = cnxn
+        # connection_url = URL.create("mssql+pyodbc", query={"odbc_connect": connection_string})
+        # engine = create_engine(connection_url, pool_pre_ping=True)
+    except :
         print(f"\n🔴: (!SQL!) Working Remotely: My IP ADDRESS is {my_ip}")
         return open_vpn(sql_counter)
     return cnxn
@@ -53,5 +59,3 @@ def get_ip_address():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.connect(("8.8.8.8", 80))
     return s.getsockname()[0]
-
-

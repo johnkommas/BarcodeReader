@@ -21,3 +21,4 @@ scikit-learn~=1.1.2
 barcode~=1.0.1
 numpy~=1.19.4
 colorama~=0.4.5
+SQLAlchemy~=1.4.41
