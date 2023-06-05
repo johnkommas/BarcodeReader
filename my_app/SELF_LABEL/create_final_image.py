@@ -155,6 +155,7 @@ def split_labels_to_fit_a4():
     page_number = 1
     while list_of_names:
         labels = list_of_names[:14]
+        logger.info(f"Labels to PUt inside A4 PAGE {page_number}: {labels}")
         del list_of_names[:14]
         a4_page_fit_images(labels, f"A4_PAGE{page_number}.png")
         page_number += 1
@@ -164,11 +165,13 @@ def split_labels_to_fit_a4():
 def a4_page_fit_images(labels, ouptut_name):
     path = pathlib.Path(__file__).parent.resolve()
     my_image = Image.open(f'{path}/images/A4_Labels_Saloon.png')
+    # Συντεταγμένες για κάθε εικόνα
     x = [49, 1240]
     y = [158, 604, 1050, 1496, 1942, 2388, 2834]
     c = list(itertools.product(x, y))
 
     for name, place in tqdm(zip(labels, c), "A4 Page Maker"):
+        logger.info(f"Fitting IMAGE: {name} to A4 in (X, Y): {place}")
         overlay = Image.open(f"{path}/merged_images/{name}")
         size = (1191, 446)
         overlay = overlay.resize(size, Image.ANTIALIAS)
