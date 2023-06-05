@@ -99,8 +99,10 @@ def event(user_info, sql_status, activity):
                                   action_id="action_id_entersoft_sql")
     activity_section = simple_section(text=f"> *USER ACTIVITY ANALYTICS* \n{activity}")
 
-    basic_block = [basic_user_info, divider, barcode_generator_section, barcode_generator_action, divider,
-                   activity_section, divider]
+    basic_block = [basic_user_info, divider,
+                   barcode_generator_section, barcode_generator_action, divider,
+                   # activity_section, divider,
+                   ]
     if user_info['user'].get('is_admin'):
         if sql_status:
             blocks = [basic_user_info, divider, entersoft_sql_section, entersoft_sql_action, divider]
