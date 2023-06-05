@@ -1,5 +1,5 @@
 #  Copyright (c) Ioannis E. Kommas 2022. All Rights Reserved
-
+import pathlib
 import uvicorn
 from slack_bolt import App
 from slack_bolt.adapter.fastapi import SlackRequestHandler
@@ -9,6 +9,13 @@ from fastapi import FastAPI, Request
 import warnings
 from tqdm import tqdm
 from my_app.SQL import sql3_conn, sql_connect, pass_manager
+import logging
+
+path = pathlib.Path(__file__).parent.resolve()
+log_path = f'{path}/std.log'
+logging.basicConfig(filename=log_path, filemode='w', format='%(asctime)s - %(levelname)s - %(message)s')
+logger=logging.getLogger()
+logger.setLevel(logging.INFO)
 
 warnings.simplefilter("ignore", UserWarning)
 
@@ -220,6 +227,10 @@ def handle_submission(ack, body, client, view, logger, ):
         df = barcode_generator.special_offer_get_data(from_date)
         for i in tqdm(df['ΚΩΔΙΚΟΣ'].unique(), desc='Barcode Generator: Creating Final Images:'):
             create_final_image.special_price(df[df['ΚΩΔΙΚΟΣ'] == i], file_name, price, tags[-1])
+
+        # Create A4 Pages Ready To Print
+        create_final_image.split_labels_to_fit_a4()
+
 
     except Exception as e:
         logger.error(f"Error responding to 'first_button' button click: {e}")

@@ -65,6 +65,7 @@ def run(mobile_document_header_code, order_type, color):
 
     delete_all_files_inside_folder(folder=f'{parent_path}/svg')
     delete_all_files_inside_folder(folder=f'{parent_path}/merged_images')
+    delete_all_files_inside_folder(folder=f'{parent_path}/to_print_labels')
     df = get_info_from_database(mobile_document_header_code, order_type)
     barcodes = df['BarCode'].tolist()
     app(barcodes, color)
@@ -77,6 +78,7 @@ def special_offer_get_data(from_date):
 
     delete_all_files_inside_folder(folder=f'{parent_path}/svg')
     delete_all_files_inside_folder(folder=f'{parent_path}/merged_images')
+    delete_all_files_inside_folder(folder=f'{parent_path}/to_print_labels')
     df = pd.read_sql_query(sql.get_products_in_the_period(from_date), sql_connect.connect())
     barcodes = df['ΚΩΔΙΚΟΣ'].tolist()
     app(barcodes, color='yellow')
