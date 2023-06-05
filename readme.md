@@ -75,7 +75,7 @@ https://user-images.githubusercontent.com/54149422/181995686-51b41d61-9832-4ea1-
 
 ![5202087000668](https://user-images.githubusercontent.com/54149422/181995891-e23da479-4711-4a62-91ee-00dab99c22a4.png)
 
-
+![0101](https://github.com/johnkommas/BarcodeReader/blob/master/my_app/SELF_LABEL/images/Discount%20LATO_.png?raw=true)
 
 ---
 
