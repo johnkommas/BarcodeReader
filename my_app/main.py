@@ -12,7 +12,7 @@ from my_app.SQL import sql3_conn, sql_connect, pass_manager
 import logging
 
 path = pathlib.Path(__file__).parent.resolve()
-log_path = f'{path}/std.log'
+log_path = f'{path}/_std.log'
 logging.basicConfig(filename=log_path, filemode='w', format='%(asctime)s - %(levelname)s - %(message)s')
 logger=logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -105,10 +105,10 @@ def handle_submission(ack, body, client, view, logger, ):
             elif x == 'e_pick_type_static_select_tags':
                 tags = str((view['state']['values'][i]['e_pick_type_static_select_tags']['selected_option'].get('value')))
         stores = ['EM', 'L1', 'L2']
-        special_colors = ['WHITE', 'YELLOW']
+        special_colors = ['WHITE', 'YELLOW', 'RED']
         bg_colors = ['#61D839', '#6FBCF0']
         prices = ['RetailPrice', 'LATO 01', 'LATO 02']
-        file_names = ['Elounda Market White.png', 'Elounda Market Yellow.png', 'Lato White.png', 'Lato Yellow.png']
+        file_names = ['Elounda Market White.png', 'Elounda Market Yellow.png', 'Lato White.png', 'Lato Yellow.png', 'Elounda Market RED.png']
 
         bg_color = bg_colors[0]
         file_name = file_names[0]
@@ -121,6 +121,8 @@ def handle_submission(ack, body, client, view, logger, ):
                 file_name = file_names[0]
             elif special_color == special_colors[1]:
                 file_name = file_names[1]
+            elif special_color == special_colors[2]:
+                file_name = file_names[4]
         elif store == stores[1]:
             price = prices[1]
             bg_color = bg_colors[1]
@@ -128,6 +130,8 @@ def handle_submission(ack, body, client, view, logger, ):
                 file_name = file_names[2]
             elif special_color == special_colors[1]:
                 file_name = file_names[3]
+            elif special_color == special_colors[2]:
+                file_name = file_names[4]
         elif store == stores[2]:
             price = prices[2]
             bg_color = bg_colors[1]
@@ -135,11 +139,19 @@ def handle_submission(ack, body, client, view, logger, ):
                 file_name = file_names[2]
             elif special_color == special_colors[1]:
                 file_name = file_names[3]
+            elif special_color == special_colors[2]:
+                file_name = file_names[4]
 
         # run my_app
         df = barcode_generator.run(number, type, bg_color)
         for i in tqdm(df.BarCode.unique(), desc='Barcode Generator: Creating Final Images:'):
             create_final_image.run(df[df['BarCode'] == i], file_name, price, tags)
+
+        # Create A4 Pages Ready To Print
+        create_final_image.split_labels_to_fit_a4()
+
+        # Εκτύπωση των ετικετών
+        create_final_image.export_to_printer()
 
     except Exception as e:
         logger.error(f"Error responding to 'first_button' button click: {e}")
@@ -205,9 +217,13 @@ def handle_submission(ack, body, client, view, logger, ):
         for i in key:
             x = list(view['state']['values'][i].keys())[0]
             if x == 'special_offer_datepicker_action_from':
-                from_date = (view['state']['values'][i]['special_offer_datepicker_action_from'].get('selected_date'))
+                from_date = (view['state']['values'][i][x].get('selected_date'))
             elif x == 'special_offer_pick_type_static_select_store':
-                store = str(view['state']['values'][i]['special_offer_pick_type_static_select_store']['selected_option'].get('value'))
+                store = str(view['state']['values'][i][x]['selected_option'].get('value'))
+            elif x == 'special_offer_pick_label_size':
+                is_big = int(view['state']['values'][i][x]['selected_option'].get('value'))
+            elif x == 'special_offer_pick_printer_name':
+                printer_name = str(view['state']['values'][i][x]['selected_option'].get('value'))
 
         stores = ['EM', 'L1', 'L2']
         prices = ['RetailPrice', 'LATO 01', 'LATO 02']
@@ -229,7 +245,10 @@ def handle_submission(ack, body, client, view, logger, ):
             create_final_image.special_price(df[df['ΚΩΔΙΚΟΣ'] == i], file_name, price, tags[-1])
 
         # Create A4 Pages Ready To Print
-        create_final_image.split_labels_to_fit_a4()
+        create_final_image.split_labels_to_fit_a4(is_big)
+
+        # Εκτύπωση των ετικετών
+        create_final_image.export_to_printer(printer_name)
 
 
     except Exception as e:

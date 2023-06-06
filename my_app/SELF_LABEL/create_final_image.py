@@ -1,5 +1,6 @@
 #  Copyright (c) Ioannis E. Kommas 2022. All Rights Reserved
 import itertools
+import subprocess
 
 from PIL import Image, ImageFont, ImageDraw
 import pathlib
@@ -29,6 +30,7 @@ def run(df, file_name, init_price, tags):
     my_image = Image.open(f'{path}/images/{file_name}')
     title_font = ImageFont.truetype('Avenir Next.ttc', 80)
     detailed_info_retail_discount = ImageFont.truetype('Avenir Next.ttc', 58)
+    detailed_info_retail = ImageFont.truetype('Futura.ttc', 120)
     euro_font = ImageFont.truetype('Futura.ttc', 700)
     copper_font = ImageFont.truetype('Futura.ttc', 300)
     euro_sign_font = ImageFont.truetype('Futura.ttc', 400)
@@ -49,10 +51,23 @@ def run(df, file_name, init_price, tags):
     overlay = Image.open(f"{path}/images/{tags}.png").convert("RGBA")
     size = (overlay.size[0] // 1, overlay.size[1] // 1)
     overlay = overlay.resize(size, Image.ANTIALIAS)
-    data = f"Retail Price: {df[init_price].values[0]}€ || Discount: {df['ΕΚΠΤΩΣΗ'].values[0]}%"
 
-    # Detailed Info about Price and Discount
-    image_editable.text((100, 820), data, (0, 0, 0), font=detailed_info_retail_discount)
+    if (df['ΕΚΠΤΩΣΗ'].values[0] > 0) and (tags == "no_tags"):
+        # DETAILED DATA STRUCTURE
+        data_a = f"Initial Price: {df[init_price].values[0]}€"
+        data_b = f"Discount: {df['ΕΚΠΤΩΣΗ'].values[0]}% "
+
+        # Detailed Info about Price and Discount
+        image_editable.text((100, 300), data_a, (255, 255, 255), font=detailed_info_retail)
+        image_editable.text((100, 550), data_b, (255, 255, 255), font=detailed_info_retail)
+
+    elif df['ΕΚΠΤΩΣΗ'].values[0] > 0:
+        data = f"Retail Price: {df[init_price].values[0]}€ || Discount: {df['ΕΚΠΤΩΣΗ'].values[0]}%"
+
+        # Detailed Info about Price and Discount
+        image_editable.text((100, 820), data, (0, 0, 0), font=detailed_info_retail_discount)
+
+
 
     if len(str(euro_price)) == 1:
         image_editable.text((1346 - 40, 80),  str(euro_price) + ".", (244, 36, 7), font=euro_font)
@@ -113,6 +128,8 @@ def special_price(df, file_name, init_price, tags):
     starts = datetime.strptime(starts, '%Y-%m-%d').strftime('%d-%m-%Y')
     ends = str(df['ΛΗΞΗ'].values[0])[:10]
     ends = datetime.strptime(ends, '%Y-%m-%d').strftime('%d-%m-%Y')
+
+    # DETAILED DATA STRUCTURE
     data_a = f"Retail Price: {df[init_price].values[0]}€"
     data_b = f"Discount: {df['ΕΚΠΤΩΣΗ'].values[0]}% "
     data_c = f"Starts: {starts} / Ends: {ends}"
@@ -121,6 +138,8 @@ def special_price(df, file_name, init_price, tags):
     image_editable.text((100, 300), data_a, (255, 255, 255), font=detailed_info_retail)
     image_editable.text((100, 550), data_b, (255, 255, 255), font=detailed_info_retail)
     image_editable.text((150, 700), data_c, (255, 255, 255), font=detailed_info_retail_discount)
+
+    # FINAL RETAIL PRICE
     if len(str(euro_price)) == 1:
         image_editable.text((1346 - 40, 80), str(euro_price) + ".", (244, 36, 7), font=euro_font)
         my_image.paste(overlay, (186 - 40, 211), mask=overlay)
@@ -130,6 +149,7 @@ def special_price(df, file_name, init_price, tags):
     elif len(str(euro_price)) == 3:
         image_editable.text((555 - 40, 80), str(euro_price) + ".", (244, 36, 7), font=euro_font)
         my_image.paste(overlay, (-212, 211), mask=overlay)
+
     # Εμφανίζει ένα δεκαδικό όταν η τιμή είναι π.χ. 1.0 έτσι προσθέτουμε ακόμα ένα 0
     image_editable.text((1755 - 40, 195),
                         (str(copper_price) if len(str(copper_price)) == 2 else str(copper_price) + "0"), (244, 36, 7),
@@ -140,52 +160,73 @@ def special_price(df, file_name, init_price, tags):
     my_image.save(f"{path}/merged_images/{barcode}.png")
 
 
-def split_labels_to_fit_a4():
+def split_labels_to_fit_a4(big=False):
     path = pathlib.Path(__file__).parent.resolve()
 
     # Get the File List of names
     list_of_names = os.listdir(f"{path}/merged_images")
     logger.info(list_of_names)
 
+    if big:
+        labels_per_page = 8
+    else:
+        labels_per_page = 14
+
     # every A4 page can have maximum of 14 image labels
-    total_pages = (len(list_of_names) // 14) + (1 if len(list_of_names) % 14 > 0 else 0)
+    total_pages = (len(list_of_names) // labels_per_page) + (1 if len(list_of_names) % labels_per_page > 0 else 0)
+
     logger.info(f"Total Labels in PATH: {len(list_of_names)}")
     logger.info(f"Total A4 Pages to Build: {total_pages}")
 
     page_number = 1
     while list_of_names:
-        labels = list_of_names[:14]
+        labels = list_of_names[:labels_per_page]
         logger.info(f"Labels to PUt inside A4 PAGE {page_number}: {labels}")
-        del list_of_names[:14]
-        a4_page_fit_images(labels, f"A4_PAGE{page_number}.png")
+        del list_of_names[:labels_per_page]
+        a4_page_fit_images(labels, f"A4_PAGE{page_number}.png", big=big)
         page_number += 1
 
 
 
-def a4_page_fit_images(labels, ouptut_name):
+def a4_page_fit_images(labels, ouptut_name, big=False):
     path = pathlib.Path(__file__).parent.resolve()
-    my_image = Image.open(f'{path}/images/A4_Labels_Saloon.png')
-    # Συντεταγμένες για κάθε εικόνα
-    x = [49, 1240]
-    y = [158, 604, 1050, 1496, 1942, 2388, 2834]
-    c = list(itertools.product(x, y))
+    if big:
+        image_name = "A4_Labels_Saloon_big.png"
+        # Συντεταγμένες για κάθε εικόνα
+        x = [163, 1754]
+        y = [56, 653, 1250, 1847]
+        c = list(itertools.product(x, y))
+        size = (1591, 597)
+    else:
+        image_name = "A4_Labels_Saloon.png"
+        # Συντεταγμένες για κάθε εικόνα
+        x = [49, 1240]
+        y = [158, 604, 1050, 1496, 1942, 2388, 2834]
+        c = list(itertools.product(x, y))
+        size = (1191, 446)
 
+    my_image = Image.open(f'{path}/images/{image_name}')
     for name, place in tqdm(zip(labels, c), "A4 Page Maker"):
         logger.info(f"Fitting IMAGE: {name} to A4 in (X, Y): {place}")
         overlay = Image.open(f"{path}/merged_images/{name}")
-        size = (1191, 446)
         overlay = overlay.resize(size, Image.ANTIALIAS)
         my_image.paste(overlay, place, mask=overlay)
     file_out = f"{path}/to_print_labels/{ouptut_name}"
     my_image.save(file_out)
 
 
-def export_to_printer(printer_name="_192_168_1_175"):
+
+
+def export_to_printer(printer_name):
     path = pathlib.Path(__file__).parent.resolve()
-    list_of_names = os.listdir(f"{path}/to_print_labels")
-    for file_name in list_of_names:
-        file = f"{path}/to_print_labels/{file_name}"
-        os.system(f"lpr -P {printer_name} {file}")
+    if printer_name == "0":
+        logger.info("No Print Asked, Opening Folder Instead")
+        subprocess.call(['open', f"{path}/to_print_labels", ])
+    else:
+        list_of_names = os.listdir(f"{path}/to_print_labels")
+        for file_name in list_of_names:
+            file = f"{path}/to_print_labels/{file_name}"
+            os.system(f"lpr -P {printer_name} {file}")
 
 
 
