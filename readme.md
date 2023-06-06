@@ -75,6 +75,11 @@ https://user-images.githubusercontent.com/54149422/181995686-51b41d61-9832-4ea1-
 > Δ. Το προϊόν να είναι σε προσφορά ορισμένου χρόνου και να έχει τοποθετηθεί απευθείας τιμή. <br>
 > Όλα τα παραπάνω σενάρια αναγνωρίζονται αυτόματα και δεν χρειάζεται από τον χρήστη να τις διαχωρίσει, 
 σε κάθε περίπτωση το ταμπελάκι διαμορφώνεται ως εξης: <br>
+ 
+```python
+price = (df['ΝΕΑ ΤΙΜΗ'].values[0] if df['ΕΚΠΤΩΣΗ'].values[0] <= 0 else round(df[init_price].values[0] * (100 - df['ΕΚΠΤΩΣΗ'].values[0]) / 100, 2))
+    
+```
 
 - ΚΑΝΟΝΙΚΕΣ ΤΙΜΕΣ / Είδος με Τιμή Λιανικής 
 - (επιλέξαμε Τag "Best Choice")
@@ -105,6 +110,34 @@ https://user-images.githubusercontent.com/54149422/181995686-51b41d61-9832-4ea1-
 > Τα ταμπελάκια στο σύνολο τους κάθε φορά είναι αρκετά, για την εκτύπωση τους έχω διαμορφώσει δύο διαφορετικά μεγέθη <br>
 > Α. Μεγάλο Μέγεθος, εκτυπώνονται 8 ταμπελάκια σε κάθε σελίδα και το χαρτί δεν χωράει στην ετικετοθέση του ραφιού <br>
 > Β. Μικρό Μέγεθος, εκτυπώνονται 14 ταμπελάκια σε κάθε σελίδα και το χαρτί χωράει ακριβώς στην ετικετοθέση του ραφιού
+ 
+```python
+def a4_page_fit_images(labels, ouptut_name, big=False):
+    path = pathlib.Path(__file__).parent.resolve()
+    if big:
+        image_name = "A4_Labels_Saloon_big.png"
+        # Συντεταγμένες για κάθε εικόνα
+        x = [163, 1754]
+        y = [56, 653, 1250, 1847]
+        c = list(itertools.product(x, y))
+        size = (1591, 597)
+    else:
+        image_name = "A4_Labels_Saloon.png"
+        # Συντεταγμένες για κάθε εικόνα
+        x = [49, 1240]
+        y = [158, 604, 1050, 1496, 1942, 2388, 2834]
+        c = list(itertools.product(x, y))
+        size = (1191, 446)
+
+    my_image = Image.open(f'{path}/images/{image_name}')
+    for name, place in tqdm(zip(labels, c), "A4 Page Maker"):
+        logger.info(f"Fitting IMAGE: {name} to A4 in (X, Y): {place}")
+        overlay = Image.open(f"{path}/merged_images/{name}")
+        overlay = overlay.resize(size, Image.ANTIALIAS)
+        my_image.paste(overlay, place, mask=overlay)
+    file_out = f"{path}/to_print_labels/{ouptut_name}"
+    my_image.save(file_out)
+```
 
 ### 8 Printable Labels per Page (A4) (SPECIAL OFFER)
 
@@ -126,7 +159,20 @@ https://user-images.githubusercontent.com/54149422/181995686-51b41d61-9832-4ea1-
 > Το τελικό στάδιο είναι η εκτύπωση, σε αυτό το σημείο έχουμε στη διάθεση μας δύο επιλογές: <br>
 > Α. Άμεση Εκτύπωση, η εκτύπωση ξεκινά άμεσα <br>
 > B. Χωρίς Εκτύπωση, το πρόγραμμα εμφανίζει τον φάκελο με τις σελίδες προς εκτύπωση <br>
+ 
 
+```python
+def export_to_printer(printer_name):
+    path = pathlib.Path(__file__).parent.resolve()
+    if printer_name == "0":
+        logger.info("No Print Asked, Opening Folder Instead")
+        subprocess.call(['open', f"{path}/to_print_labels"])
+    else:
+        list_of_names = os.listdir(f"{path}/to_print_labels")
+        for file_name in list_of_names:
+            file = f"{path}/to_print_labels/{file_name}"
+            os.system(f"lpr -P {printer_name} {file}")
+```
 ---
 ### Requirements
 - crefi==2.0.9
