@@ -122,7 +122,12 @@ https://user-images.githubusercontent.com/54149422/181995686-51b41d61-9832-4ea1-
 ![0102](https://github.com/johnkommas/BarcodeReader/blob/master/my_app/SELF_LABEL/images/A4_PAGE2.png?raw=true)
 
 ---
+### Εκτύπωση
+> Το τελικό στάδιο είναι η εκτύπωση, σε αυτό το σημείο έχουμε στη διάθεση μας δύο επιλογές: <br>
+> Α. Άμεση Εκτύπωση, η εκτύπωση ξεκινά άμεσα <br>
+> B. Χωρίς Εκτύπωση, το πρόγραμμα εμφανίζει τον φάκελο με τις σελίδες προς εκτύπωση <br>
 
+---
 ### Requirements
 - crefi==2.0.9
 - pip==22.2.1
