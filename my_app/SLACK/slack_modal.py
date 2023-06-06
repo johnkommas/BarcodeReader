@@ -293,6 +293,101 @@ def modal_view():
                     "emoji": True
                 }
             },
+            {
+                "type": "input",
+                "element": {
+
+                    "type": "static_select",
+                    "placeholder": {
+                        "type": "plain_text",
+                        "text": "ΕΠΙΛΕΞΕ ΜΕΓΕΘΟΣ ΕΚΤΥΠΩΣΗΣ",
+                        "emoji": True
+                    },
+                    "initial_option": {"text": {"type": "plain_text",
+                                                "text": "⚽️ ΜΕΓΑΛΟ 8 Labels per Page",
+                                                "emoji": True
+                                                },
+                                       "value": "1"
+                                       },
+
+                    "options": [{"text": {"type": "plain_text",
+                                          "text": "⚽️ ΜΕΓΑΛΟ 8 Labels per Page",
+                                          "emoji": True
+                                          },
+                                 "value": "1"
+                                 },
+                                {"text": {"type": "plain_text",
+                                          "text": "🏀️ ΜΙΚΡΟ 14 Labels per Page",
+                                          "emoji": True
+                                          },
+                                 "value": "0"
+                                 },
+
+                                ],
+
+                    "action_id": "normal_price_pick_label_size"
+
+                },
+                "label": {
+                    "type": "plain_text",
+                    "text": "ΕΠΙΛΕΞΕ ΜΕΓΕΘΟΣ ΕΚΤΥΠΩΣΗΣ:",
+                    "emoji": True
+                }
+            },
+
+            {
+                "type": "input",
+                "element": {
+
+                    "type": "static_select",
+                    "placeholder": {
+                        "type": "plain_text",
+                        "text": "ΕΠΙΛΕΞΕ ΕΚΤΥΠΩΤΗ",
+                        "emoji": True
+                    },
+                    "initial_option": {"text": {"type": "plain_text",
+                                                "text": "ELOUNDA MARKET PRINTER",
+                                                "emoji": True
+                                                },
+                                       "value": "_192_168_1_175"
+                                       },
+
+                    "options": [{"text": {"type": "plain_text",
+                                          "text": "ELOUNDA MARKET PRINTER",
+                                          "emoji": True
+                                          },
+                                 "value": "_192_168_1_175"
+                                 },
+                                {"text": {"type": "plain_text",
+                                          "text": "LATO 01 PRINTER",
+                                          "emoji": True
+                                          },
+                                 "value": "_192_168_1_176"
+                                 },
+                                {"text": {"type": "plain_text",
+                                          "text": "LATO 02 PRINTER",
+                                          "emoji": True
+                                          },
+                                 "value": "_192_168_1_177"
+                                 },
+                                {"text": {"type": "plain_text",
+                                          "text": "ΧΩΡΙΣ ΕΚΤΥΠΩΣΗ",
+                                          "emoji": True
+                                          },
+                                 "value": "0"
+                                 },
+
+                                ],
+
+                    "action_id": "normal_price_printer_name"
+
+                },
+                "label": {
+                    "type": "plain_text",
+                    "text": "ΕΠΙΛΕΞΕ ΕΚΤΥΠΩΤΗ:",
+                    "emoji": True
+                }
+            },
 
         ]
     }
@@ -614,7 +709,7 @@ def special_offer_modal():
                 },
                 "label": {
                     "type": "plain_text",
-                    "text": "ΕΠΙΛΕΞΕ ΜΕΓΕΘΟΣ ΕΚΤΥΠΩΣΗΣ:",
+                    "text": "ΕΠΙΛΕΞΕ ΕΚΤΥΠΩΤΗ:",
                     "emoji": True
                 }
             },

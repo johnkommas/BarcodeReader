@@ -95,15 +95,20 @@ def handle_submission(ack, body, client, view, logger, ):
         for i in key:
             x = list(view['state']['values'][i].keys())[0]
             if x == 'a_pick_type_static_select_action':
-                type = str(view['state']['values'][i]['a_pick_type_static_select_action']['selected_option'].get('value'))
+                type = str(view['state']['values'][i][x]['selected_option'].get('value'))
             elif x == 'b_pda_number_plain_text_input_action':
-                number = int(view['state']['values'][i]['b_pda_number_plain_text_input_action'].get('value'))
+                number = int(view['state']['values'][i][x].get('value'))
             elif x == 'c_pick_type_static_select_store':
-                store = str(view['state']['values'][i]['c_pick_type_static_select_store']['selected_option'].get('value'))
+                store = str(view['state']['values'][i][x]['selected_option'].get('value'))
             elif x == 'd_pick_type_static_select_color':
-                special_color = str(view['state']['values'][i]['d_pick_type_static_select_color']['selected_option'].get('value'))
+                special_color = str(view['state']['values'][i][x]['selected_option'].get('value'))
             elif x == 'e_pick_type_static_select_tags':
-                tags = str((view['state']['values'][i]['e_pick_type_static_select_tags']['selected_option'].get('value')))
+                tags = str((view['state']['values'][i][x]['selected_option'].get('value')))
+            elif x == 'normal_price_pick_label_size':
+                is_big = int((view['state']['values'][i][x]['selected_option'].get('value')))
+            elif x == 'normal_price_printer_name':
+                printer_name = str((view['state']['values'][i][x]['selected_option'].get('value')))
+
         stores = ['EM', 'L1', 'L2']
         special_colors = ['WHITE', 'YELLOW', 'RED']
         bg_colors = ['#61D839', '#6FBCF0']
@@ -148,10 +153,10 @@ def handle_submission(ack, body, client, view, logger, ):
             create_final_image.run(df[df['BarCode'] == i], file_name, price, tags)
 
         # Create A4 Pages Ready To Print
-        create_final_image.split_labels_to_fit_a4()
+        create_final_image.split_labels_to_fit_a4(is_big)
 
         # Εκτύπωση των ετικετών
-        create_final_image.export_to_printer()
+        create_final_image.export_to_printer(printer_name)
 
     except Exception as e:
         logger.error(f"Error responding to 'first_button' button click: {e}")

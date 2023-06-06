@@ -1,6 +1,5 @@
 #  Copyright (c) Ioannis E. Kommas 2022. All Rights Reserved
 from asyncio.log import logger
-
 from my_app.SQL import sql3_conn
 from my_app.SLACK import slack_home_page
 

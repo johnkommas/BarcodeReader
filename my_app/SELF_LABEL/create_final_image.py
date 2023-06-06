@@ -217,11 +217,11 @@ def a4_page_fit_images(labels, ouptut_name, big=False):
 
 
 
-def export_to_printer(printer_name):
+def export_to_printer(printer_name='_192_168_1_175'):
     path = pathlib.Path(__file__).parent.resolve()
     if printer_name == "0":
         logger.info("No Print Asked, Opening Folder Instead")
-        subprocess.call(['open', f"{path}/to_print_labels", ])
+        subprocess.call(['open', f"{path}/to_print_labels"])
     else:
         list_of_names = os.listdir(f"{path}/to_print_labels")
         for file_name in list_of_names:
