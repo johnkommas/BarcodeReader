@@ -68,15 +68,21 @@ https://user-images.githubusercontent.com/54149422/181995686-51b41d61-9832-4ea1-
 
 # Τελικό Αποτέλεσμα
 
-- Έκπτωση Επί Τιμής Υποκαταστήματος:
+- ΚΑΝΟΝΙΚΕΣ ΤΙΜΕΣ / Είδος με Τιμή Λιανικής:
 
-![5200427400246](https://user-images.githubusercontent.com/54149422/181995790-fc7e57aa-60d2-478a-8d21-78ff8fc9acb0.png)
-- Ανάθεση Τιμής
+![0102](https://github.com/johnkommas/BarcodeReader/blob/master/my_app/SELF_LABEL/images/A.png?raw=true)
 
-![5202087000668](https://user-images.githubusercontent.com/54149422/181995891-e23da479-4711-4a62-91ee-00dab99c22a4.png)
+- ΚΑΝΟΝΙΚΕΣ ΤΙΜΕΣ / Είδος με Τιμή Λιανικής και Έκπτωση
 
-![0101](https://github.com/johnkommas/BarcodeReader/blob/master/my_app/SELF_LABEL/images/Discount%20LATO_.png?raw=true)
+![0102](https://github.com/johnkommas/BarcodeReader/blob/master/my_app/SELF_LABEL/images/D.png?raw=true)
 
+- ΠΡΟΣΦΟΡΕΣ / Προσφορά Ορισμένου Χρόνου με Έκπτωση
+
+![0102](https://github.com/johnkommas/BarcodeReader/blob/master/my_app/SELF_LABEL/images/B.png?raw=true)
+
+- ΠΡΟΣΦΟΡΕΣ / Προσφορά Ορισμένου Χρόνου με Απευθείας Ανάθεση Τιμής
+
+![0102](https://github.com/johnkommas/BarcodeReader/blob/master/my_app/SELF_LABEL/images/C.png?raw=true)
 ---
 
 ### 8 Printable Labels per Page (A4) (SPECIAL OFFER)
