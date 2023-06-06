@@ -83,6 +83,11 @@ https://user-images.githubusercontent.com/54149422/181995686-51b41d61-9832-4ea1-
 - ΠΡΟΣΦΟΡΕΣ / Προσφορά Ορισμένου Χρόνου με Απευθείας Ανάθεση Τιμής
 
 ![0102](https://github.com/johnkommas/BarcodeReader/blob/master/my_app/SELF_LABEL/images/C.png?raw=true)
+
+- Συνδυασμός Προσφοράς με Καρτελάκι Έκπτωσης
+- 
+![0101](https://github.com/johnkommas/BarcodeReader/blob/master/my_app/SELF_LABEL/images/Discount%20LATO_.png?raw=true)
+
 ---
 
 ### 8 Printable Labels per Page (A4) (SPECIAL OFFER)
