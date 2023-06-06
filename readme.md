@@ -79,16 +79,20 @@ https://user-images.githubusercontent.com/54149422/181995686-51b41d61-9832-4ea1-
 
 ---
 
-### 8 Printable Labels per Page (A4) 
+### 8 Printable Labels per Page (A4) (SPECIAL OFFER)
 
 ![0102](https://github.com/johnkommas/BarcodeReader/blob/master/my_app/SELF_LABEL/images/A4_PAGE1.png?raw=true)
+
+---
+
+### 8 Printable Labels per Page (A4) (SPECIAL OFFER)
+![0102](https://github.com/johnkommas/BarcodeReader/blob/master/my_app/SELF_LABEL/images/A4_PAGE3.png?raw=true)
 
 ---
 
 ### 14 Printable Labels per Page (A4) 
 
 ![0102](https://github.com/johnkommas/BarcodeReader/blob/master/my_app/SELF_LABEL/images/A4_PAGE2.png?raw=true)
-
 
 ---
 
