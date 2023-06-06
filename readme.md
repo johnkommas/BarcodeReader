@@ -76,19 +76,24 @@ https://user-images.githubusercontent.com/54149422/181995686-51b41d61-9832-4ea1-
 > Όλα τα παραπάνω σενάρια αναγνωρίζονται αυτόματα και δεν χρειάζεται από τον χρήστη να τις διαχωρίσει, 
 σε κάθε περίπτωση το ταμπελάκι διαμορφώνεται ως εξης: <br>
 
-- ΚΑΝΟΝΙΚΕΣ ΤΙΜΕΣ / Είδος με Τιμή Λιανικής:
+- ΚΑΝΟΝΙΚΕΣ ΤΙΜΕΣ / Είδος με Τιμή Λιανικής 
+- (επιλέξαμε Τag "Best Choice")
+- (επιλέξαμε Χρώμα: Πράσινο)
 
 ![0102](https://github.com/johnkommas/BarcodeReader/blob/master/my_app/SELF_LABEL/images/A.png?raw=true)
 
 - ΚΑΝΟΝΙΚΕΣ ΤΙΜΕΣ / Είδος με Τιμή Λιανικής και Έκπτωση
+- (επιλέξαμε Χρώμα: Πράσινο)
 
 ![0102](https://github.com/johnkommas/BarcodeReader/blob/master/my_app/SELF_LABEL/images/D.png?raw=true)
 
 - ΠΡΟΣΦΟΡΕΣ / Προσφορά Ορισμένου Χρόνου με Έκπτωση
+- (επιλέξαμε Χρώμα: Κόκκινο)
 
 ![0102](https://github.com/johnkommas/BarcodeReader/blob/master/my_app/SELF_LABEL/images/B.png?raw=true)
 
 - ΠΡΟΣΦΟΡΕΣ / Προσφορά Ορισμένου Χρόνου με Απευθείας Ανάθεση Τιμής
+- (επιλέξαμε Χρώμα: Κόκκινο)
 
 ![0102](https://github.com/johnkommas/BarcodeReader/blob/master/my_app/SELF_LABEL/images/C.png?raw=true)
 > Για την καλύτερη προώθηση των προϊόντων σε προσφορά, προτείνετε το ταμπελάκι να συνδυάζεται με σήμανση, παρακάτω απεικονίζεται 
