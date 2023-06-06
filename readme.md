@@ -76,7 +76,19 @@ https://user-images.githubusercontent.com/54149422/181995686-51b41d61-9832-4ea1-
 ![5202087000668](https://user-images.githubusercontent.com/54149422/181995891-e23da479-4711-4a62-91ee-00dab99c22a4.png)
 
 ![0101](https://github.com/johnkommas/BarcodeReader/blob/master/my_app/SELF_LABEL/images/Discount%20LATO_.png?raw=true)
-![0102](https://github.com/johnkommas/BarcodeReader/blob/master/my_app/SELF_LABEL/images/EM.png?raw=true)
+
+---
+
+### 8 Printable Labels per Page (A4) 
+
+![0102](https://github.com/johnkommas/BarcodeReader/blob/master/my_app/SELF_LABEL/images/A4_PAGE1.png?raw=true)
+
+---
+
+### 14 Printable Labels per Page (A4) 
+
+![0102](https://github.com/johnkommas/BarcodeReader/blob/master/my_app/SELF_LABEL/images/A4_PAGE2.png?raw=true)
+
 
 ---
 
