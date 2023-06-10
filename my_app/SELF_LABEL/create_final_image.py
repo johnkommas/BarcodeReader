@@ -32,6 +32,7 @@ def run(df, file_name, init_price, tags):
     detailed_info_retail_discount = ImageFont.truetype('Avenir Next.ttc', 58)
     detailed_info_retail = ImageFont.truetype('Futura.ttc', 120)
     euro_font = ImageFont.truetype('Futura.ttc', 700)
+    euro_font_2 = ImageFont.truetype('Futura.ttc', 550)
     copper_font = ImageFont.truetype('Futura.ttc', 300)
     euro_sign_font = ImageFont.truetype('Futura.ttc', 400)
     fMUCode_font = ImageFont.truetype('Times.ttc', 98)
@@ -54,7 +55,7 @@ def run(df, file_name, init_price, tags):
 
     if (df['ΕΚΠΤΩΣΗ'].values[0] > 0) and (tags == "no_tags"):
         # DETAILED DATA STRUCTURE
-        data_a = f"Initial Price: {df[init_price].values[0]}€"
+        data_a = f"Retail Price: {df[init_price].values[0]}€"
         data_b = f"Discount: {df['ΕΚΠΤΩΣΗ'].values[0]}% "
 
         # Detailed Info about Price and Discount
@@ -73,7 +74,7 @@ def run(df, file_name, init_price, tags):
         image_editable.text((1346 - 40, 80),  str(euro_price) + ".", (244, 36, 7), font=euro_font)
         my_image.paste(overlay, (186 - 40, 211), mask=overlay)
     elif len(str(euro_price)) == 2:
-        image_editable.text((930 - 40, 80),  str(euro_price) + ".", (244, 36, 7), font=euro_font)
+        image_editable.text((1050, 200),  str(euro_price) + ".", (244, 36, 7), font=euro_font_2)
         my_image.paste(overlay, (48 - 40, 211), mask=overlay)
     elif len(str(euro_price)) == 3:
         image_editable.text((555 - 40, 80),  str(euro_price) + ".", (244, 36, 7), font=euro_font)
