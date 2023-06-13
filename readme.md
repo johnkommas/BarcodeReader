@@ -107,6 +107,10 @@ price = (df['ΝΕΑ ΤΙΜΗ'].values[0] if df['ΕΚΠΤΩΣΗ'].values[0] <= 0 
 ![0101](https://github.com/johnkommas/BarcodeReader/blob/master/my_app/SELF_LABEL/images/Discount%20LATO_.png?raw=true)
 
 ---
+> Ταμπελάκια με χρώμα:
+
+![0101](https://github.com/johnkommas/BarcodeReader/blob/master/my_app/SELF_LABEL/images/A4_PAGE4.png?raw=true)
+---
 > Τα ταμπελάκια στο σύνολο τους κάθε φορά είναι αρκετά, για την εκτύπωση τους έχω διαμορφώσει δύο διαφορετικά μεγέθη <br>
 > Α. Μεγάλο Μέγεθος, εκτυπώνονται 8 ταμπελάκια σε κάθε σελίδα και το χαρτί δεν χωράει στην ετικετοθέση του ραφιού <br>
 > Β. Μικρό Μέγεθος, εκτυπώνονται 14 ταμπελάκια σε κάθε σελίδα και το χαρτί χωράει ακριβώς στην ετικετοθέση του ραφιού
