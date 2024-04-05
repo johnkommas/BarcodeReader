@@ -1,6 +1,7 @@
 #  Copyright (c) Ioannis E. Kommas 2022. All Rights Reserved
 import itertools
 import subprocess
+import textwrap
 
 from PIL import Image, ImageFont, ImageDraw
 import pathlib
@@ -39,7 +40,13 @@ def run(df, file_name, init_price, tags):
     image_editable = ImageDraw.Draw(my_image)
 
     # TITLE
-    image_editable.text((100, 80), title, (0, 0, 0), font=title_font)
+    # TODO SPLIT THE TEXT MAKE THE BELOW CODE EXECUTABLE BY TESTING
+    s_wrap_list = textwrap.wrap(title, 42)
+    image_editable.text((100, 80), s_wrap_list[0], (0, 0, 0), font=title_font)
+    if len(s_wrap_list) > 1:
+        image_editable.text((100, 160), s_wrap_list[1], (0, 0, 0), font=title_font)
+
+    # image_editable.text((100, 80), title, (0, 0, 0), font=title_font)
 
     # BARCODE
     overlay = Image.open(f"{path}/svg/{barcode}.png").convert("RGBA")
@@ -106,12 +113,19 @@ def special_price(df, file_name, init_price, tags):
     detailed_info_retail_discount = ImageFont.truetype('Avenir Next.ttc', 38)
     detailed_info_retail = ImageFont.truetype('Futura.ttc', 120)
     euro_font = ImageFont.truetype('Futura.ttc', 700)
+    euro_font_2 = ImageFont.truetype('Futura.ttc', 500)
     copper_font = ImageFont.truetype('Futura.ttc', 300)
     euro_sign_font = ImageFont.truetype('Futura.ttc', 400)
     fMUCode_font = ImageFont.truetype('Times.ttc', 98)
     image_editable = ImageDraw.Draw(my_image)
 
     # TITLE
+    # TODO SPLIT THE TEXT MAKE THE BELOW CODE EXECUTABLE BY TESTING
+    # s_wrap_list = textwrap.wrap(title, 42)
+    # image_editable.text((100, 80), s_wrap_list[0], (0, 0, 0), font=title_font)
+    # if len(s_wrap_list) > 1:
+    #     image_editable.text((100, 345), s_wrap_list[1], (0, 0, 0), font=title_font)
+
     image_editable.text((100, 80), title, (0, 0, 0), font=title_font)
 
     # BARCODE
@@ -145,7 +159,7 @@ def special_price(df, file_name, init_price, tags):
         image_editable.text((1346 - 40, 80), str(euro_price) + ".", (244, 36, 7), font=euro_font)
         my_image.paste(overlay, (186 - 40, 211), mask=overlay)
     elif len(str(euro_price)) == 2:
-        image_editable.text((930 - 40, 80), str(euro_price) + ".", (244, 36, 7), font=euro_font)
+        image_editable.text((1150, 280), str(euro_price) + ".", (244, 36, 7), font=euro_font_2)
         my_image.paste(overlay, (48 - 40, 211), mask=overlay)
     elif len(str(euro_price)) == 3:
         image_editable.text((555 - 40, 80), str(euro_price) + ".", (244, 36, 7), font=euro_font)
