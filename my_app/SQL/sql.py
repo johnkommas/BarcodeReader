@@ -36,8 +36,24 @@ SELECT  DISTINCT IMP_MobileDocumentLines.BarCode        AS 'BarCode',
         ORDER BY 4, 2
 """
 
+def lato_prices(barcodes):
+    return f"""
+SELECT  DISTINCT ESFIItem.BarCode                       AS 'ΚΩΔΙΚΟΣ',
+        ESFIItem.Description                            AS 'ΠΕΡΙΓΡΑΦΗ',
+        ESMMItemMU.fMUCode                              AS 'MM',
+        ESFIItem.Price1                                 AS 'LATO 01',
+        ESFIItem.Discount                               AS 'ΕΚΠΤΩΣΗ'
+        FROM ESFIItem
+            LEFT JOIN ESFIZItemCategory
+                ON ESFIItem.fItemCategoryCode = ESFIZItemCategory.Code
+            LEFT JOIN ESMMItemMU
+                ON ESFIItem.fMainMUGID = ESMMItemMU.GID
+        WHERE ESFIItem.BarCode in {barcodes}
+"""
+
 
 def get_products_in_the_period(from_date):
+    print(from_date)
     return f"""
 SELECT ESFIPricelist.Code                         AS 'ΤΙΜΟΚΑΤΑΛΟΓΟΣ',
        ESFIPricelistItem.fItemPricingCategoryCode AS 'ΚΑΤΗΓΟΡΙΑ',
@@ -59,7 +75,7 @@ from ESFIPricelistItem
                     on ESFIPricelistItem.fPricelistGID = ESFIPricelist.GID
          LEFT JOIN ESMMItemMU
                     ON ESFIItem.fMainMUGID = ESMMItemMU.GID
-where ValidFromDate = '{from_date}' 
+where '{from_date}' = ValidFromDate 
 
 order by 3,4,5
 """
