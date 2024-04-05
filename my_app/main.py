@@ -240,12 +240,13 @@ def handle_submission(ack, body, client, view, logger, ):
             file_name = file_names[0]
         elif store == stores[1]:
             price = prices[1]
-            file_name = file_names[1]
+            file_name = file_names[0]
         else:
             price = prices[2]
-            file_name = file_names[1]
+            file_name = file_names[0]
 
         df = barcode_generator.special_offer_get_data(from_date)
+        print(df)
         for i in tqdm(df['ΚΩΔΙΚΟΣ'].unique(), desc='Barcode Generator: Creating Final Images:'):
             create_final_image.special_price(df[df['ΚΩΔΙΚΟΣ'] == i], file_name, price, tags[-1])
 
@@ -282,4 +283,4 @@ async def root():
 if __name__ == "__main__":
     my_ip = sql_connect.get_ip_address()
 
-    uvicorn.run("main:api", host=my_ip, port=3001, log_level="info", reload=True)
+    uvicorn.run("main:api", host=my_ip, port=3001, log_level="info", reload=False)
