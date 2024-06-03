@@ -1,46 +1,43 @@
 #  Copyright (c) Ioannis E. Kommas 2022. All Rights Reserved
 
+
 # Make the Connection
-import os
+import pyodbc
 from subprocess import call
 import time
 import socket
-from my_app.SQL import sql3_conn, pass_manager
-# from sqlalchemy.engine import URL
-# from sqlalchemy import create_engine
-import pyodbc
-
-
+from sqlalchemy.engine.url import URL
+from sqlalchemy import create_engine
+from dotenv import load_dotenv
+import os
 
 def connect():
+    load_dotenv()
     sql_counter = 0
     my_ip = get_ip_address()
-    df = sql3_conn.read_credentials_for_entersoft_sql()
     try:
-        cnxn = pyodbc.connect("DRIVER={ODBC Driver 17 for SQL Server};"
-                              f"Server={df['ServerIp'].values[0]};"  
-                              f"UID={df['User_ID'].values[0]};"  
-                              f"PWD={pass_manager.decrypt(df['KeyOnSave'].values[0], df['PasswdKey'].values[0])};"  
-                              f"Database={df['DataBaseName'].values[0]};"  
-                              f"TrustServerCertificate={df['TrustServerCertificate'].values[0]}")
-        # connection_string = cnxn
-        # connection_url = URL.create("mssql+pyodbc", query={"odbc_connect": connection_string})
-        # engine = create_engine(connection_url, pool_pre_ping=True)
-    except :
+        cnxn = f"""DRIVER={{ODBC Driver 17 for SQL Server}};
+                                      Server={os.getenv('SQL_SERVER')};
+                                      UID={os.getenv('UID')};
+                                      PWD={os.getenv('SQL_PWD')};
+                                      Database={os.getenv('DATABASE')};
+                                      TrustServerCertificate={os.getenv('TSC')}"""
+        connection_string = cnxn
+        connection_url = URL.create("mssql+pyodbc", query={"odbc_connect": connection_string})
+        engine = create_engine(connection_url)
+    except pyodbc.OperationalError:
         print(f"\n🔴: (!SQL!) Working Remotely: My IP ADDRESS is {my_ip}")
         return open_vpn(sql_counter)
-    return cnxn
+    return engine
 
 
 def open_vpn(sql_counter):
-    df = sql3_conn.read_ip()
-    EM_mode = os.system(f"ping -c 1  {df['BotID'][['BOtName'] == 'EM'].values[0]} >/dev/null")
+    EM_mode = os.system(f"ping -c 1  {os.getenv('VPN')} >/dev/null")
     if EM_mode == 0:
-        df = sql3_conn.read_credentials_for_vpn()
-        print("\n🟢: (SQL) Elounda Market is UP, Trying to get VPN UP...")
-        call(["scutil", "--nc", "start", df['ConnectionName'].values[0], '--secret', pass_manager.decrypt(df['KeyOnSave'].values[0], df['PasswdKey'].values[0])])
+        print("\n🟢: (SQL) is UP, Trying to get VPN UP...")
+        call(["scutil", "--nc", "start", os.getenv('VPN_NAME'), '--secret', os.getenv('VPN_PWD')])
         time.sleep(5)
-        Server_mode = os.system(f"ping -c 1  {df['BotID'][['BOtName'] == 'EM ROUTER'].values[0]} >/dev/null")
+        Server_mode = os.system(f"ping -c 1  {os.getenv('ROUTER')} >/dev/null")
         if Server_mode == 0:
             print("🟢: (SQL) VPN IS UP")
             return connect()
