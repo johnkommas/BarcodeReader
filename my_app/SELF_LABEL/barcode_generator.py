@@ -7,7 +7,7 @@ import pathlib
 import shutil
 import barcode
 from barcode.writer import SVGWriter
-from my_app.SQL import sql, sql_connect, sql_connect_lato
+from my_app.SQL import sql, sql_connect
 from tqdm import tqdm
 
 parent_path = pathlib.Path(__file__).parent.resolve()
@@ -81,7 +81,10 @@ def special_offer_get_data(from_date):
     delete_all_files_inside_folder(folder=f'{parent_path}/merged_images')
     delete_all_files_inside_folder(folder=f'{parent_path}/to_print_labels')
     # df = pd.read_sql_query(sql.get_products_in_the_period(from_date), sql_connect.connect())
-    df = pd.read_sql_query(sql.get_products_in_the_period(from_date), sql_connect.connect())
+    engine = sql_connect.connect()  # calling the connect() function
+    print(type(engine))  # print the type of returned object
+    df = pd.read_sql_query(sql.get_products_in_the_period(from_date), engine)
+    print(df)
     barcodes = df['ΚΩΔΙΚΟΣ'].tolist()
     app(barcodes, color='yellow')
     return df
