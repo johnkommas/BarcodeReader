@@ -259,7 +259,7 @@ def handle_submission(ack, body, client, view, logger, ):
 
     except Exception as e:
         logger.error(f"Error responding to 'first_button' button click: {e}")
-        print(f"⭕️ Error on Home Page: Special Offer 💭")
+        print(f"⭕️ Error on Home Page: Special Offer 💭 {e}")
     finally:
         print("END")
         # insert sql data, refresh home page,  update channel image
