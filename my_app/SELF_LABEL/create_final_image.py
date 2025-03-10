@@ -2,18 +2,62 @@
 import itertools
 import subprocess
 import textwrap
+from wand.api import library
+import wand.color
+import wand.image
 
 from PIL import Image, ImageFont, ImageDraw
 import pathlib
-from cairosvg import svg2png
 import pandas as pd
 from datetime import datetime
+from xml.dom.minidom import parse
 import os
 import logging
 
 from tqdm import tqdm
 
 logger=logging.getLogger(__name__)
+
+def svg_to_png(svg_filename, output_filename, dpi=1200):
+    """
+    Μετατρέπει SVG σε PNG χρησιμοποιώντας τη βιβλιοθήκη Wand.
+
+    Args:
+        svg_filename (str): Το μονοπάτι του αρχείου SVG.
+        output_filename (str): Το επιθυμητό όνομα του PNG αρχείου εξόδου.
+        dpi (int): Η ανάλυση της εικόνας σε Dots Per Inch (προεπιλεγμένο: 1200).
+    """
+    try:
+        # Φορτώνουμε το SVG αρχείο
+        with open(svg_filename, "rb") as svg_file:
+            # Δημιουργούμε το wand image αντικείμενο
+            with wand.image.Image() as image:
+                # Ορίζουμε το DPI (ανάλυση)
+                image.resolution = (dpi, dpi)
+
+                # Ορίζουμε το background σε transparent
+                with wand.color.Color("transparent") as background_color:
+                    library.MagickSetBackgroundColor(
+                        image.wand, background_color.resource
+                    )
+
+                # Φορτώνουμε το SVG μέσα στο Wand Image
+                image.read(blob=svg_file.read(), format="svg")
+
+                # Μετατροπή σε PNG (με 32-bit transparency)
+                png_image = image.make_blob("png32")
+
+                # Αποθήκευση του PNG σε αρχείο εξόδου
+                with open(output_filename, "wb") as out_file:
+                    out_file.write(png_image)
+
+        # print(f"H μετατροπή ολοκληρώθηκε: {svg_filename} -> {output_filename} | DPI: {dpi}")
+
+    except Exception as e:
+        print(f"Σφάλμα κατά τη μετατροπή SVG σε PNG: {e}")
+
+
+
 
 def run(df, file_name, init_price, tags):
     path = pathlib.Path(__file__).parent.resolve()
@@ -27,7 +71,7 @@ def run(df, file_name, init_price, tags):
     if len(str(copper_price)) == 1:
         copper_price = "0"+str(copper_price)
 
-    svg2png(url=f"{path}/svg/{barcode}.svg", write_to=f"{path}/svg/{barcode}.png", dpi=1200)
+    svg_to_png(f"{path}/svg/{barcode}.svg", f"{path}/svg/{barcode}.png")
     my_image = Image.open(f'{path}/images/{file_name}')
     title_font = ImageFont.truetype('Avenir Next.ttc', 80)
     detailed_info_retail_discount = ImageFont.truetype('Avenir Next.ttc', 58)
@@ -52,13 +96,15 @@ def run(df, file_name, init_price, tags):
     overlay = Image.open(f"{path}/svg/{barcode}.png").convert("RGBA")
     overlay = overlay.rotate(270, Image.NEAREST, expand=True)
     size = (overlay.size[0] // 4, overlay.size[1] // 4)
-    overlay = overlay.resize(size, Image.ANTIALIAS)
+    overlay = overlay.resize(size, Image.Resampling.LANCZOS)
+
     my_image.paste(overlay, (2250, 388), mask=overlay)
 
     # TAGS
     overlay = Image.open(f"{path}/images/{tags}.png").convert("RGBA")
     size = (overlay.size[0] // 1, overlay.size[1] // 1)
-    overlay = overlay.resize(size, Image.ANTIALIAS)
+    overlay = overlay.resize(size, Image.Resampling.LANCZOS)
+
 
     if (df['ΕΚΠΤΩΣΗ'].values[0] > 0) and (tags == "no_tags"):
         # DETAILED DATA STRUCTURE
@@ -107,7 +153,7 @@ def special_price(df, file_name, init_price, tags):
     if len(str(copper_price)) == 1:
         copper_price = "0"+str(copper_price)
 
-    svg2png(url=f"{path}/svg/{barcode}.svg", write_to=f"{path}/svg/{barcode}.png", dpi=1200)
+    svg_to_png(f"{path}/svg/{barcode}.svg", f"{path}/svg/{barcode}.png")
     my_image = Image.open(f'{path}/images/{file_name}')
     title_font = ImageFont.truetype('Avenir Next.ttc', 80)
     detailed_info_retail_discount = ImageFont.truetype('Avenir Next.ttc', 38)
@@ -132,13 +178,15 @@ def special_price(df, file_name, init_price, tags):
     overlay = Image.open(f"{path}/svg/{barcode}.png").convert("RGBA")
     overlay = overlay.rotate(270, Image.NEAREST, expand=True)
     size = (overlay.size[0] // 4, overlay.size[1] // 4)
-    overlay = overlay.resize(size, Image.ANTIALIAS)
+    overlay = overlay.resize(size, Image.Resampling.LANCZOS)
+
     my_image.paste(overlay, (2250, 388), mask=overlay)
 
     # TAGS
     overlay = Image.open(f"{path}/images/{tags}.png").convert("RGBA")
     size = (overlay.size[0] // 1, overlay.size[1] // 1)
-    overlay = overlay.resize(size, Image.ANTIALIAS)
+    overlay = overlay.resize(size, Image.Resampling.LANCZOS)
+
     starts = str(df['ΕΝΑΡΞΗ'].values[0])[:10]
     starts = datetime.strptime(starts, '%Y-%m-%d').strftime('%d-%m-%Y')
     ends = str(df['ΛΗΞΗ'].values[0])[:10]
@@ -224,7 +272,8 @@ def a4_page_fit_images(labels, ouptut_name, big=False):
     for name, place in tqdm(zip(labels, c), "A4 Page Maker"):
         logger.info(f"Fitting IMAGE: {name} to A4 in (X, Y): {place}")
         overlay = Image.open(f"{path}/merged_images/{name}")
-        overlay = overlay.resize(size, Image.ANTIALIAS)
+        overlay = overlay.resize(size, Image.Resampling.LANCZOS)
+
         my_image.paste(overlay, place, mask=overlay)
     file_out = f"{path}/to_print_labels/{ouptut_name}"
     my_image.save(file_out)
@@ -232,7 +281,7 @@ def a4_page_fit_images(labels, ouptut_name, big=False):
 
 
 
-def export_to_printer(printer_name='_192_168_1_175'):
+def export_to_printer(printer_name='KOMMAS'):
     path = pathlib.Path(__file__).parent.resolve()
     if printer_name == "0":
         logger.info("No Print Asked, Opening Folder Instead")
@@ -241,6 +290,7 @@ def export_to_printer(printer_name='_192_168_1_175'):
         list_of_names = os.listdir(f"{path}/to_print_labels")
         for file_name in list_of_names:
             file = f"{path}/to_print_labels/{file_name}"
+            # print(printer_name)
             os.system(f"lpr -P {printer_name} {file}")
 
 

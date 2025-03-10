@@ -349,14 +349,14 @@ def modal_view():
                                                 "text": "ELOUNDA MARKET PRINTER",
                                                 "emoji": True
                                                 },
-                                       "value": "_192_168_1_175"
+                                       "value": "KOMMAS"
                                        },
 
                     "options": [{"text": {"type": "plain_text",
                                           "text": "ELOUNDA MARKET PRINTER",
                                           "emoji": True
                                           },
-                                 "value": "_192_168_1_175"
+                                 "value": "KOMMAS"
                                  },
                                 {"text": {"type": "plain_text",
                                           "text": "LATO 01 PRINTER",
@@ -674,14 +674,14 @@ def special_offer_modal():
                                                 "text": "ELOUNDA MARKET PRINTER",
                                                 "emoji": True
                                                 },
-                                       "value": "_192_168_1_175"
+                                       "value": "KOMMAS"
                                        },
 
                     "options": [{"text": {"type": "plain_text",
                                           "text": "ELOUNDA MARKET PRINTER",
                                           "emoji": True
                                           },
-                                 "value": "_192_168_1_175"
+                                 "value": "KOMMAS"
                                  },
                                 {"text": {"type": "plain_text",
                                           "text": "LATO 01 PRINTER",

@@ -137,7 +137,8 @@ def a4_page_fit_images(labels, ouptut_name, big=False):
     for name, place in tqdm(zip(labels, c), "A4 Page Maker"):
         logger.info(f"Fitting IMAGE: {name} to A4 in (X, Y): {place}")
         overlay = Image.open(f"{path}/merged_images/{name}")
-        overlay = overlay.resize(size, Image.ANTIALIAS)
+        overlay = overlay.resize(size, Image.Resampling.LANCZO)
+
         my_image.paste(overlay, place, mask=overlay)
     file_out = f"{path}/to_print_labels/{ouptut_name}"
     my_image.save(file_out)
